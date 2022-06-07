@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class TensorflowCont {
   public TensorflowCont() {
-    System.out.println("-> TensorflowCont created.");
+    //System.out.println("-> TensorflowCont created.");
   }
      //http://localhost:9091/tensorflow/recommend_perfume/start.do
      @RequestMapping(value = {"/tensorflow/recommend_perfume/start.do"}, method = RequestMethod.GET)
