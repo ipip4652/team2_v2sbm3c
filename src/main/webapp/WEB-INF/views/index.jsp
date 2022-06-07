@@ -37,7 +37,7 @@ request.setAttribute("list2",filelinks);
 
 %>
     <DIV style='width: 100%; margin: 10px auto; text-align: center;'>
-        <%-- /static/images/resort01.jpg <IMG src='/images/resort01.jpg' style='width: 50%;'> --%>
+        
 
         <c:forEach var="filename" items="${list1}" varStatus="status">           
             <%-- 하나의 행에 이미지를 3개씩 출력후 행 변경, index는 0부터 시작 --%>
