@@ -113,13 +113,13 @@
     var f = $('#frm_login');
     $('#contentsno', f).val(contentsno);  // 쇼핑카트 등록시 사용할 상품 번호를 저장.
     
-    // console.log('-> contentsno: ' + $('#contentsno', f).val()); 
+    console.log('-> contentsno: ' + $('#contentsno', f).val()); 
     
     // console.log('-> id:' + '${sessionScope.id}');
     if ('${sessionScope.id}' != '' || $('#login_yn').val() == 'YES') {  // 로그인이 되어 있다면
-        cart_ajax_post();  // 쇼핑카트에 바로 상품을 담음
+        cart_ajax_post();
     } else { // 로그인 안된 경우
-        $('#div_login').show(); // 로그인폼 출력
+        $('#div_login').show();
     }
 
   }
@@ -133,7 +133,7 @@
     // params = $('#frm_login').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
     params += 'contentsno=' + contentsno;
     params += '&${ _csrf.parameterName }=${ _csrf.token }';
-    // console.log('-> cart_ajax_post: ' + params);
+    console.log('-> cart_ajax_post: ' + params);
     // return;
     
     $.ajax(
@@ -174,13 +174,13 @@
   
 <body>
 <jsp:include page="../menu/top.jsp" />
- 
+<%--  
 <DIV class='title_line'>
   <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 
   <A href="../cate/list_by_categrpno.do?categrpno=${categrpVO.categrpno }" class='title_link'>${categrpVO.name }</A> >
   <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }" class='title_link'>${cateVO.name }</A>
 </DIV>
-
+ --%>
 <DIV class='content_body'>
   <ASIDE class="aside_right">
     <A href="./create.do?cateno=${cateVO.cateno }">등록</A>
@@ -201,7 +201,13 @@
       </c:if>    
     </form>
   </DIV>
-  
+  <div align="center">
+    <a href='#'>성별</a>
+    <span class='menu_divide' >│</span>
+    <a href='#'>mbti</a>
+    <span class='menu_divide' >│</span>
+    <a href='#'>etc</a>
+  </div>
   <DIV class='menu_line'></DIV>
   
   <%-- ******************** Ajax 기반 로그인 폼 시작 ******************** --%>
@@ -250,80 +256,63 @@
   <%-- ******************** Ajax 기반 로그인 폼 종료 ******************** --%>
     
   
-  <table class="table table-striped" style='width: 100%;'>
-    <colgroup>
-      <col style="width: 10%;"></col>
-      <col style="width: 60%;"></col>
-      <col style="width: 20%;"></col>
-      <col style="width: 10%;"></col>
-    </colgroup>
-    <%-- table 컬럼 --%>
-<!--     <thead>
-      <tr>
-        <th style='text-align: center;'>파일</th>
-        <th style='text-align: center;'>상품명</th>
-        <th style='text-align: center;'>정가, 할인률, 판매가, 포인트</th>
-        <th style='text-align: center;'>기타</th>
-      </tr>
-    
-    </thead> -->
-    
-    <%-- table 내용 --%>
-    <tbody>
-      <c:forEach var="contentsVO" items="${list }" varStatus="status">
-        <c:set var="contentsno" value="${contentsVO.contentsno }" />
-        <c:set var="cateno" value="${contentsVO.cateno }" />
-        <c:set var="title" value="${contentsVO.title }" />
-        <c:set var="content" value="${contentsVO.content }" />
-        <c:set var="recom" value="${contentsVO.recom }" />
-        
-        <c:set var="file1" value="${contentsVO.file1 }" />
-        <c:set var="thumb1" value="${contentsVO.thumb1 }" />
-        
-        <c:set var="price" value="${contentsVO.price }" />
-        <c:set var="dc" value="${contentsVO.dc }" />
-        <c:set var="saleprice" value="${contentsVO.saleprice }" />
-        <c:set var="point" value="${contentsVO.point }" />
-        
-        <tr> 
-          <td style='vertical-align: middle; text-align: center;'>
-            <c:choose>
-              <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
-                <%-- /static/contents/storage/ --%>
-                <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }"><IMG src="/contents/storage/${thumb1 }" style="width: 120px; height: 80px;"></a> 
+  <div style='width: 100%;'> <%-- 갤러리 Layout 시작 --%>
+    <c:forEach var="contentsVO" items="${list }" varStatus="status">
+      <c:set var="contentsno" value="${contentsVO.contentsno }" />
+      <c:set var="title" value="${contentsVO.title }" />
+      <c:set var="content" value="${contentsVO.content }" />
+      <c:set var="file1" value="${contentsVO.file1 }" />
+      <c:set var="size1" value="${contentsVO.size1 }" />
+      <c:set var="thumb1" value="${contentsVO.thumb1 }" />
+      
+      <c:set var="price" value="${contentsVO.price }" />
+      <c:set var="dc" value="${contentsVO.dc }" />
+      <c:set var="saleprice" value="${contentsVO.saleprice }" />
+      <c:set var="point" value="${contentsVO.point }" />
+
+      <%-- 하나의 행에 이미지를 4개씩 출력후 행 변경, index는 0부터 시작 --%>
+      <c:if test="${status.index % 4 == 0 && status.index != 0 }"> 
+        <HR class='menu_line'>
+      </c:if>
+      
+      <!-- 하나의 이미지, 24 * 4 = 96% -->
+      <DIV style='width: 24%; 
+              float: left; 
+              margin: 0.5%; padding: 0.5%; background-color: #EEEFFF; text-align: center;'>
+        <c:choose>
+          <c:when test="${size1 > 0}"> <!-- 파일이 존재하면 -->
+            <c:choose> 
+              <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}"> <!-- 이미지 인경우 -->
+                <a href="./read.do?contentsno=${contentsno}">               
+                  <IMG src="./storage/${thumb1 }" style='width: 100%; height: 150px;'>
+                </a><br>
+                <a href="./read.do?contentsno=${contentsno}">${title}</a> <br>
+                <del><fmt:formatNumber value="${price}" pattern="#,###" /></del>
+                <span style="color: #FF0000; font-size: 1.0em;">${dc} %</span>
+                <strong><fmt:formatNumber value="${saleprice}" pattern="#,###" /></strong>
               </c:when>
-              <c:otherwise> <!-- 기본 이미지 출력 -->
-                <IMG src="/contents/images/none1.png" style="width: 120px; height: 80px;">
+              <c:otherwise> <!-- 이미지가 아닌 일반 파일 -->
+                <DIV style='width: 100%; height: 150px; display: table; border: solid 1px #CCCCCC;'>
+                  <DIV style='display: table-cell; vertical-align: middle; text-align: center;'> <!-- 수직 가운데 정렬 -->
+                    <a href="./read.do?contentsno=${contentsno}">${file1}</a><br>
+                  </DIV>
+                </DIV>
+                <a href="./read.do?contentsno=${contentsno}">${title}</a> (${cnt})              
               </c:otherwise>
             </c:choose>
-          </td>  
-          <td style='vertical-align: middle;'>
-            <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word}"><strong>${title}</strong> ${content}</a> 
-          </td> 
-          <td style='vertical-align: middle; text-align: center;'>
-            <del><fmt:formatNumber value="${price}" pattern="#,###" /></del><br>
-            <span style="color: #FF0000; font-size: 1.2em;">${dc} %</span>
-            <strong><fmt:formatNumber value="${saleprice}" pattern="#,###" /></strong><br>
-            <span style="font-size: 0.8em;">포인트: <fmt:formatNumber value="${point}" pattern="#,###" /></span>
-            <span><A id="recom_${status.count }" href="javascript:recom_ajax(${contentsno }, ${status.count })" class="recom_link">♥(${recom })</A></span>
-
-            <%-- <span id="span_animation_${status.count }"></span> --%>
-            <br>
-            <button type='button' id='btn_cart' class="btn btn-info" style='margin-bottom: 2px;'
-                        onclick="cart_ajax(${contentsno })">장바 구니</button><br>
-            <button type='button' id='btn_ordering' class="btn btn-info" 
-                        onclick="cart_ajax(${contentsno })">바로 구매</button>  
-                                    
-          </td>
-          <td style='vertical-align: middle; text-align: center;'>
-            <A href="./update_text.do?contentsno=${contentsno}&now_page=${param.now_page }"><img src='/contents/images/update.png'></A>
-            <A href="./delete.do?contentsno=${contentsno}&now_page=${param.now_page }&cateno=${cateno}"><img src='/contents/images/delete.png'></A>
-          </td>
-        </tr>
-      </c:forEach>
-      
-    </tbody>
-  </table>
+          </c:when>
+          <c:otherwise> <%-- 파일이 없는 경우 기본 이미지 출력 --%>
+            <a href="./read.do?contentsno=${contentsno}">
+              <img src='/contents/images/none1.png' style='width: 100%; height: 150px;'>
+            </a><br>
+            이미지를 등록해주세요.
+          </c:otherwise>
+        </c:choose>         
+      </DIV>  
+    </c:forEach>
+    <!-- 갤러리 Layout 종료 -->
+    <br><br>
+  </div>
   
   <!-- 페이지 목록 출력 부분 시작 -->
   <DIV class='bottom_menu'>${paging }</DIV> <%-- 페이지 리스트 --%>
@@ -336,4 +325,3 @@
 </body>
  
 </html>
-
