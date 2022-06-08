@@ -46,15 +46,19 @@
                             style="font-size: 0.9em; font-weight: bold;">
                                 STORE</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/categrp/list.do"
-                                    style="font-size: 0.9em;">MAN </a> <a
-                                    class="dropdown-item" href="#"
-                                    style="font-size: 0.9em;">WOMAN</a>
-                                <a class="dropdown-item" href="#"
-                                    style="font-size: 0.9em;">UNISEX</a>
-                                <a class="dropdown-item" href="#"
-                                    style="font-size: 0.9em;">MINI
-                                    SAMPLE</a>
+                                <a class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=1&now_page=1"
+                                    style="font-size: 0.9em;">과일 </a> <a
+                                    class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=1&now_page=1"
+                                    style="font-size: 0.9em;">꽃</a>
+                                <a class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=1&now_page=1"
+                                    style="font-size: 0.9em;">머스크</a>
+                                <a class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=1&now_page=1"
+                                    style="font-size: 0.9em;">바닐라 </a> <a
+                                    class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=1&now_page=1"
+                                    style="font-size: 0.9em;">스파이시 </a>
+                                <a class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=1&now_page=1"
+                                    style="font-size: 0.9em;">우디</a>
+                                
                             </div></li>
                         <li class="nav-item dropdown"><a
                             class="nav-link dropdown-toggle" href="#"
