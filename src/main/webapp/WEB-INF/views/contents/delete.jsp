@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="contentsno" value="${contentsVO.contentsno }" />
-<c:set var="title" value="${contentsVO.title }" />
+<c:set var="pname" value="${contentsVO.pname }" />
  
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -49,7 +49,7 @@
     <span class='menu_divide' >│</span>
     <A href="./update_text.do?contentsno=${contentsno}">수정</A>
     <span class='menu_divide' >│</span>
-    <A href="./update_text.do?contentsno=${contentsno}">파일 수정</A>  
+    <A href="./update_file.do?contentsno=${contentsno}">파일 수정</A>  
   </ASIDE> 
   
     <DIV style="text-align: right; clear: both;">  
@@ -83,7 +83,7 @@
         </DIV>
 
         <DIV style='text-align: left; width: 47%; float: left;'>
-          <span style='font-size: 1.5em;'>${title}</span>
+          <span style='font-size: 1.5em;'>${pname}</span>
           <br>
           <FORM name='frm' method='POST' action='./delete.do'>
               <input type='hidden' name='contentsno' value='${param.contentsno}'>
@@ -95,7 +95,6 @@
               <div class="form-group">   
                 <div class="col-md-12" style='text-align: center; margin: 10px auto;'>
                   <span style="color: #FF0000; font-weight: bold;">삭제를 진행 하시겠습니까? 삭제하시면 복구 할 수 없습니다.</span><br><br>
-                  패스워드 <input type='password' name='passwd' value='' required="required" style='width: 30%;' autofocus="autofocus">
                   <br><br>
                   <button type = "submit" class="btn btn-primary">삭제 진행</button>
                   <button type = "button" onclick = "history.back()" class="btn btn-primary">취소</button>

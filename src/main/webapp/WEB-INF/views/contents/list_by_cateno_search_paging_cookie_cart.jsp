@@ -259,16 +259,14 @@
   <div style='width: 100%;'> <%-- 갤러리 Layout 시작 --%>
     <c:forEach var="contentsVO" items="${list }" varStatus="status">
       <c:set var="contentsno" value="${contentsVO.contentsno }" />
-      <c:set var="title" value="${contentsVO.title }" />
-      <c:set var="content" value="${contentsVO.content }" />
+      <c:set var="pcompany" value="${contentsVO.pcompany }" />
+      <c:set var="pname" value="${contentsVO.pname }" />
+      <c:set var="pcontent" value="${contentsVO.pcontent }" />
       <c:set var="file1" value="${contentsVO.file1 }" />
       <c:set var="size1" value="${contentsVO.size1 }" />
       <c:set var="thumb1" value="${contentsVO.thumb1 }" />
       
       <c:set var="price" value="${contentsVO.price }" />
-      <c:set var="dc" value="${contentsVO.dc }" />
-      <c:set var="saleprice" value="${contentsVO.saleprice }" />
-      <c:set var="point" value="${contentsVO.point }" />
 
       <%-- 하나의 행에 이미지를 4개씩 출력후 행 변경, index는 0부터 시작 --%>
       <c:if test="${status.index % 4 == 0 && status.index != 0 }"> 
@@ -288,8 +286,6 @@
                 </a><br>
                 <a href="./read.do?contentsno=${contentsno}">${title}</a> <br>
                 <del><fmt:formatNumber value="${price}" pattern="#,###" /></del>
-                <span style="color: #FF0000; font-size: 1.0em;">${dc} %</span>
-                <strong><fmt:formatNumber value="${saleprice}" pattern="#,###" /></strong>
               </c:when>
               <c:otherwise> <!-- 이미지가 아닌 일반 파일 -->
                 <DIV style='width: 100%; height: 150px; display: table; border: solid 1px #CCCCCC;'>
@@ -297,7 +293,7 @@
                     <a href="./read.do?contentsno=${contentsno}">${file1}</a><br>
                   </DIV>
                 </DIV>
-                <a href="./read.do?contentsno=${contentsno}">${title}</a> (${cnt})              
+                <a href="./read.do?contentsno=${contentsno}">${pname}</a> (${cnt})              
               </c:otherwise>
             </c:choose>
           </c:when>
