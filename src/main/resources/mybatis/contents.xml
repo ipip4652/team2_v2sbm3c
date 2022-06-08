@@ -6,9 +6,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
 <mapper namespace="dev.mvc.contents.ContentsDAOInter"> 
 <!--   <insert id="create" parameterType="dev.mvc.contents.ContentsVO">
-    INSERT INTO contents(contentsno, adminno, cateno, title, content, passwd, word,
+    INSERT INTO contents(contentsno, memberno, cateno, pname, content, sex, word,
                                      file1, file1saved, thumb1, size1, rdate)
-    VALUES(contents_seq.nextval, #{adminno}, #{cateno}, #{title}, #{content}, #{passwd}, #{word},
+    VALUES(contents_seq.nextval, #{memberno}, #{cateno}, #{pname}, #{content}, #{sex}, #{word},
                 #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate)
   </insert> -->
 
@@ -18,16 +18,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       SELECT contents_seq.nextval FROM dual
     </selectKey>
     
-    INSERT INTO contents(contentsno, adminno, cateno, title, content, passwd, word,
+    INSERT INTO contents(contentsno, memberno, cateno, pcompany, pname, pcontent, sex, word,
                                      file1, file1saved, thumb1, size1, rdate)
-    VALUES(#{contentsno}, #{adminno}, #{cateno}, #{title}, #{content}, #{passwd}, #{word},
+    VALUES(#{contentsno}, #{memberno}, #{cateno}, #{pcompany}, #{pname}, #{pcontent}, #{sex}, #{word},
                 #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate)
   </insert>
   
   <!-- 일반적인 조회 -->
   <select id="read" resultType="dev.mvc.contents.ContentsVO" parameterType="int">
-    SELECT contentsno, adminno, cateno, title, content, recom, cnt, replycnt, passwd, word, rdate,
-              file1, file1saved, thumb1, size1, price, dc, saleprice, point, salecnt
+    SELECT contentsno, memberno, cateno, pcompany, pname, pcontent, recom, cnt, sex, word, rdate,
+              file1, file1saved, thumb1, size1, price, salecnt
     FROM contents
     WHERE contentsno = #{contentsno}
   </select>
@@ -35,14 +35,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <!-- 상품 정보 변경 -->
   <update id="product_update" parameterType="dev.mvc.contents.ContentsVO">
     UPDATE contents
-    SET price=#{price}, dc=#{dc}, saleprice=#{saleprice}, point=#{point}, salecnt=#{salecnt}
+    SET price=#{price}, salecnt=#{salecnt}
     WHERE contentsno = #{contentsno}
   </update> 
   
   <!-- 특정 카테고리의 등록된 글목록 -->
   <select id="list_by_cateno" resultType="dev.mvc.contents.ContentsVO" parameterType="int">
-    SELECT contentsno, adminno, cateno, title, content, recom, cnt, replycnt, rdate,
-              file1, file1saved, thumb1, size1, price, dc, saleprice, point
+    SELECT contentsno, memberno, cateno, pcompany, pname, pcontent, recom, cnt, rdate,
+              file1, file1saved, thumb1, size1, price, point
     FROM contents 
     WHERE cateno = #{cateno}
     ORDER BY contentsno DESC
@@ -51,15 +51,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <!-- 카테고리별 검색 목록 -->
   <select id="list_by_cateno_search" resultType="dev.mvc.contents.ContentsVO" 
              parameterType="HashMap">
-    SELECT contentsno, adminno, cateno, title, content, recom, cnt, replycnt, rdate,
-            file1, file1saved, thumb1, size1, price, dc, saleprice, point
+    SELECT contentsno, memberno, cateno, pcompany, pname, pcontent, recom, cnt, rdate,
+            file1, file1saved, thumb1, size1, price
     FROM contents
     <choose>
       <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
         WHERE cateno=#{cateno}
       </when>
       <otherwise> <!-- 검색하는 경우 -->
-        WHERE cateno=#{cateno} AND (UPPER(title) LIKE '%' || #{word} || '%' 
+        WHERE cateno=#{cateno} AND (UPPER(pname) LIKE '%' || #{word} || '%' 
                                                      OR UPPER(content) LIKE '%' || #{word} || '%' 
                                                      OR UPPER(word) LIKE '%' || #{word} || '%')
       </otherwise>
@@ -76,7 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE cateno=#{cateno}
       </when>
       <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
-        WHERE cateno=#{cateno} AND (UPPER(title) LIKE '%' || #{word} || '%' 
+        WHERE cateno=#{cateno} AND (UPPER(pname) LIKE '%' || #{word} || '%' 
                                                      OR UPPER(content) LIKE '%' || #{word} || '%' 
                                                      OR UPPER(word) LIKE '%' || #{word} || '%')
       </otherwise>
@@ -86,21 +86,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <!-- 카테고리별 검색 목록 + 페이징 + 메인 이미지 -->   
   <select id="list_by_cateno_search_paging" 
              resultType="dev.mvc.contents.ContentsVO" parameterType="HashMap">
-   SELECT contentsno, adminno, cateno, title, content, recom, cnt, replycnt, rdate,
-              file1, file1saved, thumb1, size1, price, dc, saleprice, point, r
+   SELECT contentsno, memberno, cateno, pcompany, pname, pcontent, recom, cnt, rdate,
+              file1, file1saved, thumb1, size1, price, r
    FROM (
-              SELECT contentsno, adminno, cateno, title, content, recom, cnt, replycnt, rdate,
-                         file1, file1saved, thumb1, size1, price, dc, saleprice, point, rownum as r
+              SELECT contentsno, memberno, cateno, pcompany, pname, pcontent, recom, cnt, rdate,
+                         file1, file1saved, thumb1, size1, price, rownum as r
               FROM (
-                        SELECT contentsno, adminno, cateno, title, content, recom, cnt, replycnt, rdate,
-                                   file1, file1saved, thumb1, size1, price, dc, saleprice, point
+                        SELECT contentsno, memberno, cateno, pcompany, pname, pcontent, recom, cnt, rdate,
+                                   file1, file1saved, thumb1, size1, price
                         FROM contents
                         <choose>
                           <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
                              WHERE cateno=#{cateno}
                           </when>
                           <otherwise>
-                            WHERE cateno=#{cateno} AND (UPPER(title) LIKE '%' || #{word} || '%' 
+                            WHERE cateno=#{cateno} AND (UPPER(pname) LIKE '%' || #{word} || '%' 
                                                                   OR UPPER(content) LIKE '%' || #{word} || '%' 
                                                                   OR UPPER(word) LIKE '%' || #{word} || '%')
                           </otherwise>
@@ -117,17 +117,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>   
   
   <!-- 패스워드 검사 -->
-  <select id="passwd_check" resultType="int" parameterType="HashMap">
-	SELECT COUNT(*) as cnt 
-	FROM contents
-	WHERE contentsno=#{contentsno} AND passwd=#{passwd}
-  </select>
+  <!--   <select id="sex_check" resultType="int" parameterType="HashMap">
+    SELECT COUNT(*) as cnt 
+    FROM contents
+    WHERE contentsno=#{contentsno} AND sex=#{sex}
+  </select> -->
+
 
   <!-- 텍스트 수정 -->
   <update id="update_text" parameterType="dev.mvc.contents.ContentsVO">
     UPDATE contents
-    SET title=#{title}, content=#{content},  word=#{word}, 
-          price=#{price}, dc=#{dc}, saleprice=#{saleprice}, point=#{point}, salecnt=#{salecnt}
+    SET pcompany =#{pcompany}, pname=#{pname}, pcontent=#{pcontent},  word=#{word}, 
+          price=#{price}, salecnt=#{salecnt}
     WHERE contentsno = #{contentsno}
   </update>
 
