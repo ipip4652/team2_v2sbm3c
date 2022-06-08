@@ -7,7 +7,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world</title>
+<title>향수 사이트</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
@@ -46,16 +46,15 @@
   <div style='width: 100%;'> <%-- 갤러리 Layout 시작 --%>
     <c:forEach var="contentsVO" items="${list }" varStatus="status">
       <c:set var="contentsno" value="${contentsVO.contentsno }" />
-      <c:set var="title" value="${contentsVO.title }" />
-      <c:set var="content" value="${contentsVO.content }" />
+      <c:set var="pcompany" value="${contentsVO.pcompany }" />
+      <c:set var="pname" value="${contentsVO.pname }" />
+      <c:set var="pcontent" value="${contentsVO.pcontent }" />
       <c:set var="file1" value="${contentsVO.file1 }" />
       <c:set var="size1" value="${contentsVO.size1 }" />
       <c:set var="thumb1" value="${contentsVO.thumb1 }" />
       
       <c:set var="price" value="${contentsVO.price }" />
-      <c:set var="dc" value="${contentsVO.dc }" />
-      <c:set var="saleprice" value="${contentsVO.saleprice }" />
-      <c:set var="point" value="${contentsVO.point }" />
+
 
       <%-- 하나의 행에 이미지를 4개씩 출력후 행 변경, index는 0부터 시작 --%>
       <c:if test="${status.index % 4 == 0 && status.index != 0 }"> 
@@ -72,11 +71,9 @@
               <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}"> <!-- 이미지 인경우 -->
                 <a href="./read.do?contentsno=${contentsno}">               
                   <IMG src="./storage/${thumb1 }" style='width: 100%; height: 150px;'>
-                </a><br>
-                ${title} <br>
-                <del><fmt:formatNumber value="${price}" pattern="#,###" /></del>
-                <span style="color: #FF0000; font-size: 1.0em;">${dc} %</span>
-                <strong><fmt:formatNumber value="${saleprice}" pattern="#,###" /></strong>
+                </a><br> ${pcompany} <br>
+                ${pname} <br>
+                <fmt:formatNumber value="${price}" pattern="#,###" />
               </c:when>
               <c:otherwise> <!-- 이미지가 아닌 일반 파일 -->
                 <DIV style='width: 100%; height: 150px; display: table; border: solid 1px #CCCCCC;'>
@@ -84,7 +81,7 @@
                     <a href="./read.do?contentsno=${contentsno}">${file1}</a><br>
                   </DIV>
                 </DIV>
-                ${title} (${cnt})              
+                ${pname} (${cnt})              
               </c:otherwise>
             </c:choose>
           </c:when>

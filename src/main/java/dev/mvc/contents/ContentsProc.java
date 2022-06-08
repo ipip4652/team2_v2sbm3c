@@ -26,14 +26,14 @@ public class ContentsProc implements ContentsProcInter {
     public ContentsVO read(int contentsno) {
         ContentsVO contentsVO = this.contentsDAO.read(contentsno);
 
-        String title = contentsVO.getTitle();
-        String content = contentsVO.getContent();
+        String title = contentsVO.getPname();
+        String content = contentsVO.getPcontent();
 
         title = Tool.convertChar(title); // 특수 문자 처리
         content = Tool.convertChar(content);
 
-        contentsVO.setTitle(title);
-        contentsVO.setContent(content);
+        contentsVO.setPname(title);
+        contentsVO.setPcontent(content);
 
         long size1 = contentsVO.getSize1();
         contentsVO.setSize1_label(Tool.unit(size1));
@@ -52,20 +52,20 @@ public class ContentsProc implements ContentsProcInter {
         List<ContentsVO> list = this.contentsDAO.list_by_cateno(cateno);
 
         for (ContentsVO contentsVO : list) {
-            String content = contentsVO.getContent();
+            String content = contentsVO.getPcontent();
 
             if (content.length() > 150) { // 150 초과이면 150자만 선택
                 content = content.substring(0, 150) + "...";
-                contentsVO.setContent(content); // 줄어든 문자열 저장
+                contentsVO.setPcontent(content); // 줄어든 문자열 저장
             }
 
-            String title = contentsVO.getTitle();
+            String title = contentsVO.getPname();
 
             title = Tool.convertChar(title); // 특수 문자 처리
             content = Tool.convertChar(content);
 
-            contentsVO.setTitle(title);
-            contentsVO.setContent(content);
+            contentsVO.setPname(title);
+            contentsVO.setPcontent(content);
         }
 
         return list;
@@ -76,10 +76,10 @@ public class ContentsProc implements ContentsProcInter {
       List<ContentsVO> list = contentsDAO.list_by_cateno_search(hashMap);
       
       for (ContentsVO contentsVO : list) { // 내용이 160자 이상이면 160자만 선택
-        String content = contentsVO.getContent();
+        String content = contentsVO.getPcontent();
         if (content.length() > 150) {
           content = content.substring(0, 150) + "...";
-          contentsVO.setContent(content);
+          contentsVO.setPcontent(content);
         }
       }
       
@@ -129,17 +129,17 @@ public class ContentsProc implements ContentsProcInter {
       List<ContentsVO> list = this.contentsDAO.list_by_cateno_search_paging(map);
       
       for (ContentsVO contentsVO : list) { // 내용이 160자 이상이면 160자만 선택
-        String content = contentsVO.getContent();
+        String content = contentsVO.getPcontent();
         if (content.length() > 150) {
           content = content.substring(0, 150) + "...";
-          contentsVO.setContent(content);
+          contentsVO.setPcontent(content);
         }
         
-        String title = Tool.convertChar(contentsVO.getTitle());  // 특수 문자 변환
-        contentsVO.setTitle(title);
+        String title = Tool.convertChar(contentsVO.getPname());  // 특수 문자 변환
+        contentsVO.setPname(title);
         
         content = Tool.convertChar(content);
-        contentsVO.setContent(content);
+        contentsVO.setPcontent(content);
       }
       
       return list;
@@ -236,12 +236,6 @@ public class ContentsProc implements ContentsProcInter {
       str.append("</DIV>"); 
        
       return str.toString(); 
-    }
-
-    @Override
-    public int passwd_check(HashMap map) {
-        int cnt = this.contentsDAO.passwd_check(map);
-        return cnt;
     }
 
     @Override

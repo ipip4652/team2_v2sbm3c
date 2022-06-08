@@ -3,14 +3,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="contentsno" value="${contentsVO.contentsno }" />
-<c:set var="title" value="${contentsVO.title }" />
+<c:set var="pname" value="${contentsVO.pname }" />
  
 <!DOCTYPE html> 
 <html lang="ko"> 
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world</title>
+<title>향수 사이트</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
@@ -84,7 +84,7 @@
         </DIV>
 
         <DIV style='text-align: left; width: 47%; float: left;'>
-          <span style='font-size: 1.5em;'>${title}</span>
+          <span style='font-size: 1.5em;'>${pname}</span>
           <br>
           <FORM name='frm' method='POST' action='./update_file.do' enctype="multipart/form-data">
             <input type="hidden" name="contentsno" value="${contentsno }">
@@ -94,8 +94,6 @@
             <br><br> 
             변경 이미지 선택<br>  
             <input type='file' name='file1MF' id='file1MF' value='' placeholder="파일 선택"><br>
-            패스워드<br>
-            <input type='password' name='passwd' value='' required="required" style='width: 30%;'>
             <br>
             <div style='margin-top: 20px; clear: both;'>  
               <button type="submit" class="btn btn-primary">파일 변경 처리</button>

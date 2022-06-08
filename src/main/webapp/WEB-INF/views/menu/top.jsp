@@ -46,15 +46,13 @@
                             style="font-size: 0.9em; font-weight: bold;">
                                 STORE</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/categrp/list.do"
+                                <a class="dropdown-item" href="../cate/list_by_categrpno.do?categrpno=1"
                                     style="font-size: 0.9em;">MAN </a> <a
-                                    class="dropdown-item" href="#"
+                                    class="dropdown-item" href="../cate/list_by_categrpno.do?categrpno=1"
                                     style="font-size: 0.9em;">WOMAN</a>
-                                <a class="dropdown-item" href="#"
+                                <a class="dropdown-item" href="../cate/list_by_categrpno.do?categrpno=1"
                                     style="font-size: 0.9em;">UNISEX</a>
-                                <a class="dropdown-item" href="#"
-                                    style="font-size: 0.9em;">MINI
-                                    SAMPLE</a>
+                                
                             </div></li>
                         <li class="nav-item dropdown"><a
                             class="nav-link dropdown-toggle" href="#"
@@ -74,7 +72,7 @@
                             style="font-size: 0.9em; font-weight: bold;">
                                 BOARD</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#"
+                                <a class="dropdown-item" href="../notice/list.do"
                                     style="font-size: 0.9em;">공지사항 </a>
                                 <a class="dropdown-item" href="#"
                                     style="font-size: 0.9em;">Q

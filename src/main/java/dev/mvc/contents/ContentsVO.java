@@ -4,45 +4,39 @@ import org.springframework.web.multipart.MultipartFile;
 
 /*
         contentsno                            NUMBER(10)         NOT NULL         PRIMARY KEY,
-        adminno                              NUMBER(10)     NOT NULL ,
+        memberno                              NUMBER(10)     NOT NULL ,
         cateno                                NUMBER(10)         NOT NULL ,
-        title                                 VARCHAR2(300)         NOT NULL,
-        content                               CLOB                  NOT NULL,
-        recom                                 NUMBER(7)         DEFAULT 0         NOT NULL,
+        pcompany                                 VARCHAR2(300)         NOT NULL,
+        pname                                   VARCHAR2(300)         NOT NULL,
+        pcontent                               CLOB                  NOT NULL,
+        sex                                   CHAR(1)         NOT NULL,
         cnt                                   NUMBER(7)         DEFAULT 0         NOT NULL,
-        replycnt                              NUMBER(7)         DEFAULT 0         NOT NULL,
-        passwd                                VARCHAR2(15)         NOT NULL,
         word                                  VARCHAR2(300)         NULL ,
         rdate                                 DATE               NOT NULL,
         file1                                   VARCHAR(100)          NULL,
         file1saved                            VARCHAR(100)          NULL,
         thumb1                              VARCHAR(100)          NULL,
         size1                                 NUMBER(10)      DEFAULT 0 NULL,  
-        price                                 NUMBER(10)      DEFAULT 0 NULL,  
-        dc                                    NUMBER(10)      DEFAULT 0 NULL,  
         saleprice                            NUMBER(10)      DEFAULT 0 NULL,  
-        point                                 NUMBER(10)      DEFAULT 0 NULL,  
         salecnt                               NUMBER(10)      DEFAULT 0 NULL,  
  */
 public class ContentsVO {
     /** 컨텐츠 번호 */
     private int contentsno;
-    /** 관리자 번호 */
-    private int adminno;
+    /** 회원 번호 */
+    private int memberno;
     /** 카테고리 번호 */
     private int cateno;
-    /** 제목 */
-    private String title = "";
+    /** 향수회사 */
+    private String pcompany = "";
+    /** 향수이름 */
+    private String pname = "";
     /** 내용 */
-    private String content = "";
-    /** 추천수 */
-    private int recom;
+    private String pcontent = "";
     /** 조회수 */
     private int cnt = 0;
-    /** 댓글수 */
-    private int replycnt = 0;
-    /** 패스워드 */
-    private String passwd = "";
+    /** 성 */
+    private String sex = "";
     /** 검색어 */
     private String word = "";
     /** 등록 날짜 */
@@ -59,12 +53,6 @@ public class ContentsVO {
 
     /** 정가 */
     private int price;
-    /** 할인률 */
-    private int dc;
-    /** 판매가 */
-    private int saleprice;
-    /** 포인트 */
-    private int point;
     /** 재고 수량 */
     private int salecnt;
     
@@ -90,13 +78,7 @@ public class ContentsVO {
         this.contentsno = contentsno;
     }
 
-    public int getAdminno() {
-        return adminno;
-    }
-
-    public void setAdminno(int adminno) {
-        this.adminno = adminno;
-    }
+    
 
     public int getCateno() {
         return cateno;
@@ -106,29 +88,6 @@ public class ContentsVO {
         this.cateno = cateno;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public int getRecom() {
-        return recom;
-    }
-
-    public void setRecom(int recom) {
-        this.recom = recom;
-    }
 
     public int getCnt() {
         return cnt;
@@ -138,22 +97,7 @@ public class ContentsVO {
         this.cnt = cnt;
     }
 
-    public int getReplycnt() {
-        return replycnt;
-    }
-
-    public void setReplycnt(int replycnt) {
-        this.replycnt = replycnt;
-    }
-
-    public String getPasswd() {
-        return passwd;
-    }
-
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
-    }
-
+    
     public String getWord() {
         return word;
     }
@@ -210,29 +154,6 @@ public class ContentsVO {
         this.price = price;
     }
 
-    public int getDc() {
-        return dc;
-    }
-
-    public void setDc(int dc) {
-        this.dc = dc;
-    }
-
-    public int getSaleprice() {
-        return saleprice;
-    }
-
-    public void setSaleprice(int saleprice) {
-        this.saleprice = saleprice;
-    }
-
-    public int getPoint() {
-        return point;
-    }
-
-    public void setPoint(int point) {
-        this.point = point;
-    }
 
     public int getSalecnt() {
         return salecnt;
@@ -256,6 +177,46 @@ public class ContentsVO {
 
     public void setSize1_label(String size1_label) {
         this.size1_label = size1_label;
+    }
+
+    public int getMemberno() {
+        return memberno;
+    }
+
+    public void setMemberno(int memberno) {
+        this.memberno = memberno;
+    }
+
+    public String getPcompany() {
+        return pcompany;
+    }
+
+    public void setPcompany(String pcompany) {
+        this.pcompany = pcompany;
+    }
+
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
+    }
+
+    public String getPcontent() {
+        return pcontent;
+    }
+
+    public void setPcontent(String pcontent) {
+        this.pcontent = pcontent;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
     
     

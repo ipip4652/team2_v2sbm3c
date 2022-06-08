@@ -57,13 +57,6 @@ public interface ContentsDAOInter {
     public List<ContentsVO> list_by_cateno_search_paging(HashMap<String, Object> map);
     
     /**
-     * 패스워드 검사
-     * @param map
-     * @return 1 or 0
-     */
-    public int passwd_check(HashMap map);
-    
-    /**
      * 텍스트 정보 수정
      * @param contentsVO
      * @return 처리된 레코드 갯수

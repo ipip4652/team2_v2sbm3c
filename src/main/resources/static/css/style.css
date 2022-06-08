@@ -14,6 +14,11 @@
     margin: 10px auto;
 }
 
+.container {
+    width: 90%;
+    margin: 20px auto;
+  }
+
 /* 이미지 사용시 경로 지정
   /css/images/top_image_1920.jpg
   Spring Boot: /static/css/images/top_image_1920.jpg

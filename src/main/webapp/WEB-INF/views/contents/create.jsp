@@ -6,7 +6,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world</title>
+<title>향수 사이트</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
@@ -28,11 +28,6 @@
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
  
-<DIV class='title_line'>
-  <A href="../categrp/list.do" class='title_link'>카테고리 그룹</A> > 
-  ${categrpVO.name } > ${cateVO.name } >
-  글 등록
-</DIV>
 
 <DIV class='content_body'>
   <ASIDE class="aside_right">
@@ -71,24 +66,39 @@
     <input type="hidden" name="categrpno" value="${cateVO.categrpno }"> 
     <input type="hidden" name="cateno" value="${param.cateno }">
     <input type="hidden" name="adminno" value="1"> <%-- 관리자 개발후 변경 필요 --%>
-    
+
     <div class="form-group">
-       <label class="control-label col-md-2">상품명</label>
+       <label class="control-label col-md-2">향수회사명</label>
        <div class="col-md-10">
-         <input type='text' name='title' value='가을 영화' required="required" 
+         <input type='text' name='pcompany' value='회사명' required="required" 
+                   autofocus="autofocus" class="form-control" style='width: 100%;'>
+       </div>
+    </div>
+    <div class="form-group">
+       <label class="control-label col-md-2">향수명</label>
+       <div class="col-md-10">
+         <input type='text' name='pname' value='가을 영화' required="required" 
                    autofocus="autofocus" class="form-control" style='width: 100%;'>
        </div>
     </div>
     <div class="form-group">
        <label class="control-label col-md-2">상품 설명</label>
        <div class="col-md-10">
-         <textarea name='content' required="required" class="form-control" rows="12" style='width: 100%;'>가을 단풍보며 멍때리기</textarea>
+         <textarea name='pcontent' required="required" class="form-control" rows="12" style='width: 100%;'>상품 설명을 등록해주세요</textarea>
+       </div>
+    </div>
+    <!--radio button으로 할 예정 -->
+    <div class="form-group">
+       <label class="control-label col-md-2">성별</label>
+       <div class="col-md-10">
+         <input type='text' name='sex' value='여성' required="required" 
+                   autofocus="autofocus" class="form-control" style='width: 100%;'>
        </div>
     </div>
     <div class="form-group">
        <label class="control-label col-md-2">검색어</label>
        <div class="col-md-10">
-         <input type='text' name='word' value='월터,벤 스틸러,크리스튼위그,휴먼,도전' required="required" 
+         <input type='text' name='word' value='향수,향' required="required" 
                     class="form-control" style='width: 100%;'>
        </div>
     </div>   
@@ -98,14 +108,7 @@
          <input type='file' class="form-control" name='file1MF' id='file1MF' 
                     value='' placeholder="파일 선택">
        </div>
-    </div>   
-    <div class="form-group">
-       <label class="control-label col-md-2">패스워드</label>
-       <div class="col-md-10">
-         <input type='password' name='passwd' value='1234' required="required" 
-                    class="form-control" style='width: 50%;'>
-       </div>
-    </div>   
+    </div>     
     <div class="content_body_bottom">
       <button type="submit" class="btn btn-primary">등록</button>
       <button type="button" onclick="location.href='./list.do'" class="btn btn-primary">목록</button>
