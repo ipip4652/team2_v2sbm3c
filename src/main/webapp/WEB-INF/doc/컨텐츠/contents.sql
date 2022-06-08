@@ -19,6 +19,7 @@ CREATE TABLE CONTENTS(
         sex                                 CHAR(1)      NULL ,
         RDATE                               DATE         NOT NULL,
         SALECNT                             NUMBER(10)       NULL ,
+        cnt                             NUMBER(7)       NULL ,
   FOREIGN KEY (cateno) REFERENCES cate (cateno),
   FOREIGN KEY (memberno) REFERENCES member (memberno)
 );
@@ -39,4 +40,7 @@ COMMENT ON COLUMN CONTENTS.SIZE1 is '메인 이미지 크기';
 COMMENT ON COLUMN CONTENTS.sex is '성별';
 COMMENT ON COLUMN CONTENTS.RDATE is '등록일';
 COMMENT ON COLUMN CONTENTS.SALECNT is '수량';
+COMMENT ON COLUMN CONTENTS.cnt is '조회수';
+
+
 
