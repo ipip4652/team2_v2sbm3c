@@ -524,13 +524,9 @@ public class ContentsCont {
                                                     @RequestParam(value = "now_page", defaultValue = "1") int now_page) {
       ModelAndView mav = new ModelAndView();
       
-      HashMap<String, Object> map = new HashMap<String, Object>();
-      map.put("contentsno", contentsVO.getContentsno());
-      map.put("passwd", contentsVO.getPasswd());
       
       int cnt = 0;
-      int passwd_cnt = this.contentsProc.passwd_check(map);
-      if (passwd_cnt == 1) {
+      
           cnt = this.contentsProc.update_text(contentsVO); // 수정 처리
           System.out.println("-> word_search: " + word_search);
           
@@ -538,12 +534,7 @@ public class ContentsCont {
           mav.addObject("now_page", now_page);
           mav.addObject("contentsno", contentsVO.getContentsno());
           mav.setViewName("redirect:/contents/read.do");  //  param 접근 가능: now_page , contentsno         
-      } else {
-          mav.addObject("cnt", cnt);
-          mav.addObject("code", "passwd_fail");
-          mav.addObject("url", "/contents/msg"); // msg.jsp, redirect parameter 적용
-          mav.setViewName("redirect:/contents/msg.do"); //  param 접근 가능: cnt , code, url
-      }
+      
 
       return mav; // forward
     }
@@ -586,13 +577,9 @@ public class ContentsCont {
       // 삭제할 파일 정보를 읽어옴, 기존에 등록된 레코드 저장용
       ContentsVO contentsVO_old = contentsProc.read(contentsVO.getContentsno());
       
-      HashMap<String, Object> map = new HashMap<String, Object>();
-      map.put("contentsno", contentsVO.getContentsno());
-      map.put("passwd", contentsVO.getPasswd());
       
       int cnt = 0;
-      int passwd_cnt = this.contentsProc.passwd_check(map);
-      if (passwd_cnt == 1) { // 패스워드 일치 -> 등록된 파일 삭제 -> 신규 파일 등록
+ // 패스워드 일치 -> 등록된 파일 삭제 -> 신규 파일 등록
           // -------------------------------------------------------------------
           // 파일 삭제 코드 시작
           // -------------------------------------------------------------------
@@ -665,13 +652,7 @@ public class ContentsCont {
           mav.addObject("contentsno", contentsVO.getContentsno());
           mav.setViewName("redirect:/contents/read.do"); // request -> param으로 접근 전환
           
-      } else { // 패스워드 오류
-          mav.addObject("cnt", cnt);
-          mav.addObject("code", "passwd_fail");
-          mav.addObject("url", "/contents/msg"); // msg.jsp, redirect parameter 적용
-          mav.setViewName("redirect:/contents/msg.do");
-      }
-
+      
       mav.addObject("cateno", contentsVO_old.getCateno());
       System.out.println("-> cateno: " + contentsVO_old.getCateno());
       
@@ -713,13 +694,10 @@ public class ContentsCont {
       ModelAndView mav = new ModelAndView();
       int contentsno = contentsVO.getContentsno();
       
-      HashMap<String, Object> passwd_map = new HashMap<String, Object>();
-      passwd_map.put("contentsno", contentsVO.getContentsno());
-      passwd_map.put("passwd", contentsVO.getPasswd());
+
       
       int cnt = 0;
-      int passwd_cnt = this.contentsProc.passwd_check(passwd_map);
-      if (passwd_cnt == 1) { // 패스워드 일치 -> 등록된 파일 삭제 -> 신규 파일 등록
+ // 패스워드 일치 -> 등록된 파일 삭제 -> 신규 파일 등록
           // -------------------------------------------------------------------
           // 파일 삭제 코드 시작
           // -------------------------------------------------------------------
@@ -767,12 +745,6 @@ public class ContentsCont {
           mav.addObject("now_page", now_page);
           mav.setViewName("redirect:/contents/list_by_cateno_search_paging.do"); // redirect: param.now_page
 
-      } else { // 패스워드 오류
-          mav.addObject("cnt", cnt);
-          mav.addObject("code", "passwd_fail");
-          mav.addObject("url", "/contents/msg"); // msg.jsp, redirect parameter 적용
-          mav.setViewName("redirect:/contents/msg.do");
-      }
       mav.addObject("cateno", contentsVO.getCateno());
       System.out.println("-> cateno: " + contentsVO.getCateno());
       

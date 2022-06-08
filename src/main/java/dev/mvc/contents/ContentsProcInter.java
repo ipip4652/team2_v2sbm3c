@@ -70,13 +70,6 @@ public interface ContentsProcInter {
     public String pagingBox(int cateno, int search_count, int now_page, String word);
     
     /**
-     * 패스워드 검사
-     * @param map
-     * @return 1 or 0
-     */
-    public int passwd_check(HashMap map);
-    
-    /**
      * 텍스트 정보 수정
      * @param contentsVO
      * @return 처리된 레코드 갯수
