@@ -99,6 +99,30 @@ public class NoticeCont {
 
         return mav; // forward
     }
+    
+    
+    
+    /**
+     * 게시판 상세 조회
+     * @param noticeno
+     * @param model
+     * @return
+     */
+    @RequestMapping("/notice/detailBoard.do")
+    public String detailboard(int noticeno, Model model) {
+        ModelAndView mav = new ModelAndView();
+        NoticeVO noticeVO = this.noticeProc.read(noticeno);
+
+        model.addAttribute("noticeVO", noticeVO);
+
+        int cnt = this.noticeProc.updatecnt(noticeno); // 조회수 증가 처리
+        mav.addObject("cnt", cnt);
+
+        List<NoticeVO> list = this.noticeProc.list_noticeno_asc();
+        mav.addObject("list", list); // request 객체에 저장
+
+        return "notice/detailBoard";
+    }
 
     /**
      * 조회 + 수정폼
@@ -124,6 +148,33 @@ public class NoticeCont {
         return mav; // forward
     }
 
+    
+      // http://localhost:9091/notice/read_delete.do
+      /**
+        * 조회 + 삭제폼
+        * 
+        * @param noticeno 조회할 카테고리 번호
+        * @return
+        */
+    @RequestMapping(value = "/notice/delete.do", method = RequestMethod.GET)
+    public ModelAndView read_delete(int noticeno) {
+        System.out.println("삭제할 글번호 : " + noticeno);
+        ModelAndView mav = new ModelAndView();
+
+        NoticeVO noticeVO = this.noticeProc.read(noticeno); // 삭제할 자료 읽기
+        // MemberVO memberVO = this.memberProc.read(noticeVO.getMemberno());
+
+        mav.addObject("noticeVO", noticeVO); // request 객체에 저장
+        // mav.addObject("memberVO", memberVO);
+        int cnt = this.noticeProc.delete(noticeno); // 삭제 처리
+        mav.addObject("cnt", cnt); // request 객체에 저장
+
+        mav.setViewName("redirect:/notice/list.do"); // read_delete.jsp
+
+        return mav;
+
+    }
+    
     // http://localhost:9091/notice/update.do
     /**
      * 수정 처리
@@ -154,62 +205,8 @@ public class NoticeCont {
         return mav;
     }
 
-    /*
-     * // http://localhost:9091/notice/read_delete.do
-     *//**
-        * 조회 + 삭제폼
-        * 
-        * @param noticeno 조회할 카테고리 번호
-        * @return
-        */
-            @RequestMapping(value="/notice/delete.do", method=RequestMethod.GET )
-            public ModelAndView read_delete(int noticeno) { 
-                System.out.println("삭제할 글번호 : " + noticeno);
-                ModelAndView mav = new ModelAndView();
-            
-                NoticeVO noticeVO = this.noticeProc.read(noticeno); // 삭제할 자료 읽기
-                // MemberVO memberVO = this.memberProc.read(noticeVO.getMemberno());
-                
-                mav.addObject("noticeVO", noticeVO); // request 객체에 저장
-               //  mav.addObject("memberVO", memberVO);
-                
-                List<NoticeVO> list = this.noticeProc.list_noticeno_asc();
-                mav.addObject("list", list); // request 객체에 저장
-            
-                mav.setViewName("/notice/delete"); // read_delete.jsp 
-                
-                return mav; 
-            
-            }
-           
 
-    // http://localhost:9091/notice/delete.do
-    /**
-     * 삭제
-     * 
-     * @param noticeno 조회할 카테고리 번호
-     * @return
-     */
-    @RequestMapping(value = "/notice/delete.do", method = RequestMethod.POST)
-    public ModelAndView delete(int noticeno) {
-        System.out.println("삭제할 글번호 : " + noticeno);
-        ModelAndView mav = new ModelAndView();
 
-        NoticeVO noticeVO = this.noticeProc.read(noticeno); // 삭제 정보
-        mav.addObject("noticeVO", noticeVO); // request 객체에 저장
-        
-        MemberVO memberVO = this.memberProc.read(noticeVO.getMemberno());
-        
-        int cnt = this.noticeProc.delete(noticeno); // 삭제 처리
-        mav.addObject("cnt", cnt); // request 객체에 저장
-
-        // mav.setViewName("/notice/delete_msg"); // delete_msg.jsp
-        mav.setViewName("redirect:/notice/list.do");
-
-        return mav;
-    }
-
-    // http://localhost:9091/notice/list.do
     /**
      * 목록
      * 
@@ -227,20 +224,6 @@ public class NoticeCont {
         return mav;
     }
 
-    @RequestMapping("/notice/detailBoard.do")
-    public String detailboard(int noticeno, Model model) {
-        ModelAndView mav = new ModelAndView();
-        NoticeVO noticeVO = this.noticeProc.read(noticeno);
 
-        model.addAttribute("noticeVO", noticeVO);
-
-        int cnt = this.noticeProc.updatecnt(noticeno); // 조회수 증가 처리
-        mav.addObject("cnt", cnt);
-
-        List<NoticeVO> list = this.noticeProc.list_noticeno_asc();
-        mav.addObject("list", list); // request 객체에 저장
-
-        return "notice/detailBoard";
-    }
 
 }
