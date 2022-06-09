@@ -153,7 +153,7 @@
   <DIV id='panel_create' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; width: 100%; text-align: center;'>
     <FORM name='frm_create' id='frm_create' method='POST' action='./create.do'>
       <label>카테고리 그룹 번호</label>
-      <input type='text' name='categrpno' value='${param.categrpno }' > ${param.categrpno } 
+      <input type='text' name='categrpno' value='${param.categrpno }' > 
     
       <label>카테고리 이름</label>
       <input type='text' name='name' value='' required="required" style='width: 25%;' autofocus="autofocus">
