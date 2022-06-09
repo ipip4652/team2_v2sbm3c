@@ -87,14 +87,6 @@
          <textarea name='pcontent' required="required" class="form-control" rows="12" style='width: 100%;'>상품 설명을 등록해주세요</textarea>
        </div>
     </div>
-    <!--radio button으로 할 예정 -->
-    <div class="form-group">
-       <label class="control-label col-md-2">성별</label>
-       <div class="col-md-10">
-         <input type='text' name='sex' value='여성' required="required" 
-                   autofocus="autofocus" class="form-control" style='width: 100%;'>
-       </div>
-    </div>
     <div class="form-group">
        <label class="control-label col-md-2">검색어</label>
        <div class="col-md-10">
