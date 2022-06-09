@@ -12,10 +12,6 @@ public class CategrpVO {
     private int categrpno;
     /** 카테고리 이름 */
     private String name;
-    /** 출력 순서 */
-    private int seqno;
-    /** 출력 모드 */
-    private String visible;
     /** 등록일 */
     private String rdate;
     
@@ -23,11 +19,9 @@ public class CategrpVO {
         
     }
     
-    public CategrpVO(int categrpno, String name, int seqno, String visible, String rdate) {
+    public CategrpVO(int categrpno, String name, String rdate) {
         this.categrpno = categrpno;
         this.name = name;
-        this.seqno = seqno;
-        this.visible = visible;
         this.rdate = rdate;
     }
 
@@ -42,18 +36,6 @@ public class CategrpVO {
     }
     public void setName(String name) {
         this.name = name;
-    }
-    public int getSeqno() {
-        return seqno;
-    }
-    public void setSeqno(int seqno) {
-        this.seqno = seqno;
-    }
-    public String getVisible() {
-        return visible;
-    }
-    public void setVisible(String visible) {
-        this.visible = visible;
     }
     public String getRdate() {
         return rdate;

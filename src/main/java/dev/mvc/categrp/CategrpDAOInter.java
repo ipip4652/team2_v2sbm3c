@@ -49,34 +49,6 @@ public interface CategrpDAOInter {
    */
   public int delete(int categrpno);
   
-  /**
-   * 출력 순서별 목록
-   * select id="list_seqno_asc" resultType="dev.mvc.categrp.CategrpVO"
-   * @return
-   */
-  public List<CategrpVO> list_seqno_asc();
-
-  /**
-   * 출력 순서 상향 2 → 1
-   * @param categrpno
-   * @return 처리된 레코드 갯수
-   */
-  public int update_seqno_up(int categrpno);
- 
-  /**
-   * 출력 순서 하향 1 → 2
-   * @param categrpno
-   * @return 처리된 레코드 갯수
-   */
-  public int update_seqno_down(int categrpno); 
-  
-  /**
-   * visible 수정
-   * @param categrpVO 전달받음
-   * @return 변경한 레코드 갯수
-   */
-  public int update_visible(CategrpVO categrpVO);
-  
 }
 
 

@@ -115,8 +115,6 @@ public class CategrpCont {
         JSONObject json = new JSONObject();
         json.put("categrpno", categrpVO.getCategrpno());
         json.put("name", categrpVO.getName());
-        json.put("seqno", categrpVO.getSeqno());
-        json.put("visible", categrpVO.getVisible());
         json.put("rdate", categrpVO.getRdate());
           
         return json.toString();
@@ -143,8 +141,6 @@ public class CategrpCont {
         JSONObject json = new JSONObject();
         json.put("categrpno", categrpVO.getCategrpno());
         json.put("name", categrpVO.getName());
-        json.put("seqno", categrpVO.getSeqno());
-        json.put("visible", categrpVO.getVisible());
         json.put("rdate", categrpVO.getRdate());
         
         // 카테고리 그룹에 속한 카테고리수 파악
@@ -239,7 +235,7 @@ public class CategrpCont {
       // List<CategrpVO> list = this.categrpProc.list_categrpno_asc();
 
       // 출력 순서별 출력
-      List<CategrpVO> list = this.categrpProc.list_seqno_asc();
+      List<CategrpVO> list = this.categrpProc.list_categrpno_asc();
 
       mav.addObject("list", list); // request.setAttribute("list", list);
 
@@ -247,60 +243,6 @@ public class CategrpCont {
       mav.setViewName("/categrp/list_ajax"); // /webapp/WEB-INF/views/categrp/list_ajax.jsp
       return mav;
     }
-    
-    // http://localhost:9091/categrp/update_seqno_up.do?categrpno=1
-    // http://localhost:9091/categrp/update_seqno_up.do?categrpno=1000
-    /**
-     * 우선순위 상향 up 10 ▷ 1
-     * @param categrpno 카테고리 번호
-     * @return
-     */
-    @RequestMapping(value="/categrp/update_seqno_up.do", 
-                                method=RequestMethod.GET )
-    public ModelAndView update_seqno_up(int categrpno) {
-      ModelAndView mav = new ModelAndView();
-      
-      this.categrpProc.update_seqno_up(categrpno);  // 우선 순위 상향 처리
-
-      mav.setViewName("redirect:/categrp/list.do"); 
-      return mav;
-    }  
-    
-    // http://localhost:9091/categrp/update_seqno_down.do?categrpno=1
-    // http://localhost:9091/categrp/update_seqno_down.do?categrpno=1000
-    /**
-     * 우선순위 하향 up 1 ▷ 10
-     * @param categrpno 카테고리 번호
-     * @return
-     */
-    @RequestMapping(value="/categrp/update_seqno_down.do", 
-                                method=RequestMethod.GET )
-    public ModelAndView update_seqno_down(int categrpno) {
-      ModelAndView mav = new ModelAndView();
-      
-      this.categrpProc.update_seqno_down(categrpno);
-      
-      mav.setViewName("redirect:/categrp/list.do");
-
-      return mav;
-    }  
-    
-    /**
-     * 출력 모드의 변경
-     * @param categrpVO
-     * @return
-     */
-    @RequestMapping(value="/categrp/update_visible.do", 
-        method=RequestMethod.GET )
-    public ModelAndView update_visible(CategrpVO categrpVO) {
-      ModelAndView mav = new ModelAndView();
-      
-      int cnt = this.categrpProc.update_visible(categrpVO);
-      
-      mav.setViewName("redirect:/categrp/list.do"); // request 객체 전달 안됨. 
-      
-      return mav;
-    }  
     
     
 }
