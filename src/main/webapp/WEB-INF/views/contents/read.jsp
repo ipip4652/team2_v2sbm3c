@@ -4,7 +4,7 @@
 
 <c:set var="contentsno" value="${contentsVO.contentsno }" />
 <c:set var="cateno" value="${contentsVO.cateno }" />
-<c:set var="title" value="${contentsVO.title }" />        
+<c:set var="pname" value="${contentsVO.pname }" />        
 <c:set var="price" value="${contentsVO.price }" />
 <c:set var="dc" value="${contentsVO.dc }" />
 <c:set var="saleprice" value="${contentsVO.saleprice }" />
@@ -22,7 +22,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world</title>
+<title>향수</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
@@ -111,7 +111,7 @@
         </DIV>
 
         <DIV style="width: 47%; height: 260px; float: left; margin-right: 10px; margin-bottom: 30px;">
-          <span style="font-size: 1.5em; font-weight: bold;">${title }</span><br>
+          <span style="font-size: 1.5em; font-weight: bold;">${pname }</span><br>
           <!-- <span style="color: #FF0000; font-size: 2.0em;">${dc} %</span>
           <span style="font-size: 1.5em; font-weight: bold;"><fmt:formatNumber value="${saleprice}" pattern="#,###" /> 원</span>
           <del><fmt:formatNumber value="${price}" pattern="#,###" /> 원</del><br> -->
