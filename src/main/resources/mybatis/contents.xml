@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <!-- 특정 카테고리의 등록된 글목록 -->
   <select id="list_by_cateno" resultType="dev.mvc.contents.ContentsVO" parameterType="int">
     SELECT contentsno, memberno, cateno, pcompany, pname, pcontent, cnt, rdate,
-              file1, file1saved, thumb1, size1, price, point
+              file1, file1saved, thumb1, size1, price
     FROM contents 
     WHERE cateno = #{cateno}
     ORDER BY contentsno DESC
