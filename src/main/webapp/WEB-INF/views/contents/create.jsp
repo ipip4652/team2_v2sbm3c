@@ -65,7 +65,7 @@
              enctype="multipart/form-data">
     <input type="hidden" name="categrpno" value="${cateVO.categrpno }"> 
     <input type="hidden" name="cateno" value="${param.cateno }">
-    <input type="hidden" name="adminno" value="1"> <%-- 관리자 개발후 변경 필요 --%>
+    <input type="hidden" name="memberno" value="1"> <%-- 관리자 개발후 변경 필요 --%>
 
     <div class="form-group">
        <label class="control-label col-md-2">향수회사명</label>
