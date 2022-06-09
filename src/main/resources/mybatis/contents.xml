@@ -8,14 +8,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!--   <insert id="create" parameterType="dev.mvc.contents.ContentsVO">
     INSERT INTO contents(contentsno, memberno, cateno, pname, content, word,
                                      file1, file1saved, thumb1, size1, rdate)
-    VALUES(CONTENT_seq.nextval, #{memberno}, #{cateno}, #{pname}, #{content},  #{word},
+    VALUES(contents_seq.nextval, #{memberno}, #{cateno}, #{pname}, #{content},  #{word},
                 #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate)
   </insert> -->
 
   <!-- 연속 입력 지원 등록: sequence가 SQL 실행전에 생성되어 ContentsVO에 저장 후 사용 -->
   <insert id="create" parameterType="dev.mvc.contents.ContentsVO">
     <selectKey keyProperty="contentsno" resultType="int" order="BEFORE">
-      SELECT CONTENT_seq.nextval FROM dual
+      SELECT contents_seq.nextval FROM dual
     </selectKey> <!--시퀀스 변경??(일단 db상에 있는 이름으로 지정함) -->
     
     INSERT INTO contents(contentsno, memberno, cateno, pcompany, pname, pcontent, price, word,
