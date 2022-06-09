@@ -227,17 +227,14 @@
       <c:forEach var="contentsVO" items="${list }" varStatus="status">
         <c:set var="contentsno" value="${contentsVO.contentsno }" />
         <c:set var="cateno" value="${contentsVO.cateno }" />
-        <c:set var="title" value="${contentsVO.title }" />
-        <c:set var="content" value="${contentsVO.content }" />
-        <c:set var="recom" value="${contentsVO.recom }" />
+        <c:set var="pcompany" value="${contentsVO.pcompany }" />        
+        <c:set var="title" value="${contentsVO.pname }" />
+        <c:set var="content" value="${contentsVO.pcontent }" />
         
         <c:set var="file1" value="${contentsVO.file1 }" />
         <c:set var="thumb1" value="${contentsVO.thumb1 }" />
         
         <c:set var="price" value="${contentsVO.price }" />
-        <c:set var="dc" value="${contentsVO.dc }" />
-        <c:set var="saleprice" value="${contentsVO.saleprice }" />
-        <c:set var="point" value="${contentsVO.point }" />
         
         <tr> 
           <td style='vertical-align: middle; text-align: center;'>
@@ -252,14 +249,12 @@
             </c:choose>
           </td>  
           <td style='vertical-align: middle;'>
-            <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word}"><strong>${title}</strong> ${content}</a> 
+            <a href="./read.do?contentsno=${contentsno}&now_page=${param.now_page }&word=${param.word}"><strong>${pcompany} ${title}</strong></a> 
           </td> 
           <td style='vertical-align: middle; text-align: center;'>
-            <del><fmt:formatNumber value="${price}" pattern="#,###" /></del><br>
-            <span style="color: #FF0000; font-size: 1.2em;">${dc} %</span>
-            <strong><fmt:formatNumber value="${saleprice}" pattern="#,###" /></strong><br>
-            <span style="font-size: 0.8em;">포인트: <fmt:formatNumber value="${point}" pattern="#,###" /></span>
-            <span><A id="recom_${status.count }" href="javascript:recom_ajax(${contentsno }, ${status.count })" class="recom_link">♥(${recom })</A></span>
+            <fmt:formatNumber value="${price}" pattern="#,###" />
+
+            <span><A id="recom_${status.count }" href="javascript:recom_ajax(${contentsno }, ${status.count })" class="recom_link"></A></span>
 
             <%-- <span id="span_animation_${status.count }"></span> --%>
             <br>
