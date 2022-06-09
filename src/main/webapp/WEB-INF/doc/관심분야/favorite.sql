@@ -1,23 +1,24 @@
+drop table favorite;
 /**********************************/
 /* Table Name: 관심분야 */
 /**********************************/
-DROP TABLE favorite CASCADE CONSTRAINTS;
-CREATE TABLE favorite(
-        FAVORITENO                         NUMBER(10)         NOT NULL         PRIMARY KEY,
-        SEQNO                                 NUMBER(7)         DEFAULT 1         NULL ,
-        RDATE                                  DATE         NOT NULL,
-        CATENO                               NUMBER(10)         NULL ,
-        MEMBERNO                          NUMBER(10)         NULL ,
-  FOREIGN KEY (MEMBERNO) REFERENCES MEMBER (MEMBERNO),
-  FOREIGN KEY (CATENO) REFERENCES CATE (CATENO)
+CREATE TABLE FAVORITE(
+		favoriteno                    		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
+		seqno                         		NUMBER(7)		 NOT NULL,
+		rdate                         		DATE		 NOT NULL,
+		cateno                        		NUMBER(10)		 NOT NULL,
+		memberno                      		NUMBER(10)		 NOT NULL,
+  FOREIGN KEY (memberno) REFERENCES member (memberno),
+  FOREIGN KEY (cateno) REFERENCES cate (cateno)
 );
 
-COMMENT ON TABLE favorite is '관심분야';
-COMMENT ON COLUMN favorite.FAVORITENO is '관심분야번호';
-COMMENT ON COLUMN favorite.SEQNO is '출력 순서';
-COMMENT ON COLUMN favorite.RDATE is '등록일';
-COMMENT ON COLUMN favorite.CATENO is '카테고리 번호';
-COMMENT ON COLUMN favorite.MEMBERNO is '회원 번호';
+COMMENT ON TABLE FAVORITE is '관심분야';
+COMMENT ON COLUMN FAVORITE.favoriteno is '관심 번호';
+COMMENT ON COLUMN FAVORITE.seqno is '출력순서';
+COMMENT ON COLUMN FAVORITE.rdate is '등록일';
+COMMENT ON COLUMN FAVORITE.cateno is '카테고리 번호';
+COMMENT ON COLUMN FAVORITE.memberno is '회원 번호';
+
 
 DROP SEQUENCE favorite_seq;
 CREATE SEQUENCE favorite_seq

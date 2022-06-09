@@ -1,22 +1,23 @@
+drop table recom;
 /**********************************/
 /* Table Name: 추천상품 */
 /**********************************/
-CREATE TABLE recommend(
-        RECOMMENDNO                  NUMBER(10)         NOT NULL         PRIMARY KEY,
-        SEQNO                               NUMBER(7)         DEFAULT 1         NULL ,
-        RDATE                                 DATE         NOT NULL,
-        CONTENTSNO                      NUMBER(10)         NULL ,
-        MEMBERNO                         NUMBER(10)         NULL ,
-  FOREIGN KEY (CONTENTSNO) REFERENCES CONTENTS (CONTENTSNO),
-  FOREIGN KEY (MEMBERNO) REFERENCES MEMBER (MEMBERNO)
+CREATE TABLE recom(
+		recomno                       		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
+		name                          		VARCHAR2(50)		 NOT NULL,
+		rdate                         		DATE		 NOT NULL,
+		contentsno                    		NUMBER(10)		 NOT NULL,
+		memberno                      		NUMBER(10)		 NOT NULL,
+  FOREIGN KEY (memberno) REFERENCES member (memberno),
+  FOREIGN KEY (contentsno) REFERENCES CONTENTS (CONTENTSNO)
 );
 
-COMMENT ON TABLE recommend is '추천상품';
-COMMENT ON COLUMN recommend.RECOMMENDNO is '추천상품번호';
-COMMENT ON COLUMN recommend.SEQNO is '출력 순서';
-COMMENT ON COLUMN recommend.RDATE is '등록일';
-COMMENT ON COLUMN recommend.CONTENTSNO is '컨텐츠 번호';
-COMMENT ON COLUMN recommend.MEMBERNO is '회원 번호';
+COMMENT ON TABLE recom is '추천상품';
+COMMENT ON COLUMN recom.recomno is '선호상품 번호';
+COMMENT ON COLUMN recom.name is '선호상품이름';
+COMMENT ON COLUMN recom.rdate is '등록일';
+COMMENT ON COLUMN recom.contentsno is '향수 번호';
+COMMENT ON COLUMN recom.memberno is '회원번호';
 
 DROP SEQUENCE recommend_seq;
 CREATE SEQUENCE recommend_seq
