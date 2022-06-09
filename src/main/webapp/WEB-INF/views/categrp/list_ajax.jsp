@@ -48,15 +48,11 @@
               // {"categrpno":1,"visible":"Y","seqno":1,"rdate":"2021-04-08 17:01:28","name":"문화"}
               let categrpno = rdata.categrpno;
               let name = rdata.name;
-              let seqno = rdata.seqno;
-              let visible = rdata.visible;
               let rdate = rdata.rdate;
 
               let frm_update = $('#frm_update'); // id가 frm_update인 태그
               $('#categrpno', frm_update).val(categrpno); // frm_update 폼에서 id가 categrpno인 태그
               $('#name', frm_update).val(name);
-              $('#seqno', frm_update).val(seqno);
-              $('#visible', frm_update).val(visible);
               $('#rdate', frm_update).val(rdate);
               
               // console.log('-> btn_recom: ' + $('#btn_recom').val());  // X
@@ -110,8 +106,6 @@
             // {"categrpno":1,"visible":"Y","seqno":1,"rdate":"2021-04-08 17:01:28","name":"문화"}
             let categrpno = rdata.categrpno;
             let name = rdata.name;
-            let seqno = rdata.seqno;
-            let visible = rdata.visible;
             // var rdate = rdata.rdate;
             let count_by_categrpno = parseInt(rdata.count_by_categrpno); // 카테고리 그룹에 속한 카테고리수
             console.log('count_by_categrpno: ' + count_by_categrpno);
@@ -120,8 +114,6 @@
             $('#categrpno', frm_delete).val(categrpno);
             
             $('#frm_delete_name').html(name);  // <label>그룹 이름</label><span id='frm_delete_name'></span>  
-            $('#frm_delete_seqno').html(seqno);
-            $('#frm_delete_visible').html(visible);
             
             if (count_by_categrpno > 0) {  // 자식 레코드가 있다면
                 $('#msg_count_by_categrpno').show();
@@ -161,17 +153,7 @@
       <label>그룹 이름</label>
       <input type='text' name='name' value='' required="required" style='width: 25%;'
                  autofocus="autofocus">
-  
-      <label>순서</label>
-      <input type='number' name='seqno' value='1' required="required" 
-                min='1' max='1000' step='1' style='width: 5%;'>
-  
-      <label>형식</label>
-      <select name='visible'>
-        <option value='Y' selected="selected">Y</option>
-        <option value='N'>N</option>
-      </select>
-       
+ 
       <button type="submit" id='submit' class='btn'>등록</button>
       <button type="button" id='btn_create_cancel' class='btn'>취소</button>
     </FORM>
@@ -187,17 +169,7 @@
       <label>그룹 이름</label>
       <input type='text' name='name' id='name' value='' required="required" style='width: 25%;'
                  autofocus="autofocus">
-  
-      <label>순서</label>
-      <input type='number' name='seqno' id='seqno' value='1' required="required" 
-                min='1' max='1000' step='1' style='width: 5%;'>
-  
-      <label>형식</label>
-      <select name='visible' id='visible'>
-        <option value='Y' selected="selected">Y</option>
-        <option value='N'>N</option>
-      </select>
-       
+ 
       <button type="submit" id='submit' class='btn'>저장</button>
       <button type="button" id='btn_update_cancel' class='btn'>취소</button>
       
@@ -214,8 +186,6 @@
       <input type='hidden' name='categrpno' id='categrpno' value=''>
         
       <label>그룹 이름</label>: <span id='frm_delete_name'></span>  
-      <label>순서</label>: <span id='frm_delete_seqno'></span>
-      <label>출력 형식</label>: <span id='frm_delete_visible'></span>
       
       <div id='msg_count_by_categrpno' 
              style='color: #FF0000; font-weight: bold; display: none; margin: 10px auto;'>
@@ -232,19 +202,15 @@
     
   <TABLE class='table table-striped'>
     <colgroup>
-      <col style='width: 10%;'/>
       <col style='width: 40%;'/>
-      <col style='width: 20%;'/>
-      <col style='width: 10%;'/>    
+      <col style='width: 20%;'/>  
       <col style='width: 20%;'/>
     </colgroup>
    
     <thead>  
     <TR>
-      <TH class="th_bs">순서</TH>
       <TH class="th_bs">이름</TH>
       <TH class="th_bs">등록일</TH>
-      <TH class="th_bs">출력</TH>
       <TH class="th_bs">기타</TH>
     </TR>
     </thead>
@@ -260,29 +226,15 @@
     <c:forEach var="categrpVO" items="${list}">
       <c:set var="categrpno" value="${categrpVO.categrpno }" />
       <c:set var="name" value="${categrpVO.name }" />
-      <c:set var="visible" value="${categrpVO.visible }" />
       
       <TR>
-        <TD class="td_bs">${categrpVO.seqno }</TD>
         <TD class="td_bs_left"><A href="../cate/list_by_categrpno.do?categrpno=${categrpno }">${name }</A></TD>
-        <TD class="td_bs">${categrpVO.rdate.substring(0, 10) }</TD>
-        <TD class="td_bs">
-          <c:choose>
-            <c:when test="${visible == 'Y'}">  <!-- /categrp/images/open.png: /static/categrp/images/open.png -->
-              <A href="./update_visible.do?categrpno=${categrpno }&visible=${visible }"><IMG src="/categrp/images/open.png" style='width: 18px;'></A>
-            </c:when>
-            <c:otherwise>
-              <A href="./update_visible.do?categrpno=${categrpno }&visible=${visible }"><IMG src="/categrp/images/close.png" style='width: 18px;'></A>
-            </c:otherwise>
-          </c:choose>
-        </TD>   
+        <TD class="td_bs">${categrpVO.rdate.substring(0, 10) }</TD> 
         
         <TD class="td_bs">
           <A href="../cate/create.do?categrpno=${categrpno }" title="${name } 등록"><i class="fa-solid fa-pen-to-square"></i></A>
           <A href="javascript: read_update_ajax(${categrpno })" title="수정"><i class="fa-regular fa-pen-to-square"></i></A>
-          <A href="javascript: read_delete_ajax(${categrpno })" title="삭제"><i class="fa-solid fa-eraser"></i></A>
-          <A href="./update_seqno_up.do?categrpno=${categrpno }" title="우선순위 상향"><i class="fa-solid fa-angle-up"></i></A>
-          <A href="./update_seqno_down.do?categrpno=${categrpno }" title="우선순위 하향"><i class="fa-solid fa-angle-down"></i></A>         
+          <A href="javascript: read_delete_ajax(${categrpno })" title="삭제"><i class="fa-solid fa-eraser"></i></A>       
           ${categrpno }
         </TD>   
       </TR>   
