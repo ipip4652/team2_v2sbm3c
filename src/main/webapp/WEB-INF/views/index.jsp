@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
     content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" />
-<title>Resort world - 간단하게 수정 </title>
+<title>The FARFUM </title>
 <!-- /static 기준 -->
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
 
