@@ -6,17 +6,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
 <mapper namespace="dev.mvc.contents.ContentsDAOInter"> 
 <!--   <insert id="create" parameterType="dev.mvc.contents.ContentsVO">
-    INSERT INTO contents(contentsno, memberno, cateno, pname, content, sex, word,
+    INSERT INTO contents(contentsno, memberno, cateno, pname, content, word,
                                      file1, file1saved, thumb1, size1, rdate)
-    VALUES(contents_seq.nextval, #{memberno}, #{cateno}, #{pname}, #{content}, #{sex}, #{word},
+    VALUES(CONTENT_seq.nextval, #{memberno}, #{cateno}, #{pname}, #{content},  #{word},
                 #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate)
   </insert> -->
 
   <!-- 연속 입력 지원 등록: sequence가 SQL 실행전에 생성되어 ContentsVO에 저장 후 사용 -->
   <insert id="create" parameterType="dev.mvc.contents.ContentsVO">
     <selectKey keyProperty="contentsno" resultType="int" order="BEFORE">
-      SELECT contents_seq.nextval FROM dual
-    </selectKey>
+      SELECT CONTENT_seq.nextval FROM dual
+    </selectKey> <!--시퀀스 변경??(일단 db상에 있는 이름으로 지정함) -->
     
     INSERT INTO contents(contentsno, memberno, cateno, pcompany, pname, pcontent, price, word,
                                      file1, file1saved, thumb1, size1, rdate)
@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   <!-- 일반적인 조회 -->
   <select id="read" resultType="dev.mvc.contents.ContentsVO" parameterType="int">
-    SELECT contentsno, memberno, cateno, pcompany, pname, pcontent, cnt, sex, word, rdate,
+    SELECT contentsno, memberno, cateno, pcompany, pname, pcontent, cnt, word, rdate,
               file1, file1saved, thumb1, size1, price, salecnt
     FROM contents
     WHERE contentsno = #{contentsno}
@@ -146,14 +146,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   <!-- 특정 카테고리에 속한 레코드 갯수 산출 -->
   <select id="count_by_cateno" resultType="int" parameterType="int">
-	SELECT COUNT(*) as cnt
-	FROM contents
-	WHERE cateno=#{cateno}
+    SELECT COUNT(*) as cnt
+    FROM contents
+    WHERE cateno=#{cateno}
   </select>
   
 </mapper> 
-
-
-
-
-
