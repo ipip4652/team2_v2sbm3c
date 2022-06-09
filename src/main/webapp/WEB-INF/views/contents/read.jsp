@@ -3,19 +3,22 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="contentsno" value="${contentsVO.contentsno }" />
+<c:set var="memberno" value="${contentsVO.memberno }" /> 
 <c:set var="cateno" value="${contentsVO.cateno }" />
+<c:set var="pcompany" value="${contentsVO.pcompany }" /> 
 <c:set var="pname" value="${contentsVO.pname }" />        
+<c:set var="pcontent" value="${contentsVO.pcontent }" /> 
 <c:set var="price" value="${contentsVO.price }" />
-<c:set var="dc" value="${contentsVO.dc }" />
-<c:set var="saleprice" value="${contentsVO.saleprice }" />
-<c:set var="point" value="${contentsVO.point }" />
-<c:set var="salecnt" value="${contentsVO.salecnt }" />
+<c:set var="word" value="${contentsVO.word }" />
 <c:set var="file1" value="${contentsVO.file1 }" />
 <c:set var="file1saved" value="${contentsVO.file1saved }" />
 <c:set var="thumb1" value="${contentsVO.thumb1 }" />
-<c:set var="content" value="${contentsVO.content }" />
-<c:set var="word" value="${contentsVO.word }" />
-<c:set var="size1_label" value="${contentsVO.size1_label }" />
+<c:set var="size1" value="${contentsVO.size1 }" />
+<c:set var="rdate" value="${contentsVO.rdate }" />
+<c:set var="salecnt" value="${contentsVO.salecnt }" />
+<c:set var="cnt" value="${contentsVO.cnt }" />
+
+
  
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -111,11 +114,10 @@
         </DIV>
 
         <DIV style="width: 47%; height: 260px; float: left; margin-right: 10px; margin-bottom: 30px;">
-          <span style="font-size: 1.5em; font-weight: bold;">${pname }</span><br>
-          <!-- <span style="color: #FF0000; font-size: 2.0em;">${dc} %</span>
-          <span style="font-size: 1.5em; font-weight: bold;"><fmt:formatNumber value="${saleprice}" pattern="#,###" /> 원</span>
-          <del><fmt:formatNumber value="${price}" pattern="#,###" /> 원</del><br> -->
-          <span style="font-size: 1.2em; font-weight: bold; color:blue;"><fmt:formatNumber value="${saleprice}" pattern="#,###" /> 원</span><br>
+          <span style="font-size: 1.2em; ">${pcompany }</span><br>
+          <span style="font-size: 1.5em; font-weight: bold; color:green;">${pname }</span><br>
+          <span style="font-size: 1.0em; float:left;">${pcontent }</span><br>
+          <span style="font-size: 1.2em; font-weight: bold; color:blue;"><fmt:formatNumber value="${price}" pattern="#,###" /> 원</span><br>
           <c:if test="${salecnt > 0}">
           <span style="font-size: 1.0em; color:green;">구매가능</span>
           </c:if>
@@ -127,10 +129,9 @@
           <span style="font-size: 1.0em;">구매 수량</span><br>
           <form>
           <input type="text" name='ordercnt' id ='ordercnt' placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" 
-                       class="form-control" style='width: 30%;'/><br>
-<!--           <button type='button' onclick="" class="btn btn-info">장바 구니</button>            -->          
+                       class="form-control" style='width: 30%;'/><br> 
            <button type='button' onclick="return check_order()" class="btn btn-info">바로 구매</button>
-          <button type='button' onclick="return check_order()" class="btn btn-info">관심 상품</button><br><br>
+          <button type='button' onclick="return check_order()" class="btn btn-info">장바구니</button><br><br>
           
           </form>
         </DIV> 
@@ -150,6 +151,7 @@
                 첨부 파일: <A href='/download?dir=/contents/storage&filename=${file1saved}&downname=${file1}'>${file1}</A> (${size1_label})  
             </span>
           </c:if>
+          
         </DIV>
       </li>  
            <DIV style="  position: absolute; top: 250px; right: 160px; width: 200px; height:195px; float: right; text-align:center; line-height:150px;">
