@@ -25,13 +25,16 @@ public class ContentsProc implements ContentsProcInter {
     @Override
     public ContentsVO read(int contentsno) {
         ContentsVO contentsVO = this.contentsDAO.read(contentsno);
-
+        
+        String company = contentsVO.getPcompany();
         String title = contentsVO.getPname();
         String content = contentsVO.getPcontent();
 
+        company = Tool.convertChar(company);
         title = Tool.convertChar(title); // 특수 문자 처리
         content = Tool.convertChar(content);
 
+        contentsVO.setPcompany(company);
         contentsVO.setPname(title);
         contentsVO.setPcontent(content);
 
@@ -60,12 +63,15 @@ public class ContentsProc implements ContentsProcInter {
             }
 
             String title = contentsVO.getPname();
+            String company = contentsVO.getPcompany();
 
             title = Tool.convertChar(title); // 특수 문자 처리
             content = Tool.convertChar(content);
+            company = Tool.convertChar(company);
 
             contentsVO.setPname(title);
             contentsVO.setPcontent(content);
+            contentsVO.setPcompany(company);
         }
 
         return list;
@@ -137,6 +143,10 @@ public class ContentsProc implements ContentsProcInter {
         
         String title = Tool.convertChar(contentsVO.getPname());  // 특수 문자 변환
         contentsVO.setPname(title);
+        
+        String company = contentsVO.getPcompany();
+        company = Tool.convertChar(company);
+        contentsVO.setPcompany(company);
         
         content = Tool.convertChar(content);
         contentsVO.setPcontent(content);

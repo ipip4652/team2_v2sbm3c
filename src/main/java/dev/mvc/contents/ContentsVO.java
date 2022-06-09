@@ -9,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
         pcompany                                 VARCHAR2(300)         NOT NULL,
         pname                                   VARCHAR2(300)         NOT NULL,
         pcontent                               CLOB                  NOT NULL,
-        sex                                   CHAR(1)         NOT NULL,
         cnt                                   NUMBER(7)         DEFAULT 0         NOT NULL,
         word                                  VARCHAR2(300)         NULL ,
         rdate                                 DATE               NOT NULL,
@@ -35,8 +34,6 @@ public class ContentsVO {
     private String pcontent = "";
     /** 조회수 */
     private int cnt = 0;
-    /** 성 */
-    private String sex = "";
     /** 검색어 */
     private String word = "";
     /** 등록 날짜 */
@@ -209,18 +206,7 @@ public class ContentsVO {
 
     public void setPcontent(String pcontent) {
         this.pcontent = pcontent;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-    
-    
-    
+    }    
 }
 
 
