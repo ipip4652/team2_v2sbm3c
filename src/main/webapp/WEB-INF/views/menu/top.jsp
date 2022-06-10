@@ -20,13 +20,20 @@
             <!--상단 탑 오른쪽 메뉴-->
             <div class="login_menu">
                 <ul style="padding-left: 0px;">
-                    <li class="login_li"><a href="" class="login_a">login</a>
+                    <li class="login_li">
+       	                <c:choose>
+                           	<c:when test="${sessionScope.id == null}">
+                               	<a href="/member/login.do" class="login_a">login</a>
+                           	</c:when>
+                           	<c:otherwise>
+	                           	<a href="/member/logout.do" class="login_a">${sessionScope.id } logout</a>                               	
+                           	</c:otherwise>
+                       	</c:choose>                        
                         / <a href="/member/join.html" class="login_a">join
                             us</a></li>
 
-                    <li class="login_li"><a href="" class="login_a">my
-                            page</a> / <a href="/order/basket.html"
-                        class="login_a">basket</a></li>
+                    <li class="login_li">
+                    <a href="/member/read.do?memberno=${sessionScope.memberno}" class="login_a">my page</a> / <a href="/cart/list_by_memberno.do" class="login_a">basket</a></li>
                 </ul>
             </div>
 
