@@ -38,11 +38,168 @@
 <script type="text/javascript">
   function check_order(){
       let ordercnt = document.getElementById("ordercnt").value;
+      if(ordercnt == null || ordercnt == ''){
+          alert("수량을 입력해주세요");
+          return ordercnt.focus();
+      }
       if(ordercnt > ${salecnt}) {
           alert("현재 보유수량보다 많습니다."); 
           return ordercnt.focus();
       } 
   }
+
+  $(function() {
+    // var contentsno = 0;
+    // $('#btn_cart').on('click', function() { cart_ajax(contentsno)});
+    $('#btn_login').on('click', login_ajax);
+    $('#btn_loadDefault').on('click', loadDefault);
+  });
+	  
+	  function recom_ajax(contentsno, status_count) {
+	    console.log("-> recom_" + status_count + ": " + $('#recom_' + status_count).html());  // A tag body      
+	    var params = "";
+	    // params = $('#frm').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
+	    params = 'contentsno=' + contentsno; // 공백이 값으로 있으면 안됨.
+	    $.ajax(
+	      {
+	        url: '/contents/update_recom_ajax.do',
+	        type: 'post',  // get, post
+	        cache: false, // 응답 결과 임시 저장 취소
+	        async: true,  // true: 비동기 통신
+	        dataType: 'json', // 응답 형식: json, html, xml...
+	        data: params,      // 데이터
+	        success: function(rdata) { // 응답이 온경우
+	          var str = '';
+	          if (rdata.cnt == 1) {
+	            // $('#span_animation_' + status_count).hide();   // SPAN 태그에 animation 출력
+	            $('#recom_' + status_count).html('♥('+rdata.recom+')');     // A 태그에 animation 출력
+	          } else {
+	            // $('#span_animation_' + status_count).html("X");
+	            $('#recom_' + status_count).html('♥(X)');
+	          }
+	        },
+	        // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
+	        error: function(request, status, error) { // callback 함수
+	          console.log(error);
+	        }
+	      }
+	    );  //  $.ajax END
+
+	    $('#recom_' + status_count).html("<img src='/contents/images/ani04.gif' style='width: 10%;'>");
+	    // $('#span_animation_' + status_count).css('text-align', 'center');
+	    // $('#span_animation_' + status_count).html("<img src='/contents/images/ani04.gif' style='width: 10%;'>");
+	    // $('#span_animation_' + status_count).show(); // 숨겨진 태그의 출력
+	      
+	  }  
+
+	  function loadDefault() {
+	    $('#id').val('user1');
+	    $('#passwd').val('1234');
+	  } 
+	  
+	  <%-- 로그인 --%>
+	  function login_ajax() {
+	    var params = "";
+	    params = $('#frm_login').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
+	    params += '&${ _csrf.parameterName }=${ _csrf.token }';
+	    //console.log(params);
+	    //return;
+	    
+	    $.ajax(
+	      {
+	        url: '/member/login_ajax.do',
+	        type: 'post',  // get, post
+	        cache: false, // 응답 결과 임시 저장 취소
+	        async: true,  // true: 비동기 통신
+	        dataType: 'json', // 응답 형식: json, html, xml...
+	        data: params,      // 데이터
+	        success: function(rdata) { // 응답이 온경우
+	          var str = '';
+	          console.log('-> login cnt: ' + rdata.cnt);  // 1: 로그인 성공
+	          
+	          if (rdata.cnt == 1) {
+	            // 쇼핑카트에 insert 처리 Ajax 호출
+	            $('#div_login').hide();
+	            // alert('로그인 성공');
+	            $('#login_yn').val('YES'); // 로그인 성공 기록
+	            cart_ajax_post(); // 쇼핑카트에 insert 처리 Ajax 호출     
+	            
+	          } else {
+	            alert('로그인에 실패했습니다.<br>잠시후 다시 시도해주세요.');
+	            
+	          }
+	        },
+	        // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
+	        error: function(request, status, error) { // callback 함수
+	          console.log(error);
+	        }
+	      }
+	    );  //  $.ajax END
+
+	  }
+
+	  <%-- 쇼핑 카트에 상품 추가 --%>
+	  function cart_ajax(contentsno) {
+		check_order();
+	    var f = $('#frm_login');
+	    $('#contentsno', f).val(contentsno);  // 쇼핑카트 등록시 사용할 상품 번호를 저장.
+	    
+	    console.log('-> contentsno: ' + $('#contentsno', f).val()); 
+	    
+	    // console.log('-> id:' + '${sessionScope.id}');
+	    if ('${sessionScope.id}' != '' || $('#login_yn').val() == 'YES') {  // 로그인이 되어 있다면
+	        cart_ajax_post();
+	    } else { // 로그인 안된 경우
+	        $('#div_login').show();
+	    }
+
+	  }
+
+	  <%-- 쇼핑카트 상품 등록 --%>
+	  function cart_ajax_post() {
+        check_order();
+	    var f = $('#frm_login');
+	    var contentsno = $('#contentsno', f).val();  // 쇼핑카트 등록시 사용할 상품 번호.
+        let ordercnt = $('#ordercnt').val();
+	    
+	    var params = "";
+	    // params = $('#frm_login').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
+	    params += 'contentsno=' + contentsno;
+        params += '&ordercnt=' + ordercnt;
+	    params += '&${ _csrf.parameterName }=${ _csrf.token }';
+	    console.log('-> cart_ajax_post: ' + params);
+	    // return;
+	    
+	    $.ajax(
+	      {
+	        url: '/cart/create.do',
+	        type: 'post',  // get, post
+	        cache: false, // 응답 결과 임시 저장 취소
+	        async: true,  // true: 비동기 통신
+	        dataType: 'json', // 응답 형식: json, html, xml...
+	        data: params,      // 데이터
+	        success: function(rdata) { // 응답이 온경우
+	          var str = '';
+	          console.log('-> cart_ajax_post cnt: ' + rdata.cnt);  // 1: 쇼핑카트 등록 성공
+	          
+	          if (rdata.cnt == 1) {
+	            var sw = confirm('선택한 상품이 장바구니에 담겼습니다.\n장바구니로 이동하시겠습니까?');
+	            if (sw == true) {
+	              // 쇼핑카트로 이동
+	              location.href='/cart/list_by_memberno.do';
+	            }           
+	          } else {
+	            alert('선택한 상품을 장바구니에 담지못했습니다.<br>잠시후 다시 시도해주세요.');
+	          }
+	        },
+	        // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
+	        error: function(request, status, error) { // callback 함수
+	          console.log(error);
+	        }
+	      }
+	    );  //  $.ajax END
+
+	  }
 
 </script>
  
@@ -65,7 +222,7 @@
     <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }&now_page=${param.now_page}&word=${param.word }">기본 목록형</A>    
     <span class='menu_divide' >│</span>
     <A href="./list_by_cateno_grid.do?cateno=${cateVO.cateno }">갤러리형</A>
-    <%-- <c:if test="${param.id == 'admin' }"> --%>
+    <c:if test="${sessionScope.grade <= 10 }">
         <span class='menu_divide' >│</span>
         <A href="./create.do?cateno=${cateVO.cateno }">등록</A>
         <span class='menu_divide' >│</span>
@@ -74,7 +231,7 @@
         <A href="./update_file.do?contentsno=${contentsno}&now_page=${param.now_page}&word=${param.word }">파일 수정</A>  
         <span class='menu_divide' >│</span>
         <A href="./delete.do?contentsno=${contentsno}&now_page=${param.now_page}&cateno=${cateno}&word=${param.word }">삭제</A>
-    <%-- </c:if>   --%>
+    </c:if>
   </ASIDE> 
   
   <DIV style="text-align: right; clear: both;">  
@@ -100,7 +257,7 @@
 
   <div style='float: left; width: 79%'>
   <%-- ******************** Ajax 기반 로그인 폼 시작 ******************** --%>
-  <DIV id='div_login' style='display:inline;'>
+  <DIV id='div_login' style='display:none;'>
     <div style='width: 80%; margin: 0px 0px 0px 40%;'>
         <FORM name='frm_login' id='frm_login' method='POST' action='/member/login_ajax.do' class="form-horizontal">
           <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
@@ -177,8 +334,8 @@
           <form>
           <input type="text" name='ordercnt' id ='ordercnt' placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" 
                        class="form-control" style='width: 30%;'/><br> 
-           <button type='button' onclick="return check_order()" class="btn btn-info">바로 구매</button>
-          <button type='button' onclick="return check_order()" class="btn btn-info">장바구니</button><br><br>
+           <button type='button' onclick="cart_ajax(${contentsno })" class="btn btn-info">바로 구매</button>
+          <button type='button' onclick="cart_ajax(${contentsno })" class="btn btn-info">장바구니</button><br><br>
           
           </form>
         </DIV> 

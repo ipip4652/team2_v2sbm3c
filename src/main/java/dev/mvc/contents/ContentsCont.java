@@ -247,7 +247,7 @@ public class ContentsCont {
      * @return
      */
     @RequestMapping(value = "/contents/read.do", method = RequestMethod.GET)
-    public ModelAndView read(int contentsno) {
+    public ModelAndView read(int contentsno, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
 
         ContentsVO contentsVO = this.contentsProc.read(contentsno);
@@ -259,6 +259,41 @@ public class ContentsCont {
         CategrpVO categrpVO = this.categrpProc.read(cateVO.getCategrpno());
         mav.addObject("categrpVO", categrpVO);
 
+        
+        // -------------------------------------------------------------------------------
+        // 쇼핑 카트 장바구니에 상품 등록전 로그인 폼 출력 관련 쿠기  
+        // -------------------------------------------------------------------------------
+        Cookie[] cookies = request.getCookies();
+        Cookie cookie = null;
+
+        String ck_id = ""; // id 저장
+        String ck_id_save = ""; // id 저장 여부를 체크
+        String ck_passwd = ""; // passwd 저장
+        String ck_passwd_save = ""; // passwd 저장 여부를 체크
+
+        if (cookies != null) {  // Cookie 변수가 있다면
+          for (int i=0; i < cookies.length; i++){
+            cookie = cookies[i]; // 쿠키 객체 추출
+            
+            if (cookie.getName().equals("ck_id")){
+              ck_id = cookie.getValue();                                 // Cookie에 저장된 id
+            }else if(cookie.getName().equals("ck_id_save")){
+              ck_id_save = cookie.getValue();                          // Cookie에 id를 저장 할 것인지의 여부, Y, N
+            }else if (cookie.getName().equals("ck_passwd")){
+              ck_passwd = cookie.getValue();                          // Cookie에 저장된 password
+            }else if(cookie.getName().equals("ck_passwd_save")){
+              ck_passwd_save = cookie.getValue();                  // Cookie에 password를 저장 할 것인지의 여부, Y, N
+            }
+          }
+        }
+        
+        System.out.println("-> ck_id: " + ck_id);
+        
+        mav.addObject("ck_id", ck_id); 
+        mav.addObject("ck_id_save", ck_id_save);
+        mav.addObject("ck_passwd", ck_passwd);
+        mav.addObject("ck_passwd_save", ck_passwd_save);
+        
         mav.setViewName("/contents/read"); // /WEB-INF/views/contents/read.jsp
 
         return mav;

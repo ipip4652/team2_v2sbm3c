@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  
 <!DOCTYPE html> 
-<html lang="ko">
+<html lang="ko"> 
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
@@ -15,7 +15,7 @@
  
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
+
 <script type="text/javascript">
   function delete_func(cartno) {  // GET -> POST 전송, 상품 삭제
     var frm = $('#frm_post');
@@ -55,6 +55,7 @@
 <form name='frm_post' id='frm_post' action='' method='post'>
   <input type='hidden' name='cartno' id='cartno'>
   <input type='hidden' name='cnt' id='cnt'>
+  <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
 </form>
  
 <DIV class='title_line'>
@@ -63,8 +64,8 @@
 
 <DIV class='content_body'>
   <ASIDE class="aside_right">
-    <A href="/contents/list_shopping_main.do">쇼핑 계속하기</A>
-    <span class='menu_divide' >│</span>    
+      <A href="/contents/list_shipping_main.do">쇼핑 계속하기</A>
+      <span class='menu_divide' >│</span>    
     <A href="javascript:location.reload();">새로고침</A>
   </ASIDE> 
 
@@ -94,15 +95,12 @@
     <tbody>
       <c:choose>
         <c:when test="${list.size() > 0 }"> <%-- 상품이 있는지 확인 --%>
-          <c:forEach var="cartVO" items="${list }">  <%-- 상품 목록 출력 --%>
+          <c:forEach var="cartVO" items="${list }"> <%-- 상품목록 출력 --%>
             <c:set var="cartno" value="${cartVO.cartno }" />
             <c:set var="contentsno" value="${cartVO.contentsno }" />
-            <c:set var="title" value="${cartVO.title }" />
+            <c:set var="pname" value="${cartVO.pname }" />
             <c:set var="thumb1" value="${cartVO.thumb1 }" />
             <c:set var="price" value="${cartVO.price }" />
-            <c:set var="dc" value="${cartVO.dc }" />
-            <c:set var="saleprice" value="${cartVO.saleprice }" />
-            <c:set var="point" value="${cartVO.point }" />
             <c:set var="memberno" value="${cartVO.memberno }" />
             <c:set var="cnt" value="${cartVO.cnt }" />
             <c:set var="tot" value="${cartVO.tot }" />
@@ -121,13 +119,10 @@
                 </c:choose>
               </td>  
               <td style='vertical-align: middle;'>
-                <a href="/contents/read.do?contentsno=${contentsno}"><strong>${title}</strong></a> 
+                <a href="/contents/read.do?contentsno=${contentsno}"><strong>${pname}</strong></a> 
               </td> 
               <td style='vertical-align: middle; text-align: center;'>
-                <del><fmt:formatNumber value="${price}" pattern="#,###" /></del><br>
-                <span style="color: #FF0000; font-size: 1.2em;">${dc} %</span>
-                <strong><fmt:formatNumber value="${saleprice}" pattern="#,###" /></strong><br>
-                <span style="font-size: 0.8em;">포인트: <fmt:formatNumber value="${point}" pattern="#,###" /></span>
+              <strong><fmt:formatNumber value="${price}" pattern="#,###" /></strong><br>
               </td>
               <td style='vertical-align: middle; text-align: center;'>
                 <input type='number' id='${cartno }_cnt' min='1' max='100' step='1' value="${cnt }" 
@@ -161,18 +156,19 @@
         <td style='width: 50%;'>
           <div class='cart_label'>상품 금액</div>
           <div class='cart_price'><fmt:formatNumber value="${tot_sum }" pattern="#,###" /> 원</div>
-          
+          <%-- 
           <div class='cart_label'>포인트</div>
           <div class='cart_price'><fmt:formatNumber value="${point_tot }" pattern="#,###" /> 원 </div>
-          
+           --%>
           <div class='cart_label'>배송비</div>
           <div class='cart_price'><fmt:formatNumber value="${baesong_tot }" pattern="#,###" /> 원</div>
         </td>
         <td style='width: 50%;'>
-          <div class='cart_label' style='font-size: 2.0em;'>전체 주문 금액</div>
-          <div class='cart_price'  style='font-size: 2.0em; color: #FF0000;'><fmt:formatNumber value="${total_ordering }" pattern="#,###" /> 원</div>
+          <div class='cart_label' style='font-size: 1.6em;'>전체 주문 금액</div>
+          <div class='cart_price'  style='font-size: 1.6em; color: #FF0000;'><fmt:formatNumber value="${total_ordering }" pattern="#,###" /> 원</div>
           
           <form name='frm' id='frm' style='margin-top: 50px;' action="/order_pay/create.do" method='get'>
+            <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">  
             <button type='submit' id='btn_order' class='btn btn-info' style='font-size: 1.5em;'>주문하기</button>
           </form>
         <td>
@@ -186,4 +182,3 @@
 </body>
  
 </html>
-

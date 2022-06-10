@@ -2,6 +2,8 @@ package dev.mvc.cart;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
@@ -36,14 +38,14 @@ public class CartCont {
     @RequestMapping(value="/cart/create.do", method=RequestMethod.POST )
     @ResponseBody
     public String create(HttpSession session,
-                              int contentsno) {
+                              int contentsno, int ordercnt) {
       CartVO cartVO = new CartVO();
       cartVO.setContentsno(contentsno);
       
       int memberno = (Integer)session.getAttribute("memberno");
       cartVO.setMemberno(memberno);
       
-      cartVO.setCnt(1); // 최초 구매 수량 1개로 지정
+      cartVO.setCnt(ordercnt); // 최초 구매 수량 1개로 지정
       
       int cnt = this.cartProc.create(cartVO); // 등록 처리
       
@@ -67,12 +69,11 @@ public class CartCont {
      */
     @RequestMapping(value="/cart/list_by_memberno.do", method=RequestMethod.GET )
     public ModelAndView list_by_memberno(HttpSession session,
-                                                                @RequestParam(value="cartno", defaultValue="0") int cartno ) {
+                                                                @RequestParam(value="cartno", defaultValue="0") int cartno) {
       ModelAndView mav = new ModelAndView();
       
       int tot = 0;               // 할인 금액 합계 = 할인 금액 * 수량
       int tot_sum = 0;        // 할인 금액 총 합계 = 할인 금액 총 합계 + 할인 금액 합계
-      int point_tot = 0;       // 포인트 합계 = 포인트 합계 + (포인트 * 수량)
       int baesong_tot = 0;   // 배송비 합계
       int total_order = 0;    // 전체 주문 금액
       
@@ -83,13 +84,11 @@ public class CartCont {
         ArrayList<CartVO> list = this.cartProc.list_by_memberno(memberno);
         
         for (CartVO cartVO : list) {
-          tot = cartVO.getSaleprice() * cartVO.getCnt();  // 할인 금액 합계 = 할인 금액 * 수량
+          tot = cartVO.getPrice() * cartVO.getCnt();  // 할인 금액 합계 = 할인 금액 * 수량
           cartVO.setTot(tot);
           
           // 할인 금액 총 합계 = 할인 금액 총 합계 + 할인 금액 합계
           tot_sum = tot_sum + cartVO.getTot();
-          // 포인트 합계 = 포인트 합계 + (포인트 * 수량)
-          point_tot = point_tot + (cartVO.getPoint() * cartVO.getCnt());
           
         }
         
@@ -99,13 +98,11 @@ public class CartCont {
           }
         }
         
-        total_order = tot_sum + baesong_tot; // 전체 주문 금액 =  총 주문 금액 + 배송비
+        total_order = tot_sum + baesong_tot; // 전체 주문 금액 =  총 주문 금액 + 배송비  
             
         mav.addObject("list", list); // request.setAttribute("list", list);
         mav.addObject("cartno", cartno); // 쇼핑계속하기에서 사용
-        
         mav.addObject("tot_sum", tot_sum);
-        mav.addObject("point_tot", point_tot);
         mav.addObject("baesong_tot", baesong_tot);
         mav.addObject("total_ordering", total_order);
         

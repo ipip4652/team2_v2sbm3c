@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
   <!-- memberno 회원 번호별 쇼핑카트 목록 출력 -->
   <select id="list_by_memberno" resultType="dev.mvc.cart.CartVO" parameterType="int">
-    SELECT t.cartno, c.contentsno, c.title, c.thumb1, c.price, c.dc, c.saleprice, c.point, t.memberno, t.cnt, t.rdate 
+    SELECT t.cartno, c.contentsno, c.pname, c.thumb1, c.price, t.memberno, t.cnt, t.rdate 
     FROM contents c, cart t
     WHERE (c.contentsno = t.contentsno) AND t.memberno = #{memberno}
     ORDER BY cartno ASC
