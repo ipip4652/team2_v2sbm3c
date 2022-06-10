@@ -7,7 +7,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>향수 사이트</title>
+<title>상품 목록</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
@@ -71,7 +71,7 @@
               <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}"> <!-- 이미지 인경우 -->
                 <a href="./read.do?contentsno=${contentsno}">               
                   <IMG src="./storage/${thumb1 }" style='width: 100%; height: 150px;'>
-                </a><br> ${pcompany} <br>
+                </a><br> [${pcompany}] <br>
                 ${pname} <br>
                 <fmt:formatNumber value="${price}" pattern="#,###" />
               </c:when>

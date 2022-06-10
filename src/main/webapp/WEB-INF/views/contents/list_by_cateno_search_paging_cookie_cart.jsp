@@ -284,8 +284,8 @@
                 <a href="./read.do?contentsno=${contentsno}">               
                   <IMG src="./storage/${thumb1 }" style='width: 100%; height: 150px;'>
                 </a><br>
-                <a href="./read.do?contentsno=${contentsno}">${title}</a> <br>
-                <del><fmt:formatNumber value="${price}" pattern="#,###" /></del>
+                <a href="./read.do?contentsno=${contentsno}">[${pcompany}] ${pname}</a> <br>
+                <fmt:formatNumber value="${price}" pattern="#,###" />원
               </c:when>
               <c:otherwise> <!-- 이미지가 아닌 일반 파일 -->
                 <DIV style='width: 100%; height: 150px; display: table; border: solid 1px #CCCCCC;'>
