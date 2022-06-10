@@ -28,12 +28,22 @@
                            	<c:otherwise>
 	                           	<a href="/member/logout.do" class="login_a">${sessionScope.id } logout</a>                               	
                            	</c:otherwise>
-                       	</c:choose>                        
-                        / <a href="/member/join.html" class="login_a">join
-                            us</a></li>
+                       	</c:choose>
+                        <c:choose>
+                           	<c:when test="${sessionScope.id == null}">
+                               	<a href="/member/join.html" class="login_a">/ join</a>
+                           	</c:when>
+                       	</c:choose>    
+                       	
+                            </li>
 
                     <li class="login_li">
-                    <a href="/member/read.do?memberno=${sessionScope.memberno}" class="login_a">my page</a> / <a href="/cart/list_by_memberno.do" class="login_a">basket</a></li>
+                    	<c:choose>
+                           	<c:when test="${sessionScope.id != null}">
+                               	<a href="/member/read.do?memberno=${sessionScope.memberno}" class="login_a">my page</a> / <a href="/cart/list_by_memberno.do" class="login_a">basket</a></li>
+                           	</c:when>
+                       	</c:choose>
+                    
                 </ul>
             </div>
 
