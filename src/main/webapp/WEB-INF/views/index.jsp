@@ -26,7 +26,16 @@
 
 </head>
 <body>
-    <jsp:include page="./menu/top.jsp" flush='false' />
+
+	<c:choose>
+		<c:when test="${sessionScope.memberno < 10}">
+			<jsp:include page="./menu/top_ckup.jsp" flush='false' />
+		</c:when>
+		<c:otherwise>
+			<jsp:include page="./menu/top.jsp" flush='false' />                               	
+		</c:otherwise>
+	</c:choose>
+    
     
 <% 
 String filenames[] = {"//theparfum.co.kr/web/product/medium/202109/0e344e9ba5d1989510c7b17d2b770721.png", "//theparfum.co.kr/web/product/medium/202010/ac4e481bbd087b49187a678397f6889a.jpg", "http://theparfum.co.kr/web/product/medium/202010/e7b5f940f9068e482123dcefe6fd99c9.jpg","http://theparfum.co.kr/web/product/medium/20200518/ab7ffcbfdf58c7f3b08a043483828985.jpg","http://theparfum.co.kr/web/product/medium/20200518/f68bc44b406436020a957f8b79490d37.jpg","http://theparfum.co.kr/web/product/medium/20200518/86ad159603a5b986eddef2c0a3023838.jpg","//theparfum.co.kr/web/product/medium/202109/0e344e9ba5d1989510c7b17d2b770721.png","//theparfum.co.kr/web/product/medium/202109/0e344e9ba5d1989510c7b17d2b770721.png","//theparfum.co.kr/web/product/medium/202109/0e344e9ba5d1989510c7b17d2b770721.png"};
