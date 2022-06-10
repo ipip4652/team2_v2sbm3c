@@ -65,7 +65,7 @@
     <A href="./list_by_cateno_search_paging.do?cateno=${cateVO.cateno }&now_page=${param.now_page}&word=${param.word }">기본 목록형</A>    
     <span class='menu_divide' >│</span>
     <A href="./list_by_cateno_grid.do?cateno=${cateVO.cateno }">갤러리형</A>
-    <c:if test="${param.id == 'admin' }">
+    <%-- <c:if test="${param.id == 'admin' }"> --%>
         <span class='menu_divide' >│</span>
         <A href="./create.do?cateno=${cateVO.cateno }">등록</A>
         <span class='menu_divide' >│</span>
@@ -74,7 +74,7 @@
         <A href="./update_file.do?contentsno=${contentsno}&now_page=${param.now_page}&word=${param.word }">파일 수정</A>  
         <span class='menu_divide' >│</span>
         <A href="./delete.do?contentsno=${contentsno}&now_page=${param.now_page}&cateno=${cateno}&word=${param.word }">삭제</A>
-    </c:if>  
+    <%-- </c:if>   --%>
   </ASIDE> 
   
   <DIV style="text-align: right; clear: both;">  
@@ -97,6 +97,53 @@
   </DIV>
   
   <DIV class='menu_line'></DIV>
+
+  <div style='float: left; width: 79%'>
+  <%-- ******************** Ajax 기반 로그인 폼 시작 ******************** --%>
+  <DIV id='div_login' style='display:inline;'>
+    <div style='width: 80%; margin: 0px 0px 0px 40%;'>
+        <FORM name='frm_login' id='frm_login' method='POST' action='/member/login_ajax.do' class="form-horizontal">
+          <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
+          <input type="hidden" name="contentsno" id="contentsno" value="contentsno">
+    
+          <div class="form-group">
+            <label class="col-md-4 control-label" style='font-size: 0.8em;'>아이디</label>    
+            <div class="col-md-8">
+              <input type='text' class="form-control" name='id' id='id' 
+                         value='${ck_id }' required="required" 
+                         style='width: 40%;' placeholder="아이디" autofocus="autofocus">
+              <Label>   
+                <input type='checkbox' name='id_save' value='Y' 
+                          ${ck_id_save == 'Y' ? "checked='checked'" : "" }> 저장
+              </Label>                   
+            </div>
+       
+          </div>   
+       
+          <div class="form-group">
+            <label class="col-md-4 control-label" style='font-size: 0.8em;'>패스워드</label>    
+            <div class="col-md-8">
+              <input type='password' class="form-control" name='passwd' id='passwd' 
+                        value='${ck_passwd }' required="required" style='width: 40%;' placeholder="패스워드">
+              <Label>
+                <input type='checkbox' name='passwd_save' value='Y' 
+                          ${ck_passwd_save == 'Y' ? "checked='checked'" : "" }> 저장
+              </Label>
+            </div>
+          </div>   
+        </FORM>
+    </div>
+   
+    <div style='text-align: center; margin: 10px auto;'>
+      <button type="button" id='btn_login' class="btn btn-info">로그인</button>
+      <button type='button' onclick="location.href='./create.do'" class="btn btn-info">회원가입</button>
+      <button type='button' id='btn_loadDefault' class="btn btn-info">테스트 계정</button>
+      <button type='button' id='btn_cancel' class="btn btn-info" onclick="$('#div_login').hide();">취소</button>
+    </div>
+  
+  </DIV>
+  <%-- ******************** Ajax 기반 로그인 폼 종료 ******************** --%>
+
 
   <fieldset class="fieldset_basic">
     <ul>
@@ -154,7 +201,11 @@
           
         </DIV>
       </li>  
-           <DIV style="  position: absolute; top: 250px; right: 160px; width: 200px; height:195px; float: right; text-align:center; line-height:150px;">
+           
+    </ul>
+  </fieldset>
+  </div>
+    <DIV style=" width: 20%; float: right; text-align:center; line-height:150px;">
             <c:choose>
               <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
                 <%-- /static/contents/storage/ --%>
@@ -165,10 +216,8 @@
               </c:otherwise>
             </c:choose>
             추천상품 영역
-           </DIV> 
-    </ul>
-  </fieldset>
-
+   </DIV> 
+   <div style='clear:both;'></div>
 </DIV>
 <jsp:include page="../menu/bottom.jsp" flush='false' />
 </body>
