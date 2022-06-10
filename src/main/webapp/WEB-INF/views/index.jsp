@@ -28,7 +28,7 @@
 <body>
 
 	<c:choose>
-		<c:when test="${sessionScope.memberno < 10}">
+		<c:when test="${sessionScope.grade < 10}">
 			<jsp:include page="./menu/top_ckup.jsp" flush='false' />
 		</c:when>
 		<c:otherwise>
