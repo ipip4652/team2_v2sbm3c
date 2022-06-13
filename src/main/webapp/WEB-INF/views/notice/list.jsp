@@ -31,13 +31,11 @@
 <DIV class='content_body'>
   <ASIDE class="aside_right">
     <A href="javascript:location.reload();">새로고침</A>
-    <c:if test="${param.memberno == 1 }">
+    <c:if test="${sessionScope.grade < 10}">
         <span class='menu_divide' >│</span>
         <A href="./create.do">등록</A>
         <span class='menu_divide' >│</span>
         <A href="./read_update.do?noticeno=${noticeno}">수정</A>
-        <span class='menu_divide' >│</span>
-        <A href="./delete.do?noticeno=${noticeno}">삭제</A>
     </c:if>  
   </ASIDE> 
     
@@ -66,21 +64,20 @@
     //    out.println(noticeVO.getName() + "<br>");
     // }
     %>
-    <c:forEach var="noticeVO" items="${list }">
+      <c:forEach var="noticeVO" items="${list }">
       <c:set var="noticeno" value="${noticeVO.noticeno }" />
+      <c:set var="memberno" value="${noticeVO.memberno }" />
       <c:set var="title" value="${noticeVO.title }" />
       <c:set var="rdate" value="${noticeVO.rdate }" />
       <c:set var="cnt" value="${noticeVO.cnt }" />
-      
       <TR>
         <TD class="td_bs">${noticeVO.noticeno }</TD>
         <TD class="td_bs"><A href="./detailBoard.do?noticeno=${noticeno }">${title }</A></TD>
         <TD class="td_bs">${noticeVO.rdate.substring(0, 10) }</TD>
         <TD class="td_bs">${noticeVO.cnt } </TD>   
-      </TR>   
-    </c:forEach> 
+      </TR>
+        </c:forEach>   
     </tbody>
-   
   </TABLE>
 </DIV>
 

@@ -32,7 +32,7 @@
  
 <DIV class='content_body' >
   <FORM name='frm' method='POST' action='./create.do' class="form-horizontal">
-    <input type="hidden" id='memberno' name="memberno" value="${param.memberno}">
+    <input type="hidden" id='memberno' name="memberno" value="${sessionScope.memberno}">
     <div class="form-group">
        <label class="control-label col-md-4">제목</label>
        <div class="col-md-8">
