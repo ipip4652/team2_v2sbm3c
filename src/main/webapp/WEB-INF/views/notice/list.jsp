@@ -29,6 +29,17 @@
 <DIV class='title_line'>공지사항</DIV>
 
 <DIV class='content_body'>
+  <ASIDE class="aside_right">
+    <A href="javascript:location.reload();">새로고침</A>
+    <c:if test="${param.memberno == 1 }">
+        <span class='menu_divide' >│</span>
+        <A href="./create.do">등록</A>
+        <span class='menu_divide' >│</span>
+        <A href="./read_update.do?noticeno=${noticeno}">수정</A>
+        <span class='menu_divide' >│</span>
+        <A href="./delete.do?noticeno=${noticeno}">삭제</A>
+    </c:if>  
+  </ASIDE> 
     
   <TABLE class='table table-striped'>
     <colgroup>
@@ -63,7 +74,7 @@
       
       <TR>
         <TD class="td_bs">${noticeVO.noticeno }</TD>
-        <TD class="td_bs_left"><A href="./detailBoard.do?noticeno=${noticeno }">${title }</A></TD>
+        <TD class="td_bs"><A href="./detailBoard.do?noticeno=${noticeno }">${title }</A></TD>
         <TD class="td_bs">${noticeVO.rdate.substring(0, 10) }</TD>
         <TD class="td_bs">${noticeVO.cnt } </TD>   
       </TR>   

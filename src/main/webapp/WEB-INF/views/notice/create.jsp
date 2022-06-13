@@ -32,10 +32,11 @@
  
 <DIV class='content_body' >
   <FORM name='frm' method='POST' action='./create.do' class="form-horizontal">
+    <input type="hidden" id='memberno' name="memberno" value="${param.memberno}">
     <div class="form-group">
        <label class="control-label col-md-4">제목</label>
        <div class="col-md-8">
-         <input type='text' name='title' value='' required="required" placeholder="제목 입력"
+         <input type='text' id="title" name='title' value='' required="required" placeholder="제목 입력"
                     autofocus="autofocus" class="form-control" style='width: 100%;'>
        </div>
     </div>

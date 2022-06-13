@@ -56,7 +56,7 @@ public class NoticeCont {
      * @return
      */
     @RequestMapping(value = "/notice/create.do", method = RequestMethod.GET)
-    public ModelAndView create() {
+    public ModelAndView create(int memberno) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("/notice/create"); // webapp/WEB-INF/views/notice/create.jsp
 
@@ -75,12 +75,18 @@ public class NoticeCont {
     public ModelAndView create(NoticeVO noticeVO) { // noticeVO 자동 생성, Form -> VO
         // noticeVO noticeVO <FORM> 태그의 값으로 자동 생성됨.
         // request.setAttribute("noticeVO", noticeVO); 자동 실행
-
+        System.out.println("-> memberno: " + noticeVO.getMemberno());
         ModelAndView mav = new ModelAndView();
 
         int cnt = this.noticeProc.create(noticeVO); // 등록 처리
         // cnt = 0; // error test
+        
+        // request.setAttribute("code", "create_success");
+        mav.addObject("code", "create_success");
+        mav.addObject("cnt", cnt);
+        mav.addObject("memberno", noticeVO.getMemberno()); // 회원 번호
 
+        mav.setViewName("/cate/msg"); // /WEB-INF/views/cate/msg.jsp
         mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt);
 
         if (cnt == 1) {
@@ -101,7 +107,6 @@ public class NoticeCont {
     }
     
     
-    
     /**
      * 게시판 상세 조회
      * @param noticeno
@@ -116,6 +121,7 @@ public class NoticeCont {
         model.addAttribute("noticeVO", noticeVO);
 
         int cnt = this.noticeProc.updatecnt(noticeno); // 조회수 증가 처리
+        System.out.println("조회수"+cnt);
         mav.addObject("cnt", cnt);
 
         List<NoticeVO> list = this.noticeProc.list_noticeno_asc();
@@ -175,6 +181,7 @@ public class NoticeCont {
 
     }
     
+    
     // http://localhost:9091/notice/update.do
     /**
      * 수정 처리
@@ -183,28 +190,27 @@ public class NoticeCont {
      * @return
      */
     @RequestMapping(value = "/notice/update.do", method = RequestMethod.POST)
-    public ModelAndView update(NoticeVO noticeVO) {
+    public ModelAndView read_update(NoticeVO noticeVO) {
         // noticeVO noticeVO <FORM> 태그의 값으로 자동 생성됨.
         // request.setAttribute("noticeVO", noticeVO); 자동 실행
-
         ModelAndView mav = new ModelAndView();
-
+        System.out.println("불러오기 성공");
         int cnt = this.noticeProc.update(noticeVO);
         mav.addObject("cnt", cnt); // request에 저장
 
         // cnt = 0; // error test
         if (cnt == 1) {
-            // System.out.println("수정 성공");
+             System.out.println("수정 성공");
             // response.sendRedirect("/notice/list.do");
             mav.setViewName("redirect:/notice/list.do");
         } else {
+            System.out.println("수정 실패");
             mav.addObject("code", "update_fail"); // request에 저장, request.setAttribute("code", "update_fail")
             mav.setViewName("/notice/msg"); // /WEB-INF/views/notice/msg.jsp
         }
 
         return mav;
     }
-
 
 
     /**

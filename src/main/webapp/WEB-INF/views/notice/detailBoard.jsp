@@ -35,12 +35,12 @@ function boardDelete() {
 function boardUpdate() {
 	let noticeno = '${noticeVO.noticeno}';
 	
-	location.href="read_update?noticeno=" + noticeno;
+	location.href="read_update.do?noticeno=" + noticeno;
 }
 </script>
 </head>
 <body>
-
+<jsp:include page="../menu/top.jsp" />
 <DIV class='title_line'>공지사항</DIV>
 
 <DIV class='content_body'>
@@ -96,6 +96,8 @@ function boardUpdate() {
 		</tr>
 	</table>	
 </div>
+</DIV>
+<jsp:include page="../menu/bottom.jsp" />
 </body>
 </html>
 

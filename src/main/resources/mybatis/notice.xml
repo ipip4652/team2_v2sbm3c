@@ -7,8 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dev.mvc.notice.NoticeDAOInter"> 
   <!-- 등록, 입력: noticeVO, 리턴: 등록된 레코드 갯수  -->
   <insert id="create" parameterType="dev.mvc.notice.NoticeVO">
-    INSERT INTO notice(noticeno, memberno, title, content, rdate)
-    VALUES(notice_seq.nextval, #{memberno}, #{title}, #{content}, sysdate)
+    INSERT INTO notice(noticeno, memberno, title, content, rdate, cnt)
+    VALUES(notice_seq.nextval, #{memberno}, #{title}, #{content}, sysdate, 0)
   </insert>
   
   <!-- 
