@@ -56,7 +56,8 @@ public class NoticeCont {
      * @return
      */
     @RequestMapping(value = "/notice/create.do", method = RequestMethod.GET)
-    public ModelAndView create(int memberno) {
+    public ModelAndView create() {
+        
         ModelAndView mav = new ModelAndView();
         mav.setViewName("/notice/create"); // webapp/WEB-INF/views/notice/create.jsp
 
