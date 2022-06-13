@@ -25,8 +25,15 @@
     $('#btn_close').on('click', setFocus); // Dialog창을 닫은후의 focus 이동
     $('#btn_close_modal').on('click', setFocus); // Dialog창을 닫은후의 focus 이동
     $('#btn_send').on('click', send); 
+    //id값이 변경될 경우 중복확인을 다시한번 하기 위해 설정
+    $('#id').change(function() {
+        $('#id').attr("check_result", "fail");
+        $('#btn_checkID').show();
+        $('#id_check_sucess').hide();
+        })
   });
-
+  
+  
   // jQuery ajax 요청
   function checkID() {
     // $('#btn_close').attr("data-focus", "이동할 태그 지정");
@@ -38,7 +45,7 @@
 
     if ($.trim(id).length == 0) { // id를 입력받지 않은 경우
       msg = '· ID를 입력하세요.<br>· ID 입력은 필수 입니다.<br>· ID는 3자이상 권장합니다.';
-      
+
       $('#modal_content').attr('class', 'alert alert-danger'); // Bootstrap CSS 변경
       $('#modal_title').html('ID 중복 확인'); // 제목 
       $('#modal_content').html(msg);        // 내용
@@ -55,6 +62,7 @@
         type: 'get',  // post
         cache: false, // 응답 결과 임시 저장 취소
         async: true,  // true: 비동기 통신
+        
         dataType: 'json', // 응답 형식: json, html, xml...
         data: params,      // 데이터
         success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
@@ -68,9 +76,15 @@
           } else {
             $('#modal_content').attr('class', 'alert alert-success'); // Bootstrap CSS 변경
             msg = "사용 가능한 ID 입니다.";
+            
+            $('#id').attr("check_result", "success");
+            $('#btn_checkID').hide();
+            $('#id_check_sucess').show();
+            
             $('#btn_close').attr("data-focus", "passwd");  // passwd 입력으로 focus 이동
             // $.cookie('checkId', 'TRUE'); // Cookie 기록
           }
+          
           
           $('#modal_title').html('ID 중복 확인'); // 제목 
           $('#modal_content').html(msg);        // 내용
@@ -106,19 +120,43 @@
 
   function send() { // 회원 가입 처리
     // 패스워드를 정상적으로 2번 입력했는지 확인
-    if ($('#passwd').val() != $('#passwd2').val()) {
-      msg = '입력된 패스워드가 일치하지 않습니다.<br>';
+    if ($('#id').attr("check_result") == "fail"){
+        msg = "ID 중복 여부를 확인하지 않았습니다.<br>";
+        msg += "중복확인을 해주시길 바랍니다.";
+
+        $('#modal_content').attr('class', 'alert alert-danger'); // CSS 변경
+        $('#modal_title').html('ID 중복체크 여부 확인'); // 제목 
+        $('#modal_content').html(msg);  // 내용
+        $('#btn_send').attr('data-focus', 'passwd');
+        $('#modal_panel').modal();         // 다이얼로그 출력
+        return false;// submit 중지
+        }
+      
+    if ($('#passwd').val() != $('#passwd2').val() || $('#passwd').val()=="") {
+      msg = '입력된 패스워드가 입력되지 않았거나 일치하지 않습니다.<br>';
       msg += "패스워드를 다시 입력해주세요.<br>"; 
       
       $('#modal_content').attr('class', 'alert alert-danger'); // CSS 변경
-      $('#modal_title').html('패스워드 일치 여부  확인'); // 제목 
+      $('#modal_title').html('패스워드 일치 여부 확인'); // 제목 
       $('#modal_content').html(msg);  // 내용
       $('#btn_send').attr('data-focus', 'passwd');
       $('#modal_panel').modal();         // 다이얼로그 출력
       
       return false; // submit 중지
-    }
-
+      }
+    if ($('#tel').val() == "" || $('#mname').val()=="") {
+        msg = '입력되지 않은 이름 또는 전화번호가 있습니다.<br>';
+        msg += "이름 또는 전화번호를 다시 입력해주세요.<br>"; 
+        
+        $('#modal_content').attr('class', 'alert alert-danger'); // CSS 변경
+        $('#modal_title').html('미입력 정보 확인'); // 제목 
+        $('#modal_content').html(msg);  // 내용
+        $('#btn_send').attr('data-focus', 'passwd');
+        $('#modal_panel').modal();         // 다이얼로그 출력
+        
+        return false; // submit 중지
+        }
+    
     $('#frm').submit();
   }
 </script>
@@ -170,9 +208,10 @@
     <div class="form-group">
       <label for="id" class="col-md-2 control-label" style='font-size: 0.9em;'>아이디*</label>    
       <div class="col-md-10">
-        <input type='text' class="form-control" name='id' id='id' value='' required="required" style='width: 30%;' placeholder="아이디" autofocus="autofocus">
+        <input type='text' class="form-control" name='id' id='id' value='' check_result= "fail" required="required" style='width: 30%;' placeholder="아이디" autofocus="autofocus">
         <button type='button' id="btn_checkID" class="btn btn-info btn-md">중복확인</button>
-        <SPAN id='id_span'></SPAN> <!-- ID 중복 관련 메시지 -->        
+        <img  src='/member/images/v.png' id="id_check_sucess" style="display: none;" >  
+       
       </div>
     </div>   
                 
