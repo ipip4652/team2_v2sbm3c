@@ -7,6 +7,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.math.BigInteger;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,17 +66,31 @@ public class MemberCont {
      * 등록 처리
      * @param memberVO
      * @return
+     * @throws NoSuchAlgorithmException 
      */
     @RequestMapping(value="/member/create.do", method=RequestMethod.POST)
-    public ModelAndView create(MemberVO memberVO){
+    public ModelAndView create(MemberVO memberVO) throws NoSuchAlgorithmException{
       ModelAndView mav = new ModelAndView();
       
       // System.out.println("id: " + memberVO.getId());
       
       memberVO.setGrade(11); // 기본 회원 가입 등록 11 지정
       
+
+      //pwd SHA-512 암호화
+      String pwd= memberVO.getPasswd();
+      MessageDigest md = MessageDigest.getInstance("SHA-512");
+      md.update(pwd.getBytes());
+      String hex = String.format("%0128x", new BigInteger(1, md.digest()));
+      
+      // 암호화된 패스워드 넣기
+      memberVO.setPasswd(hex);
+      System.out.println(memberVO.getPasswd());
+
       int cnt= memberProc.create(memberVO);
       
+
+
       if (cnt == 1) {
         mav.addObject("code", "create_success");
         mav.addObject("mname", memberVO.getMname());  // 홍길동님(user4) 회원 가입을 축하합니다.
@@ -154,10 +171,13 @@ public class MemberCont {
       * @param memberno
       * @return
       */
+     
      @RequestMapping(value="/member/read.do", method=RequestMethod.GET)
-     public ModelAndView read(int memberno){
+     public ModelAndView read(HttpSession session){
        ModelAndView mav = new ModelAndView();
        
+       int memberno = (int) session.getAttribute("memberno");
+
        MemberVO memberVO = this.memberProc.read(memberno);
        mav.addObject("memberVO", memberVO);
        mav.setViewName("/member/read"); // /member/read.jsp
@@ -200,8 +220,10 @@ public class MemberCont {
       * @return
       */
      @RequestMapping(value="/member/delete.do", method=RequestMethod.GET)
-     public ModelAndView delete(int memberno){
+     public ModelAndView delete(HttpSession session){
        ModelAndView mav = new ModelAndView();
+       
+       int memberno = (int) session.getAttribute("memberno");
        
        MemberVO memberVO = this.memberProc.read(memberno); // 삭제할 레코드를 사용자에게 출력하기위해 읽음.
        mav.addObject("memberVO", memberVO);
@@ -216,8 +238,10 @@ public class MemberCont {
       * @return
       */
      @RequestMapping(value="/member/delete.do", method=RequestMethod.POST)
-     public ModelAndView delete_proc(int memberno){
+     public ModelAndView delete_proc(HttpSession session){
        ModelAndView mav = new ModelAndView();
+       
+       int memberno = (int) session.getAttribute("memberno");
        
        // System.out.println("id: " + memberVO.getId());
        MemberVO memberVO = this.memberProc.read(memberno); // 삭제된 정보를 출력하기위해 읽음.
@@ -246,9 +270,12 @@ public class MemberCont {
       * @param memberno
       * @return
       */
-     @RequestMapping(value="/member/passwd_update.do", method=RequestMethod.GET)
-     public ModelAndView passwd_update(int memberno){
+     @RequestMapping(value="/member/passwd_update.do")
+     public ModelAndView passwd_update(HttpSession session){
        ModelAndView mav = new ModelAndView();
+       
+       int memberno = (int) session.getAttribute("memberno");
+       
        mav.setViewName("/member/passwd_update"); // passwd_update.jsp
        
        return mav;
@@ -262,14 +289,27 @@ public class MemberCont {
       * @return
       */
      @RequestMapping(value="/member/passwd_update.do", method=RequestMethod.POST)
-     public ModelAndView passwd_update(int memberno, String current_passwd, String new_passwd){
+     public ModelAndView passwd_update(HttpSession session, String current_passwd, String new_passwd) throws NoSuchAlgorithmException{
        ModelAndView mav = new ModelAndView();
        
+       int memberno = (int) session.getAttribute("memberno");
+       System.out.println(current_passwd);
        MemberVO memberVO = this.memberProc.read(memberno);
        mav.addObject("mname", memberVO.getMname());  // 홍길동님(user4) 패스워드를 변경했습니다.
        mav.addObject("id", memberVO.getId());
        
+
+       //pwd SHA-512 암호화
+       String pwd= current_passwd;
+       MessageDigest md = MessageDigest.getInstance("SHA-512");
+       md.update(pwd.getBytes());
+       String hex = String.format("%0128x", new BigInteger(1, md.digest()));
+       
+       // 암호화된 패스워드 넣기
+       current_passwd = hex;
+
        // 현재 패스워드 검사
+       System.out.println(current_passwd);
        HashMap<Object, Object> map = new HashMap<Object, Object>();
        map.put("memberno", memberno);
        map.put("passwd", current_passwd);
@@ -278,6 +318,14 @@ public class MemberCont {
        int update_cnt = 0; // 변경된 패스워드 수
        
        if (cnt == 1) { // 현재 패스워드가 일치하는 경우
+         //pwd SHA-512 암호화
+         pwd= new_passwd;
+         md.update(pwd.getBytes());
+         hex = String.format("%0128x", new BigInteger(1, md.digest()));
+         
+         // 암호화된 패스워드 넣기
+         new_passwd = hex;
+         
          map.put("passwd", new_passwd); // 새로운 패스워드를 저장
          
          update_cnt = memberProc.passwd_update(map); // 패스워드 변경 처리
