@@ -171,7 +171,7 @@ public class MemberCont {
       * @param memberno
       * @return
       */
-     
+
      @RequestMapping(value="/member/read.do", method=RequestMethod.GET)
      public ModelAndView read(HttpSession session){
        ModelAndView mav = new ModelAndView();
@@ -508,7 +508,7 @@ public class MemberCont {
        mav.addObject("ck_passwd", ck_passwd);
        mav.addObject("ck_passwd_save", ck_passwd_save);
        mav.addObject("return_url", return_url); // 로그인 성공후 자동으로 이동할 주소
-       
+       System.out.println("asd");
        mav.setViewName("/member/login_ck_form");
        return mav;
      }
@@ -612,6 +612,7 @@ public class MemberCont {
       * @param passwd_save 패스워드 Cookie에 저장 여부
       * @param return_url 로그인 성공후 자동으로 이동할 주소 
       * @return
+     * @throws NoSuchAlgorithmException 
       */
      // http://localhost:9091/member/login.do 
      @RequestMapping(value = "/member/login.do", 
@@ -623,10 +624,16 @@ public class MemberCont {
                                 String id, String passwd,
                                 @RequestParam(value="id_save", defaultValue="") String id_save,
                                 @RequestParam(value="passwd_save", defaultValue="") String passwd_save,
-                                @RequestParam(value="return_url", defaultValue="") String return_url) {
+                                @RequestParam(value="return_url", defaultValue="") String return_url) throws NoSuchAlgorithmException {
        ModelAndView mav = new ModelAndView();
        HashMap<String, Object> map = new HashMap<String, Object>();
        map.put("id", id);
+
+       // 입력된 pw를 암호화환 값과 비교를 위해 암호화를 진행
+       MessageDigest md = MessageDigest.getInstance("SHA-512");
+       md.update(passwd.getBytes());
+       passwd= String.format("%0128x", new BigInteger(1, md.digest()));
+
        map.put("passwd", passwd);
        
        int count = memberProc.login(map);
@@ -724,6 +731,7 @@ public class MemberCont {
       * @param id_save 회원 아이디 Cookie에 저장 여부
       * @param passwd_save 패스워드 Cookie에 저장 여부
       * @return
+     * @throws NoSuchAlgorithmException 
       */
      // http://localhost:9091/member/login_ajax.do 
      @RequestMapping(value = "/member/login_ajax.do", 
@@ -735,10 +743,16 @@ public class MemberCont {
                                 HttpSession session,
                                 String id, String passwd,
                                 @RequestParam(value="id_save", defaultValue="") String id_save,
-                                @RequestParam(value="passwd_save", defaultValue="") String passwd_save) {
+                                @RequestParam(value="passwd_save", defaultValue="") String passwd_save) throws NoSuchAlgorithmException {
 
        HashMap<String, Object> map = new HashMap<String, Object>();
        map.put("id", id);
+       
+       // DB에 저장된 암호화된 pw와 비교를 위해 암호화 진행
+       MessageDigest md = MessageDigest.getInstance("SHA-512");
+       md.update(passwd.getBytes());
+       passwd= String.format("%0128x", new BigInteger(1, md.digest()));
+       
        map.put("passwd", passwd);
        
        int count = memberProc.login(map);
