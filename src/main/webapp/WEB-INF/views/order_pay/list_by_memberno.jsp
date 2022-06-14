@@ -89,7 +89,7 @@
         <c:choose>
           <c:when test="${paytype == 1}">신용 카드</c:when>
           <c:when test="${paytype == 2}">모바일</c:when>
-          <c:when test="${paytype == 3}">포이트</c:when>
+          <%-- <c:when test="${paytype == 3}">포인트</c:when> --%>
           <c:when test="${paytype == 4}">계좌 이체</c:when>
           <c:when test="${paytype == 5}">직접 입금</c:when>
         </c:choose>

@@ -313,7 +313,7 @@
   <div style=" text-align: left;">
     <label style="cursor: pointer;"><input type="radio" name="paytype" id="paytype" value="1" checked="checked"> 신용 카드</label>  
     <label style="cursor: pointer;"><input type="radio" name="paytype" id="paytype" value="2"> 모바일</label>  
-    <label style="cursor: pointer;"><input type="radio" name="paytype" id="paytype" value="3"> 포인트</label>  
+    <!-- <label style="cursor: pointer;"><input type="radio" name="paytype" id="paytype" value="3"> 포인트</label>   -->
     <label style="cursor: pointer;"><input type="radio" name="paytype" id="paytype" value="4"> 계좌 이체</label>  
     <label style="cursor: pointer;"><input type="radio" name="paytype" id="paytype" value="5"> 직접 입금</label>  
   </div>
@@ -325,8 +325,8 @@
           <div class='cart_label'>상품 금액</div>
           <div class='cart_price'><fmt:formatNumber value="${tot_sum }" pattern="#,###" /> 원</div>
           
-          <div class='cart_label'>포인트</div>
-          <div class='cart_price'><fmt:formatNumber value="${point_tot }" pattern="#,###" /> 원 </div>
+          <%-- <div class='cart_label'>포인트</div>
+          <div class='cart_price'><fmt:formatNumber value="${point_tot }" pattern="#,###" /> 원 </div> --%>
           
           <div class='cart_label'>배송비</div>
           <div class='cart_price'><fmt:formatNumber value="${baesong_tot }" pattern="#,###" /> 원</div>
