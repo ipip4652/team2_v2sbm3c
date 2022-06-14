@@ -31,7 +31,7 @@
                        	</c:choose>
                         <c:choose>
                            	<c:when test="${sessionScope.id == null}">
-                               	<a href="/member/join.html" class="login_a">/ join</a>
+                               	<a href="/member/create.do" class="login_a">/ join</a>
                            	</c:when>
                        	</c:choose>    
                        	
@@ -40,7 +40,7 @@
                     <li class="login_li">
                     	<c:choose>
                            	<c:when test="${sessionScope.id != null}">
-                               	<a href="/member/read.do?memberno=${sessionScope.memberno}" class="login_a">my page</a> / <a href="/cart/list_by_memberno.do" class="login_a">basket</a></li>
+                               	<a href="/member/read.do?memberno=${sessionScope.memberno}" class="login_a">my page</a> / <a href="/cart/list_by_memberno.do?memberno=${sessionScope.memberno}" class="login_a">basket</a></li>
                            	</c:when>
                        	</c:choose>
                     

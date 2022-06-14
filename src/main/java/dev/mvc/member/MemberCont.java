@@ -621,7 +621,7 @@ public class MemberCont {
                                 HttpServletRequest request,
                                 HttpServletResponse response,
                                 HttpSession session,
-                                String id, String passwd,
+                                String id, String passwd, String passwd2,
                                 @RequestParam(value="id_save", defaultValue="") String id_save,
                                 @RequestParam(value="passwd_save", defaultValue="") String passwd_save,
                                 @RequestParam(value="return_url", defaultValue="") String return_url) throws NoSuchAlgorithmException {
@@ -634,9 +634,9 @@ public class MemberCont {
        // 입력된 pw를 암호화환 값과 비교를 위해 암호화를 진행
        MessageDigest md = MessageDigest.getInstance("SHA-512");
        md.update(passwd.getBytes());
-       passwd= String.format("%0128x", new BigInteger(1, md.digest()));
-
-       map.put("passwd", passwd);
+       passwd2= String.format("%0128x", new BigInteger(1, md.digest()));
+       
+       map.put("passwd", passwd2);
        
        int count = memberProc.login(map);
        if (count == 1) { // 로그인 성공
