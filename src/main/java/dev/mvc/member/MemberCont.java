@@ -628,6 +628,8 @@ public class MemberCont {
        ModelAndView mav = new ModelAndView();
        HashMap<String, Object> map = new HashMap<String, Object>();
        map.put("id", id);
+       
+       String passwd_cookie = passwd;
 
        // 입력된 pw를 암호화환 값과 비교를 위해 암호화를 진행
        MessageDigest md = MessageDigest.getInstance("SHA-512");
@@ -644,6 +646,7 @@ public class MemberCont {
          session.setAttribute("id", id);
          session.setAttribute("mname", memberVO.getMname());
          session.setAttribute("grade", memberVO.getGrade());
+         
          
          // -------------------------------------------------------------------
          // id 관련 쿠기 저장
@@ -670,7 +673,7 @@ public class MemberCont {
          // Password 관련 쿠기 저장
          // -------------------------------------------------------------------
          if (passwd_save.equals("Y")) { // 패스워드 저장할 경우
-           Cookie ck_passwd = new Cookie("ck_passwd", passwd);
+           Cookie ck_passwd = new Cookie("ck_passwd", passwd_cookie);
            ck_passwd.setPath("/");
            ck_passwd.setMaxAge(60 * 60 * 72 * 10); // 30 day
            response.addCookie(ck_passwd);
