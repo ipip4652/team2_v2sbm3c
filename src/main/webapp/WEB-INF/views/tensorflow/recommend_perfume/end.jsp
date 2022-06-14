@@ -17,7 +17,7 @@
         $(function() {
             send(); //Django ajax 호출
             $('#btn_previous').on('click', function() { history.back(); });   // 이전
-            $('#btn_close').on('click', function() { window.close(); });      // 윈도우 닫기
+            $('#btn_close').on('click', function() { window.open('/index.do') });      // 메인페이지(index.do)로 이동
         });
 
 
