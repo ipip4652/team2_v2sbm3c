@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       </when>
       <otherwise> <!-- 검색하는 경우 -->
         WHERE cateno=#{cateno} AND (UPPER(pname) LIKE '%' || #{word} || '%' 
-                                                     OR UPPER(content) LIKE '%' || #{word} || '%' 
+                                                     OR UPPER(pcontent) LIKE '%' || #{word} || '%' 
                                                      OR UPPER(word) LIKE '%' || #{word} || '%')
       </otherwise>
     </choose>
@@ -77,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       </when>
       <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
         WHERE cateno=#{cateno} AND (UPPER(pname) LIKE '%' || #{word} || '%' 
-                                                     OR UPPER(content) LIKE '%' || #{word} || '%' 
+                                                     OR UPPER(pcontent) LIKE '%' || #{word} || '%' 
                                                      OR UPPER(word) LIKE '%' || #{word} || '%')
       </otherwise>
     </choose>
@@ -101,7 +101,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                           </when>
                           <otherwise>
                             WHERE cateno=#{cateno} AND (UPPER(pname) LIKE '%' || #{word} || '%' 
-                                                                  OR UPPER(content) LIKE '%' || #{word} || '%' 
+                                                                  OR UPPER(pcontent) LIKE '%' || #{word} || '%' 
                                                                   OR UPPER(word) LIKE '%' || #{word} || '%')
                           </otherwise>
                         </choose>
