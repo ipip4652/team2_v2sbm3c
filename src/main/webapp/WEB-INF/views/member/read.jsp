@@ -32,9 +32,9 @@
     <ASIDE class="aside_right">
       <A href="javascript:location.reload();">새로고침</A>
       <span class='menu_divide' >│</span> 
-      <A href='./create.do'>회원 가입</A>
+      <A href='passwd_update.do?memberno=${sessionScope.memberno}'>비밀번호 변경</A>
       <span class='menu_divide' >│</span> 
-      <A href='./list.do'>목록</A>
+      <A href='delete.do?memberno=${sessionScope.memberno}'>회원 탈퇴</A>
     </ASIDE> 
    
     <div class='menu_line'></div>
