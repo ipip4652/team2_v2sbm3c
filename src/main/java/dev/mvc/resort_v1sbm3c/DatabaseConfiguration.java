@@ -23,6 +23,8 @@ import com.zaxxer.hikari.HikariDataSource;
                                               "dev.mvc.cate", 
                                               "dev.mvc.contents",
                                               "dev.mvc.member",
+                                              "dev.mvc.order_item",
+                                              "dev.mvc.order_pay",
                                               "dev.mvc.cart",
                                               "dev.mvc.notice",
                                               "dev.mvc.noticeReply"})
