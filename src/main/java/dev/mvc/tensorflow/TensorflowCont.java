@@ -72,12 +72,21 @@ public class TensorflowCont {
        
        return mav;
      }
-     
+
      //http://localhost:9091/tensorflow/recommend_perfume/end.do
       @RequestMapping(value = {"/tensorflow/recommend_perfume/end.do"}, method = RequestMethod.GET)
       public ModelAndView end() {
          ModelAndView mav = new ModelAndView();
          mav.setViewName("/tensorflow/recommend_perfume/end");  // /WEB-INF/views/tensorflow/recommend_perfume/end.jsp
+            
+        return mav;
+      }
+      
+     //http://localhost:9091/tensorflow/test.do
+      @RequestMapping(value = {"/tensorflow/test.do"}, method = RequestMethod.GET)
+      public ModelAndView test() {
+         ModelAndView mav = new ModelAndView();
+         mav.setViewName("/tensorflow/test");  // /WEB-INF/views/tensorflow/recommend_perfume/end.jsp
             
         return mav;
       }
