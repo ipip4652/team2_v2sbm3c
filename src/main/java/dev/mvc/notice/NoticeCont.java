@@ -124,6 +124,7 @@ public class NoticeCont {
         int cnt = this.noticeProc.updatecnt(noticeno); // 조회수 증가 처리
         System.out.println("조회수"+cnt);
         mav.addObject("cnt", cnt);
+        mav.setViewName("/notice/read_cookie_reply");
 
         List<NoticeVO> list = this.noticeProc.list_noticeno_asc();
         mav.addObject("list", list); // request 객체에 저장

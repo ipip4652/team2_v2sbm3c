@@ -63,7 +63,17 @@ public class NoticeProc implements NoticeProcInter {
         return cnt;
     }
     
-    
+    @Override
+    public int increaseReplycnt(int noticeno) {
+      int count = noticeDAO.increaseReplycnt(noticeno);
+      return count;
+    }
+
+    @Override
+    public int decreaseReplycnt(int noticeno) {
+      int count = noticeDAO.decreaseReplycnt(noticeno);
+      return count;
+    }   
     
 
 }

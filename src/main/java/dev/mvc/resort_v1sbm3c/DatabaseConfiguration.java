@@ -25,8 +25,7 @@ import com.zaxxer.hikari.HikariDataSource;
                                               "dev.mvc.member",
                                               "dev.mvc.cart",
                                               "dev.mvc.notice",
-                                              "dev.mvc.order_pay",
-                                              "dev.mvc.order_item"})
+                                              "dev.mvc.noticeReply"})
 public class DatabaseConfiguration {
     
     @Autowired

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "dev.mvc.noticeReply.ReplyDAOInter">
+  <insert id="create">
+    INSERT INTO n_comment(commentno, memberno, noticeno, content, rdate)
+    VALUES(n_comment_seq.nextval, #{memberno}, #{noticeno}, #{content}, sysdate)
+  </insert>
+  
+  <select id="list" resultType="dev.mvc.noticeReply.ReplyVO">
+    SELECT commentno, memberno, noticeno, content, rdate
+    FROM n_comment
+    ORDER BY commentno DESC
+  </select>
+
+  <select id="list_by_noticeno" resultType="dev.mvc.noticeReply.ReplyVO" parameterType="int">
+    SELECT commentno, memberno, noticeno, content, rdate
+    FROM n_comment
+    WHERE noticeno=#{noticeno}
+    ORDER BY commentno DESC
+  </select>
+
+  <select id="list_by_noticeno_join" resultType="dev.mvc.noticeReply.ReplyMemberVO" parameterType="int">
+    SELECT m.id,
+               r.commentno, r.memberno, r.noticeno, r.content, r.rdate
+    FROM member m,  n_comment r
+    WHERE (m.memberno = r.memberno) AND r.noticeno=#{noticeno}
+    ORDER BY r.commentno DESC
+  </select>
+  
+<!--    <select id="checkPasswd" parameterType="HashMap" resultType="int">
+  <select id="checkPasswd" parameterType="ReplyVO" resultType="int">
+  <select id="checkPasswd" parameterType="Map" resultType="int">
+    SELECT COUNT(*) as cnt
+    FROM n_comment
+    WHERE commentno=#{commentno} AND passwd=#{passwd}
+  </select> -->
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM n_comment
+    WHERE commentno=#{commentno}
+  </delete>
+    
+</mapper> 
+

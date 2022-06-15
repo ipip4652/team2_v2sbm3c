@@ -56,7 +56,20 @@ public interface NoticeDAOInter {
    */
   public int updatecnt(int noticeno);
   
-
+  /**
+   * 댓글 수 증가
+   * @param 
+   * @return
+   */ 
+  public int increaseReplycnt(int noticeno);
+ 
+  /**
+   * 댓글 수 감소
+   * @param 
+   * @return
+   */   
+  public int decreaseReplycnt(int noticeno);
+  
   
 }
 
