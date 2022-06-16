@@ -97,27 +97,87 @@
     <DIV id='panel_img' style='margin: 0px auto; width: 90%;'>
         <DIV id='fruit' style='display: none;'>
             <H3>추천 향: 과일 향</H3>
-            <img id='img1' src="/recommend_perfume/images/fruit_thumb.jpg" style='float:left; height: 550px'> <br>
+            <img id='img1' src="/recommend_perfume/images/fruit_thumb.jpg" style='float:center; height: 400px'> <br>
+            <br> <h4>원하는 성별을 선택해주세요!</h4> <br>
+            <table style='width:60%; margin-left:20%; margin-right:20%;'>
+                <tr>
+                    <td style='box-shadow: 5px 5px 5px #000; '><img id='img1' src="/recommend_perfume/images/man.png" style='height: 150px'></td>
+                    <td style='width:30px'>  </td>
+                    <td style='box-shadow: 5px 5px 5px #000; '><img id='img2' src="/recommend_perfume/images/woman.png" style='height: 150px'></td>
+                    <td style='width:30px'>  </td>
+                    <td style='box-shadow: 5px 5px 5px #000; '><img id='img3' src="/recommend_perfume/images/couple.png" style='height: 150px'></td>
+                </tr>
+            </table>
         </DIV>
         <DIV id='flower' style='display: none;'>
             <H3>추천 향: 꽃 향</H3>
-            <img id='img1' src="/recommend_perfume/images/flower_thumb.jpg" style='float:left; height: 550px'> <br>
+            <img id='img1' src="/recommend_perfume/images/flower_thumb.jpg" style='float:center; height: 400px'> <br>
+            <br> <h4>원하는 성별을 선택해주세요!</h4> <br>
+            <table style='width:60%; margin-left:20%; margin-right:20%;'>
+                <tr>
+                    <td style='box-shadow: 5px 5px 5px #000; '><img id='img1' src="/recommend_perfume/images/man.png" style='height: 150px'></td>
+                    <td style='width:30px'>  </td>
+                    <td style='box-shadow: 5px 5px 5px #000; '><img id='img2' src="/recommend_perfume/images/woman.png" style='height: 150px'></td>
+                    <td style='width:30px'>  </td>
+                    <td style='box-shadow: 5px 5px 5px #000; '><img id='img3' src="/recommend_perfume/images/couple.png" style='height: 150px'></td>
+                </tr>
+            </table>
         </DIV>
         <DIV id='musk' style='display: none;'>
             <H3>추천 향: 머스크 향</H3>
-            <img id='img1' src="/recommend_perfume/images/musk_thumb.jpg" style='float:left; height: 550px'> <br>
+            <img id='img1' src="/recommend_perfume/images/musk_thumb.jpg" style='float:center; height: 400px'> <br>
+            <br> <h4>원하는 성별을 선택해주세요!</h4> <br>
+            <table style='width:60%; margin-left:20%; margin-right:20%;'>
+                <tr>
+                    <td style='box-shadow: 5px 5px 5px #000; '><img id='img1' src="/recommend_perfume/images/man.png" style='height: 150px'></td>
+                    <td style='width:30px'>  </td>
+                    <td style='box-shadow: 5px 5px 5px #000; '><img id='img2' src="/recommend_perfume/images/woman.png" style='height: 150px'></td>
+                    <td style='width:30px'>  </td>
+                    <td style='box-shadow: 5px 5px 5px #000; '><img id='img3' src="/recommend_perfume/images/couple.png" style='height: 150px'></td>
+                </tr>
+            </table>
         </DIV>
         <DIV id='vanilla' style='display: none;'>
             <H3>추천 향: 바닐라 향</H3>
-            <img id='img1' src="/recommend_perfume/images/vanilla_thumb.jpg" style='float:left; height: 550px'> <br>
+            <img id='img1' src="/recommend_perfume/images/vanilla_thumb.jpg" style='float:center; height: 400px'> <br>
+            <br> <h4>원하는 성별을 선택해주세요!</h4> <br>
+            <table style='width:60%; margin-left:20%; margin-right:20%;'>
+                <tr>
+                    <td style='box-shadow: 5px 5px 5px #000; '><img id='img1' src="/recommend_perfume/images/man.png" style='height: 150px'></td>
+                    <td style='width:30px'>  </td>
+                    <td style='box-shadow: 5px 5px 5px #000; '><img id='img2' src="/recommend_perfume/images/woman.png" style='height: 150px'></td>
+                    <td style='width:30px'>  </td>
+                    <td style='box-shadow: 5px 5px 5px #000; '><img id='img3' src="/recommend_perfume/images/couple.png" style='height: 150px'></td>
+                </tr>
+            </table>
         </DIV>
         <DIV id='spicy' style='display: none;'>
             <H3>추천 향: 스파이시 향</H3>
-            <img id='img1' src="/recommend_perfume/images/spicy_thumb.jpg" style='float:left; height: 550px'> <br>
+            <img id='img1' src="/recommend_perfume/images/spicy_thumb.jpg" style='float:center; height: 400px'> <br>
+            <br> <h4>원하는 성별을 선택해주세요!</h4> <br>
+            <table style='width:60%; margin-left:20%; margin-right:20%;'>
+                <tr>
+                    <td style='box-shadow: 5px 5px 5px #000; '><img id='img1' src="/recommend_perfume/images/man.png" style='height: 150px'></td>
+                    <td style='width:30px'>  </td>
+                    <td style='box-shadow: 5px 5px 5px #000; '><img id='img2' src="/recommend_perfume/images/woman.png" style='height: 150px'></td>
+                    <td style='width:30px'>  </td>
+                    <td style='box-shadow: 5px 5px 5px #000; '><img id='img3' src="/recommend_perfume/images/couple.png" style='height: 150px'></td>
+                </tr>
+            </table>
         </DIV>
         <DIV id='woody' style='display: none;'>
             <H3>추천 향: 우디 향</H3>
-            <img id='img1' src="/recommend_perfume/images/wood_thumb.jpg" style='float:left; height: 550px'> <br>
+            <img id='img1' src="/recommend_perfume/images/wood_thumb.jpg" style='float:center; height: 450px'> <br>
+            <br> <h4>원하는 성별을 선택해주세요!</h4> <br>
+            <table style='width:60%; margin-left:20%; margin-right:20%;'>
+                <tr>
+                    <td style='box-shadow: 5px 5px 5px #000; '><img id='img1' src="/recommend_perfume/images/man.png" style='height: 150px'></td>
+                    <td style='width:30px'>  </td>
+                    <td style='box-shadow: 5px 5px 5px #000; '><img id='img2' src="/recommend_perfume/images/woman.png" style='height: 150px'></td>
+                    <td style='width:30px'>  </td>
+                    <td style='box-shadow: 5px 5px 5px #000; '><img id='img3' src="/recommend_perfume/images/couple.png" style='height: 150px'></td>
+                </tr>
+            </table>
         </DIV>
     </DIV>
 
