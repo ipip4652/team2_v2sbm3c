@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.notice.NoticeVO;
+import dev.mvc.noticeReply.ReplyProcInter;
+import dev.mvc.noticeReply.ReplyVO;
 import dev.mvc.cate.CateVO;
 import dev.mvc.categrp.CategrpVO;
 import dev.mvc.contents.ContentsVO;
@@ -33,6 +35,10 @@ public class NoticeCont {
     @Qualifier("dev.mvc.member.MemberProc") // @Component("dev.mvc.cate.CateProc")
     private MemberProcInter memberProc;
 
+    @Autowired
+    @Qualifier("dev.mvc.noticeReply.ReplyProc") // @Component("dev.mvc.notice.noticeProc")
+    private ReplyProcInter replyProc;
+    
     public NoticeCont() {
         System.out.println("-> NoticeCont created.");
     }
@@ -122,6 +128,10 @@ public class NoticeCont {
         NoticeVO noticeVO = this.noticeProc.read(noticeno);
 
         model.addAttribute("noticeVO", noticeVO);
+
+        List<ReplyVO> replyVO = this.replyProc.list_by_noticeno(noticeno);
+        
+        model.addAttribute("replyVO", replyVO);
 
         int cnt = this.noticeProc.updatecnt(noticeno); // 조회수 증가 처리
 

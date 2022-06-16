@@ -83,11 +83,11 @@ public class ReplyCont {
    글이 없는 경우: {"list":[]}
    글이 있는 경우
    {"list":[
-            {"memberno":1,"rdate":"2019-12-18 16:46:43","passwd":"123","replyno":3,"content":"댓글 3","noticeno":1}
+            {"memberno":1,"rdate":"2019-12-18 16:46:43","passwd":"123","commentno":3,"content":"댓글 3","noticeno":1}
             ,
-            {"memberno":1,"rdate":"2019-12-18 16:46:39","passwd":"123","replyno":2,"content":"댓글 2","noticeno":1}
+            {"memberno":1,"rdate":"2019-12-18 16:46:39","passwd":"123","commentno":2,"content":"댓글 2","noticeno":1}
             ,
-            {"memberno":1,"rdate":"2019-12-18 16:46:35","passwd":"123","replyno":1,"content":"댓글 1","noticeno":1}
+            {"memberno":1,"rdate":"2019-12-18 16:46:35","passwd":"123","commentno":1,"content":"댓글 1","noticeno":1}
             ] 
    }
    </xmp>  
@@ -115,7 +115,7 @@ public class ReplyCont {
           {"memberno":1,
         "rdate":"2019-12-18 16:46:35",
       "passwd":"123",
-      "replyno":1,
+      "commentno":1,
       "id":"user1",
       "content":"댓글 1",
       "noticeno":1}
@@ -123,7 +123,7 @@ public class ReplyCont {
         {"memberno":1,
        "rdate":"2019-12-18 16:46:35",
        "passwd":"123",
-       "replyno":1,
+       "commentno":1,
        "id":"user1",
        "content":"댓글 1",
        "noticeno":1}
@@ -145,17 +145,16 @@ public class ReplyCont {
     
     JSONObject obj = new JSONObject();
     obj.put("list", list);
- 
     return obj.toString();     
   }
   
   
   /**
    * 패스워드를 검사한 후 삭제 
-   * http://localhost:9090/resort/reply/delete.do?replyno=1&passwd=1234
+   * http://localhost:9090/resort/reply/delete.do?commentno=1&passwd=1234
    * {"delete_cnt":0,"passwd_cnt":0}
    * {"delete_cnt":1,"passwd_cnt":1}
-   * @param replyno
+   * @param commentno
    * @param passwd
    * @return
    */
@@ -163,16 +162,16 @@ public class ReplyCont {
   @RequestMapping(value = "/noticeReply/delete.do", 
                               method = RequestMethod.POST,
                               produces = "text/plain;charset=UTF-8")
-  public String delete(int replyno, int noticeno) {
+  public String delete(int commentno, int noticeno) {
       ModelAndView mav = new ModelAndView();
-      this.replyProc.delete(replyno);
+      this.replyProc.delete(commentno);
       this.noticeProc.decreaseReplycnt(noticeno); 
       /*
-       * map.put("replyno", replyno); map.put("passwd", passwd);
+       * map.put("commentno", commentno); map.put("passwd", passwd);
        * 
        * int passwd_cnt = replyProc.checkPasswd(map); // 패스워드 일치 여부, 1: 일치, 0: 불일치 int
        * delete_cnt = 0; // 삭제된 댓글 if (passwd_cnt == 1) { // 패스워드가 일치할 경우 delete_cnt =
-       * replyProc.delete(replyno); // 댓글 삭제 }
+       * replyProc.delete(commentno); // 댓글 삭제 }
        */
     
     JSONObject obj = new JSONObject();
