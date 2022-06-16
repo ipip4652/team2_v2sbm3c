@@ -418,7 +418,7 @@ public class ContentsCont {
       // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
       HashMap<String, Object> map = new HashMap<String, Object>();
       map.put("cateno", cateno); // #{cateno}
-      map.put("word", word); // #{word}
+      map.put("word", word.toUpperCase()); // #{word}
       map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
 
       // 검색 목록

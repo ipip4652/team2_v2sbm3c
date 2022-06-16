@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.noticeReply.ReplyVO;
+import dev.mvc.notice.NoticeProc;
 import dev.mvc.notice.NoticeVO;
 import dev.mvc.cate.CateVO;
 import dev.mvc.categrp.CategrpVO;
@@ -34,6 +35,10 @@ public class ReplyCont {
   @Qualifier("dev.mvc.member.MemberProc") // 이름 지정
   private MemberProc memberProc;
   
+  @Autowired
+  @Qualifier("dev.mvc.notice.NoticeProc") // 이름 지정
+  private NoticeProc noticeProc;
+  
   public ReplyCont(){
     System.out.println("-> ReplyCont created.");
   }
@@ -42,8 +47,9 @@ public class ReplyCont {
   @RequestMapping(value = "/noticeReply/create.do",
                             method = RequestMethod.POST,
                             produces = "text/plain;charset=UTF-8")
-  public String create(ReplyVO replyVO) {
+  public String create(ReplyVO replyVO, int noticeno) {
     int cnt = replyProc.create(replyVO);
+    this.noticeProc.increaseReplycnt(noticeno); 
     
     JSONObject obj = new JSONObject();
     obj.put("cnt",cnt);
@@ -141,6 +147,39 @@ public class ReplyCont {
     obj.put("list", list);
  
     return obj.toString();     
+  }
+  
+  
+  /**
+   * 패스워드를 검사한 후 삭제 
+   * http://localhost:9090/resort/reply/delete.do?replyno=1&passwd=1234
+   * {"delete_cnt":0,"passwd_cnt":0}
+   * {"delete_cnt":1,"passwd_cnt":1}
+   * @param replyno
+   * @param passwd
+   * @return
+   */
+  @ResponseBody
+  @RequestMapping(value = "/noticeReply/delete.do", 
+                              method = RequestMethod.POST,
+                              produces = "text/plain;charset=UTF-8")
+  public String delete(int replyno, int noticeno) {
+      ModelAndView mav = new ModelAndView();
+      this.replyProc.delete(replyno);
+      this.noticeProc.decreaseReplycnt(noticeno); 
+      /*
+       * map.put("replyno", replyno); map.put("passwd", passwd);
+       * 
+       * int passwd_cnt = replyProc.checkPasswd(map); // 패스워드 일치 여부, 1: 일치, 0: 불일치 int
+       * delete_cnt = 0; // 삭제된 댓글 if (passwd_cnt == 1) { // 패스워드가 일치할 경우 delete_cnt =
+       * replyProc.delete(replyno); // 댓글 삭제 }
+       */
+    
+    JSONObject obj = new JSONObject();
+//    obj.put("passwd_cnt", passwd_cnt); // 패스워드 일치 여부, 1: 일치, 0: 불일치
+//    obj.put("delete_cnt", delete_cnt); // 삭제된 댓글
+    
+    return obj.toString();
   }
   
 }

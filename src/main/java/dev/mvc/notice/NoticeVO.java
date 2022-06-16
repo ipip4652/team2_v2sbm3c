@@ -9,23 +9,30 @@ public class NoticeVO {
     private String title;
     /** 내용 */
     private String content;
+    /** 검색어 */
+    private String word = "";
     /** 등록일 */
     private String rdate;
     /** 조회수 */
     private int cnt;
+    /** 댓글수 */
+    private int replycnt;
     
     public NoticeVO() {
         
     }
 
-    public NoticeVO(int noticeno, int memberno, String title, String content, String rdate, int cnt) {
+    public NoticeVO(int noticeno, int memberno, String title, String content, String word, String rdate, int cnt,
+            int replycnt) {
         super();
         this.noticeno = noticeno;
         this.memberno = memberno;
         this.title = title;
         this.content = content;
+        this.word = word;
         this.rdate = rdate;
         this.cnt = cnt;
+        this.replycnt = replycnt;
     }
 
     public int getNoticeno() {
@@ -60,6 +67,14 @@ public class NoticeVO {
         this.content = content;
     }
 
+    public String getWord() {
+        return word;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
+    }
+
     public String getRdate() {
         return rdate;
     }
@@ -76,7 +91,13 @@ public class NoticeVO {
         this.cnt = cnt;
     }
 
-    
+    public int getReplycnt() {
+        return replycnt;
+    }
+
+    public void setReplycnt(int replycnt) {
+        this.replycnt = replycnt;
+    }
     
 }
 

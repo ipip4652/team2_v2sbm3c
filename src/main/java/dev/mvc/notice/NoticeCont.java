@@ -1,5 +1,6 @@
 package dev.mvc.notice;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -122,7 +124,7 @@ public class NoticeCont {
         model.addAttribute("noticeVO", noticeVO);
 
         int cnt = this.noticeProc.updatecnt(noticeno); // 조회수 증가 처리
-        System.out.println("조회수"+cnt);
+
         mav.addObject("cnt", cnt);
         mav.setViewName("/notice/read_cookie_reply");
 
@@ -227,11 +229,50 @@ public class NoticeCont {
         List<NoticeVO> list = this.noticeProc.list_noticeno_asc();
 
         mav.addObject("list", list); // request.setAttribute("list", list);
-
+        
         mav.setViewName("/notice/list"); // /webapp/WEB-INF/views/notice/list.jsp
         return mav;
     }
 
+    /**
+     * 목록 + 검색 지원
+     * http://localhost:9091/notice/list_by_noticeno_search.do?noticeno=1&word=공지
+     * 
+     * @param noticeno
+     * @param word
+     * @return
+     */
+    @RequestMapping(value = "/notice/list_by_noticeno_search.do", method = RequestMethod.GET)
+    public ModelAndView list_by_noticeno_search(@RequestParam(value = "noticeno", defaultValue = "1") int noticeno,
+            @RequestParam(value = "word", defaultValue = "") String word) {
 
+        ModelAndView mav = new ModelAndView();
+
+        // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+        HashMap<String, Object> map = new HashMap<String, Object>(); // 키, 값
+        map.put("noticeno", noticeno); // #{noticeno}
+        map.put("word", word.toUpperCase()); // #{word}
+
+        // 검색 목록
+        List<NoticeVO> list = noticeProc.list_by_noticeno_search(map);
+        mav.addObject("list", list);
+
+        /*
+         * // 검색된 레코드 갯수 int search_count = noticeProc.search_count(map);
+         * mav.addObject("search_count", search_count);
+         */
+
+        NoticeVO noticeVO = noticeProc.read(noticeno);
+        mav.addObject("noticeVO", noticeVO);
+
+        MemberVO memberVO = this.memberProc.read(noticeVO.getMemberno());
+        mav.addObject("memberVO", memberVO);
+
+        mav.setViewName("/notice/list"); // /contents/list_by_noticeno_search.jsp
+
+        return mav;
+    }
+    
+    
 
 }

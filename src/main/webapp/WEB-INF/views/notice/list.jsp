@@ -38,6 +38,22 @@
         <A href="./read_update.do?noticeno=${noticeno}">수정</A>
     </c:if>  
   </ASIDE> 
+
+  <%-- *********************************** 검색 시작 *********************************** --%>
+  <DIV style="text-align: right;">  
+    <form name='frm' id='frm' method='get' action='./list_by_noticeno_search.do'>
+      <input type='hidden' name='noticeno' value='${noticeVO.noticeno }'>
+      <input type='text' name='word' id='word' value='${param.word }' style='width: 20%;'>
+      <button type='submit'>검색</button>
+      <c:if test="${param.word.length() > 0 }">
+        <button type='button' 
+                     onclick="location.href='./list_by_noticeno_search.do?noticeno=${noticeVO.noticeno}&word='">검색 취소</button>  
+      </c:if> 
+      &nbsp;   
+    </form>
+  </DIV>
+  <%-- *********************************** 검색 종료 *********************************** --%>
+  
     
   <TABLE class='table table-striped'>
     <colgroup>
@@ -67,7 +83,7 @@
       <c:forEach var="noticeVO" items="${list }">
       <c:set var="noticeno" value="${noticeVO.noticeno }" />
       <c:set var="memberno" value="${noticeVO.memberno }" />
-      <c:set var="title" value="${noticeVO.title }" />
+      <c:set var="title" value="${noticeVO.title } (${noticeVO.replycnt })" />
       <c:set var="rdate" value="${noticeVO.rdate }" />
       <c:set var="cnt" value="${noticeVO.cnt }" />
       <TR>

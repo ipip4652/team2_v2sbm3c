@@ -1,6 +1,7 @@
 package dev.mvc.notice;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import dev.mvc.cart.CartVO;
@@ -39,15 +40,34 @@ public interface NoticeProcInter {
     public int update(NoticeVO noticeVO);
 
     /**
-     * 삭제 처리
-     * delete id="delete" parameterType="int"
+     * 삭제 처리 delete id="delete" parameterType="int"
+     * 
      * @param noticeno
      * @return 처리된 레코드 갯수
      */
     public int delete(int noticeno);
 
     /**
+     * 카테고리별 검색 목록
+     * 
+     * @param hashMap
+     * @return
+     */
+    public List<NoticeVO> list_by_noticeno_search(HashMap<String, Object> hashMap);
+
+    /*    *//**
+             * 카테고리별 검색 레코드 갯수
+             * 
+             * @param hashMap
+             * @return
+             *//*
+                * public int search_count(HashMap<String, Object> hashMap);
+                * 
+                */
+
+    /**
      * 조회수 증가
+     * 
      * @param noticeno
      * @return
      */
@@ -55,23 +75,18 @@ public interface NoticeProcInter {
 
     /**
      * 댓글 수 증가
-     * @param 
+     * 
+     * @param
      * @return
-     */ 
+     */
     public int increaseReplycnt(int noticeno);
-   
+
     /**
      * 댓글 수 감소
-     * @param 
+     * 
+     * @param
      * @return
-     */   
+     */
     public int decreaseReplycnt(int noticeno);
-   
-   
+
 }
-
-
-
-
-
-

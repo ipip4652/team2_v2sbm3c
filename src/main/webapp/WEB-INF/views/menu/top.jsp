@@ -89,7 +89,7 @@
                             style="font-size: 0.9em; font-weight: bold;">
                                 BOARD</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="../notice/list.do"
+                                <a class="dropdown-item" href="../notice/list_by_noticeno_search.do?noticeno=&word="
                                     style="font-size: 0.9em;">공지사항 </a>
                                 <a class="dropdown-item" href="#"
                                     style="font-size: 0.9em;">Q

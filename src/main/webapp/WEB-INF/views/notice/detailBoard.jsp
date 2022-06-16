@@ -18,47 +18,109 @@
  
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
 <script type="text/javascript">
-  $(function(){
-/*       $('#btn_recom').on("click", function() { update_recom_ajax(${noticeno}); });     
-    $('#btn_login').on('click', login_ajax);
-    $('#btn_loadDefault').on('click', loadDefault); */
-
-    // ---------------------------------------- 댓글 관련 시작 ----------------------------------------
-    var frm_reply = $('#frm_reply');
-    $('#content', frm_reply).on('click', check_login);  // 댓글 작성시 로그인 여부 확인
-    $('#btn_create', frm_reply).on('click', reply_create);  // 댓글 작성시 로그인 여부 확인
-
-    list_by_noticeno_join(); // 댓글 목록
-    // ---------------------------------------- 댓글 관련 종료 ----------------------------------------
+function boardList() {
+    let targetPlace = "./list.do";
+    location.href = targetPlace;
+}
+function boardDelete() {
+    let noticeno = '${noticeVO.noticeno}';
+    let answer = confirm('게시글을 삭제하시겠습니까?');
     
-  });
+    if(answer) {
+        location.href="delete.do?noticeno=" + noticeno;
+    }
+    
+}
+function boardUpdate() {
+    let noticeno = '${noticeVO.noticeno}';
+    
+    location.href="read_update.do?noticeno=" + noticeno;
+}
+
+$(function(){
+  //  $('#btn_recom').on("click", function() { update_recom_ajax(${contentsno}); });
+  $('#btn_login').on('click', login_ajax);
+  $('#btn_loadDefault').on('click', loadDefault);
+
+  // ---------------------------------------- 댓글 관련 시작 ----------------------------------------
+  var frm_reply = $('#frm_reply');
+  $('#content', frm_reply).on('click', check_login);  // 댓글 작성시 로그인 여부 확인
+  $('#btn_create', frm_reply).on('click', reply_create);  // 댓글 작성시 로그인 여부 확인
+  // ---------------------------------------- 댓글 관련 종료 ----------------------------------------
+  
+});
+
  
   function loadDefault() {
     $('#id').val('user1');
     $('#passwd').val('1234');
   } 
+  <%-- 로그인 --%>
+  function login_ajax() {
+    var params = "";
+    params = $('#frm_login').serialize(); // 직렬화, 폼의 데이터를 키와 값의 구조로 조합
+    params += '&${ _csrf.parameterName }=${ _csrf.token }';
+    //console.log(params);
+    //return;
+    
+    $.ajax(
+      {
+        url: '/member/login_ajax.do',
+        type: 'post',  // get, post
+        cache: false, // 응답 결과 임시 저장 취소
+        async: true,  // true: 비동기 통신
+        dataType: 'json', // 응답 형식: json, html, xml...
+        data: params,      // 데이터
+        success: function(rdata) { // 응답이 온경우
+          var str = '';
+          console.log('-> login cnt: ' + rdata.cnt);  // 1: 로그인 성공
+          
+          if (rdata.cnt == 1) {
+            //  insert 처리 Ajax 호출
+            $('#div_login').hide();
+            // alert('로그인 성공');
+            $('#login_yn').val('YES'); // 로그인 성공 기록
+            $('#memberno').val('${sessionScope.memberno}');
+            console.log('${sessionScope.id}');
+            
+          } else {
+            alert('로그인에 실패했습니다.<br>잠시후 다시 시도해주세요.');
+            
+          }
+        },
+        // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
+        error: function(request, status, error) { // callback 함수
+          console.log(error);
+        }
+      }
+    );  //  $.ajax END
+
+  }
 
   // 댓글 작성시 로그인 여부 확인
   function check_login() {
     var frm_reply = $('#frm_reply');
     if ($('#memberno', frm_reply).val().length == 0 ) {
       $('#modal_title').html('댓글 등록'); // 제목 
-      $('#modal_content').html("로그인 후 등록 하실 수 있습니다."); // 내용
+      $('#modal_content').html("로그인해야 등록 할 수 있습니다."); // 내용
       $('#modal_panel').modal();            // 다이얼로그 출력
+      /* $('#div_login').show(); */
+      location.href = '/member/login.do';
       return false;  // 실행 종료
     }
   }
 
   // 댓글 등록
   function reply_create() {
-    var frm_reply = $('#frm_reply');
-    
+      var f = $('#frm_login');
+      var frm_reply = $('#frm_reply');
+    var contentsno = $('#contentsno', f).val();  
+
     if (check_login() !=false) { // 로그인 한 경우만 처리
       var params = frm_reply.serialize(); // 직렬화: 키=값&키=값&...
       // alert(params);
@@ -164,26 +226,14 @@
     
   }
 
-  function boardList() {
-      let targetPlace = "./list.do";
-      location.href = targetPlace;
-  }
-  function boardDelete() {
-      let noticeno = '${noticeVO.noticeno}';
-      let answer = confirm('게시글을 삭제하시겠습니까?');
-      
-      if(answer) {
-          location.href="delete.do?noticeno=" + noticeno;
-      }
-      
-  }
-  function boardUpdate() {
-      let noticeno = '${noticeVO.noticeno}';
-      
-      location.href="read_update.do?noticeno=" + noticeno;
-  }
+
+
 </script>
+
+ <style>
+
  
+ </style>
 </head>
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
@@ -210,88 +260,96 @@
 <DIV class='content_body'>
   <ASIDE class="aside_right">
     <A href="javascript:location.reload();">새로고침</A>
-    <c:if test="${param.memberno == 1 }">
+    <c:if test="${sessionScope.grade < 10 }">
         <span class='menu_divide' >│</span>
         <A href="./create.do?noticeno=${noticeVO.noticeno }">등록</A>
     </c:if>  
   </ASIDE> 
-  
+  <DIV class='menu_line'></DIV>
 <div class="wrapper">
-    <h2>[ 게시판 글보기 ]</h2>
-    
-    <table border="1">
-        <tr>
-            <th>글번호</th>
-            <td>${noticeVO.noticeno}</td>
-        </tr>
-        <tr>
-            <th>제목</th>
-            <td>${noticeVO.title}</td>
-        </tr>       
-        <tr>
-            <th>내용</th>
-            <td>${noticeVO.content}</td>
-        </tr>
-        <tr>
-            <th>작성일</th>
-            <td>
-                <pre>${noticeVO.rdate}</pre>
-            </td>
-        </tr>
-        <tr>
-            <th>조회수</th>
-            <td>
-                <pre>${noticeVO.cnt}</pre>
-            </td>
-        </tr>
-        <tr>
+    <div class="form-group">
+    <div class="col-md-10">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr align="center">
+                                <th width="10%">제목</th>
+                                <th width="60%">${noticeVO.title }</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>작성일
+                                </td>
+                                <td>
+                                ${noticeVO.rdate }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>글쓴이
+                                </td>
+                                <td>
+                                ${sessionScope.id } <span style='float:right'>조회 : ${noticeVO.cnt }</span>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td colspan="2">
+                                    <p>${noticeVO.content }</p>
+                       
+                                </td>
+                            </tr>
+                            </tbody>
+                            </table>
+   </div>
+   <table style="float: right; width:33%;">     
+        <tr >
         <th class="btn" colspan="2">
             <input type="button" value="글목록" onclick="boardList();">
 
             <!-- 글삭제와 수정은 로그인한 사람과 해당글을 쓴 사람과 같아야 할 수 있다. -->
-            <input type="button" value="글수정" onclick="boardUpdate();">
-            <input type="button" value="글삭제" onclick="boardDelete();">
+            <input type="button" value="글수정" onclick="boardUpdate();" >
+            <input type="button" value="글삭제" onclick="boardDelete();" >
             </th>
         </tr>
     </table>    
-  
-  <DIV class='menu_line'></DIV>
-  
+  </div>
+  </DIV>
+<br>
   <%-- ******************** Ajax 기반 로그인 폼 시작 ******************** --%>
-  <DIV id='div_login' style='width: 80%; margin: 0px auto; display: none;'>
-  <FORM name='frm_login' id='frm_login' method='POST' action='/member/login_ajax.do' class="form-horizontal">
-    <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
-<%--     <input type="hidden" name="noticeno" id="noticeno" value="${noticeno }"> --%>    
-    <input type="hidden" name="login_yn" id="login_yn" value="NO">
-          
-    <div class="form-group">
-      <label class="col-md-4 control-label" style='font-size: 0.8em;'>아이디</label>    
-      <div class="col-md-8">
-        <input type='text' class="form-control" name='id' id='id' 
-                   value='${ck_id }' required="required" 
-                   style='width: 30%;' placeholder="아이디" autofocus="autofocus">
-        <Label>   
-          <input type='checkbox' name='id_save' value='Y' 
-                    ${ck_id_save == 'Y' ? "checked='checked'" : "" }> 저장
-        </Label>                   
-      </div>
+  <DIV id='div_login' style='display:none; float:left;'>
+    <div style='width: 70%; margin: 0px 0px 0px 30%; '>
+        <FORM name='frm_login' id='frm_login' method='POST' action='/member/login_ajax.do' class="form-horizontal">
+          <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
+          <input type="hidden" name="contentsno" id="contentsno" value="contentsno">
+    
+          <div class="form-group">
+            <label class="col-md-4 control-label" style='font-size: 0.8em;'>아이디</label>    
+            <div class="col-md-8">
+              <input type='text' class="form-control" name='id' id='id' 
+                         value='${ck_id }' required="required" 
+                         style='width: 100%;' placeholder="아이디" autofocus="autofocus">
+              <Label>   
+                <input type='checkbox' name='id_save' value='Y' 
+                          ${ck_id_save == 'Y' ? "checked='checked'" : "" }> 저장
+              </Label>                   
+            </div>
+       
+          </div>   
+       
+          <div class="form-group">
+            <label class="col-md-4 control-label" style='font-size: 0.8em;'>패스워드</label>    
+            <div class="col-md-8">
+              <input type='password' class="form-control" name='passwd' id='passwd' 
+                        value='${ck_passwd }' required="required" style='width: 100%;' placeholder="패스워드">
+              <Label>
+                <input type='checkbox' name='passwd_save' value='Y' 
+                          ${ck_passwd_save == 'Y' ? "checked='checked'" : "" }> 저장
+              </Label>
+            </div>
+          </div>   
+        </FORM>
+    </div>
  
-    </div>   
- 
-    <div class="form-group">
-      <label class="col-md-4 control-label" style='font-size: 0.8em;'>패스워드</label>    
-      <div class="col-md-8">
-        <input type='password' class="form-control" name='passwd' id='passwd' 
-                  value='${ck_passwd }' required="required" style='width: 30%;' placeholder="패스워드">
-        <Label>
-          <input type='checkbox' name='passwd_save' value='Y' 
-                    ${ck_passwd_save == 'Y' ? "checked='checked'" : "" }> 저장
-        </Label>
-      </div>
-    </div>   
- 
-    <div class="form-group">
-      <div class="col-md-offset-4 col-md-8">
+      <div style='text-align: center; margin: 10px auto;'>
         <button type="button" id='btn_login' class="btn btn-primary btn-md">로그인</button>
         <button type='button' onclick="location.href='./create.do'" class="btn btn-primary btn-md">회원가입</button>
         <button type='button' id='btn_loadDefault' class="btn btn-primary btn-md">테스트 계정</button>
@@ -299,12 +357,11 @@
                     onclick="$('#div_login').hide();">취소</button>
       </div>
     </div>   
-    
-  </FORM>
+
   </DIV>
   <%-- ******************** Ajax 기반 로그인 폼 종료 ******************** --%>
   <!-- ------------------------------ 댓글 영역 시작 ------------------------------ -->
-<DIV style='width: 80%; margin: 0px auto;'>
+<DIV style='width: 70%; margin: 0px auto; float:left;'>
     <HR>
     <FORM name='frm_reply' id='frm_reply'> <%-- 댓글 등록 폼 --%>
         <input type='hidden' name='noticeno' id='noticeno' value='${noticeno}'>

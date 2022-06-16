@@ -1,12 +1,14 @@
 package dev.mvc.notice;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import dev.mvc.contents.ContentsVO;
 import dev.mvc.notice.NoticeVO;
 
 // Autowired 기능에의해 자동 할당될 때 사용되는 이름
@@ -73,7 +75,26 @@ public class NoticeProc implements NoticeProcInter {
     public int decreaseReplycnt(int noticeno) {
       int count = noticeDAO.decreaseReplycnt(noticeno);
       return count;
+    }
+
+    @Override
+    public List<NoticeVO> list_by_noticeno_search(HashMap<String, Object> hashMap) {
+        List<NoticeVO> list = noticeDAO.list_by_noticeno_search(hashMap);
+        
+        for (NoticeVO noticeVO : list) { // 내용이 160자 이상이면 160자만 선택
+          String content = noticeVO.getContent();
+          if (content.length() > 150) {
+            content = content.substring(0, 150) + "...";
+            noticeVO.setContent(content);
+          }
+        }
+        return list;
     }   
+    
+    /*
+     * @Override public int search_count(HashMap<String, Object> hashMap) { int
+     * count = noticeDAO.search_count(hashMap); return count; }
+     */
     
 
 }

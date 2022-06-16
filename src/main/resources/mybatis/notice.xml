@@ -5,10 +5,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="dev.mvc.notice.NoticeDAOInter"> 
+  
   <!-- 등록, 입력: noticeVO, 리턴: 등록된 레코드 갯수  -->
   <insert id="create" parameterType="dev.mvc.notice.NoticeVO">
-    INSERT INTO notice(noticeno, memberno, title, content, rdate, cnt)
-    VALUES(notice_seq.nextval, #{memberno}, #{title}, #{content}, sysdate, 0)
+    INSERT INTO notice(noticeno, memberno, title, content, word, rdate, cnt)
+    VALUES(notice_seq.nextval, #{memberno}, #{title}, #{content}, #{word}, sysdate, 0)
   </insert>
   
   <!-- 
@@ -16,14 +17,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   List<noticeVO> list = new ArrayList<noticeVO>(); 
   -->
  <select id="list_noticeno_asc" resultType="dev.mvc.notice.NoticeVO">
-    SELECT  noticeno, memberno, title, content, rdate
+    SELECT  noticeno, memberno, title, content, word, rdate
     FROM notice
     ORDER BY noticeno ASC
   </select>
  
   <!-- 조회, id: read, 입력: noticeno, 리턴: noticeVO -->
   <select id="read" resultType="dev.mvc.notice.NoticeVO" parameterType="int">
-    SELECT  noticeno, title, content, rdate
+    SELECT  noticeno, title, content, word, rdate
     FROM notice
     WHERE noticeno=#{noticeno}
   </select>
@@ -40,6 +41,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     DELETE FROM notice
     WHERE noticeno=#{noticeno}
   </delete>
+
+  <!-- 카테고리별 검색 목록 -->
+  <select id="list_by_noticeno_search" resultType="dev.mvc.notice.NoticeVO" 
+             parameterType="HashMap">
+    SELECT noticeno, memberno, title, content, cnt, rdate, replycnt
+    FROM notice
+    <choose>
+      <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+        <!-- WHERE noticeno=#{noticeno} -->
+      </when>
+      <otherwise> <!-- 검색하는 경우 -->
+        WHERE (UPPER(title) LIKE '%' || #{word} || '%' 
+                                                     OR UPPER(content) LIKE '%' || #{word} || '%' 
+                                                     OR UPPER(word) LIKE '%' || #{word} || '%')
+      </otherwise>
+    </choose>
+    ORDER BY noticeno ASC   
+  </select>
+
   
   <!-- 조회수 -->
     <update id="updatecnt">
