@@ -31,7 +31,7 @@
                     alert('관심이 가는 사진을 선택해주세요');
                 }
             });
-            $('#btn_close').on('click', function() { window.close(); });      // 윈도우 닫기
+            $('#btn_close').on('click', function() { location.href='/index.do'; });      // 윈도우 닫기
         });
     </script>
     <style>

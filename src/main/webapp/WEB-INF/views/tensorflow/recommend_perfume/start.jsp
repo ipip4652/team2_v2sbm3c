@@ -16,7 +16,7 @@
     <script type="text/javascript">
       $(function() { // 자동 실행
         $('#btn_forward').on('click', function() { location.href='/tensorflow/recommend_perfume/form1.do';});
-        $('#btn_close').on('click', function() {window.open('/index.do'); window.close();});     // 윈도우 닫기
+        $('#btn_close').on('click', function() {location.href='/index.do';});     // 메인페이지(index.do)로 이동
       });
     </script>
 </head>
