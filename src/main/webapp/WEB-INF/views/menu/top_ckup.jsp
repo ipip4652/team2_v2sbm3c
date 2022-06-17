@@ -59,7 +59,13 @@
                                 </div>
                             </li>
                         </c:when>
-                    </c:choose>                    
+                    </c:choose>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">추천시스템</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/tensorflow/recommend_perfume/start.do">관심 카테고리 추천</a>
+                        </div>
+                    </li>                    
                 </ul>
             </div>    
         </nav>
