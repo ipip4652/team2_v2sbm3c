@@ -64,14 +64,14 @@
 
 <DIV class='content_body'>
   <ASIDE class="aside_right">
-      <A href="/contents/list_shipping_main.do">쇼핑 계속하기</A>
-      <span class='menu_divide' >│</span>    
-    <A href="javascript:location.reload();">새로고침</A>
+  <%--<A href="/contents/list_shipping_main.do">쇼핑 계속하기</A> <span class='menu_divide' >│</span>  
+   --%>    
+    <%--<A href="javascript:location.reload();">새로고침</A>
+     <DIV class='menu_line'></DIV> --%>
   </ASIDE> 
 
-  <DIV class='menu_line'></DIV>
-
-  <table class="table table-striped" style='width: 100%;'>
+  <div style="background-color: #DDDDDD; padding: 17PX 17PX 5PX 17px;">
+  <table class="table table-condensed" style='width: 100%; background-color: #FFFFFF;'>
     <colgroup>
       <col style="width: 10%;"></col>
       <col style="width: 35%;"></col>
@@ -133,7 +133,7 @@
                 <fmt:formatNumber value="${tot}" pattern="#,### 원" />
               </td>
               <td style='vertical-align: middle; text-align: center;'>
-                <A href="javascript: delete_func(${cartno })"><IMG src="/cart/images/delete3.png"></A>
+                <button type='button' onclick="javascript: delete_func(${cartno })" class='btn btn-secondary' style='margin-top: 5px;'>삭제</button>
               </td>
             </tr>
           </c:forEach>
@@ -148,26 +148,28 @@
       
       
     </tbody>
+    
   </table>
+  </div>
+ <div style="float: right;">
+	 <pre style='display:inline; font-size: 0.8em; '>
+	 상품 금액 <fmt:formatNumber value="${tot_sum }" pattern="#,###" /> 원 + 배송비 <fmt:formatNumber value="${baesong_tot }" pattern="#,###" /> 원 = 총액: </pre>
+	 
+	 <pre style='display:inline; font-size: 1.5em; font:bold; color: #FF0000;'><fmt:formatNumber value="${total_ordering }" pattern="#,###" /> 원</pre>
+	 
+ </div>
+ 
   
-  <table class="table" style='margin-top: 50px; margin-bottom: 50px; width: 100%;'>
+  <div style='margin-top: 50px; margin-bottom: 50px;  margin-right: 100px; width: 100%;'>
     <tbody>
-      <tr>
-        <td style='float: right;'>
-          <pre style='display:inline; font-size: 1.0em; vertical-align: sub;'>
-          상품 금액 <fmt:formatNumber value="${tot_sum }" pattern="#,###" /> 원 + 배송비 <fmt:formatNumber value="${baesong_tot }" pattern="#,###" /> 원 = 총액: </pre>
-          <pre style='display:inline; font-size: 1.4em; font:bold; float:right; color: #FF0000;'><fmt:formatNumber value="${total_ordering }" pattern="#,###" /> 원</pre>
-          
           <br style='clear:both;'>
-          <form name='frm' id='frm' style='margin-top: 20px; float: right;' action="/order_pay/create.do" method='get'>
+          <form name='frm' id='frm' style='margin-top: 0px; float: right;' action="/order_pay/create.do" method='get'>
             <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">  
-            <button type='button' class='btn btn-dark' style='font-size: 1.5em;' onclick="location.href='/'">주문하기</button>
-            <button type='submit' id='btn_order' class='btn btn-dark' style='font-size: 1.5em;'>주문하기</button>      
+            <button type='button' class='btn btn-dark' style='font-size: 0.9em;' onclick="location.href='/index.do'">쇼핑 계속하기</button>
+            <button type='submit' id='btn_order' class='btn btn-dark' style='font-size: 0.9em;'>주문하기</button>      
           </form>
-        <td>
-      </tr>
     </tbody>
-  </table>   
+  </div>   
 </DIV>
 
  

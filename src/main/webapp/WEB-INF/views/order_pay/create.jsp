@@ -109,7 +109,7 @@
 <body>
 <jsp:include page="../menu/top.jsp" flush='false' />
   <DIV class='title_line'>
-    주문, 결재
+    주문, 결제
   </DIV>
 
   <DIV class='content_body'>
@@ -120,7 +120,9 @@
 
   <div class='menu_line'></div>
   
-  <table class="table table-striped" style='width: 100%;'>
+
+  <div style="background-color: #DDDDDD; padding: 17PX 17PX 5PX 17px;">
+  <table class="table table-condensed" style='width: 100%; background-color: #FFFFFF;'>
     <colgroup>
       <col style="width: 10%;"></col>
       <col style="width: 35%;"></col>
@@ -168,14 +170,14 @@
             <fmt:formatNumber value="${tot}" pattern="#,###" />
           </td>
           <td style='vertical-align: middle; text-align: center;'>
-            <A href="../cart/list_by_memberno.do"><IMG src="/cart/images/delete3.png" title="쇼핑카트로 이동합니다."></A>
+                <button type='button' onclick="javascript: delete_func(${cartno })" class='btn btn-secondary' style='margin-top: 5px;'>삭제</button>
           </td>
         </tr>
       </c:forEach>
       
     </tbody>
   </table>
-  
+  </DIV>
   <form name='frm' id='frm' style='margin-top: 50px;' action="/order_pay/create.do" method='post'>
     <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">  
     <input type="hidden" name="amount" value=" ${total_order }">   <%-- 전체 주문 금액 --%>
@@ -306,7 +308,7 @@
   
   <div style='margin-top: 20px; width: 100%; clear: both;'> </div>  
   <ASIDE class="aside_left" style='margin-top: 50px;'>
-    결재 정보<br>
+    결제 정보<br>
   </ASIDE> 
 
   <div class='menu_line'></div>
@@ -326,7 +328,7 @@
           상품 금액 <fmt:formatNumber value="${tot_sum }" pattern="#,###" /> 원 + 배송비 <fmt:formatNumber value="${baesong_tot }" pattern="#,###" /> 원 = 총액: </pre>
           <pre style='display:inline; font-size: 1.4em; font:bold; float:right; color: #FF0000;'><fmt:formatNumber value="${total_order }" pattern="#,###" /> 원</pre>          
           <br style='clear:both;'>
-          <button type='button' id='btn_order_pay'  class='btn btn-info' style='font-size: 1.5em; float:right;'>결재하기</button>
+          <button type='submit' id='btn_order_pay' class='btn btn-dark' style='font-size: 0.9em; float:right;'>결제하기</button>      
         </td>
       </tr>
     </tbody>
