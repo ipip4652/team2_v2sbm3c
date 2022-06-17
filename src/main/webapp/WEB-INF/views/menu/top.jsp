@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -56,44 +57,66 @@
                             href="#">ABOUT US</a></li>
                         <li class="nav-item"><a class="nav-link"
                             style="font-size: 0.9em; font-weight: bold;"
-                            href="#">COACHING</a></li>
+                            href="/notice/list_by_noticeno_search.do?noticeno=&word=">Notice</a></li>
+                            
                         <li class="nav-item dropdown"><a
                             class="nav-link dropdown-toggle" href="#"
                             id="navbardrop" data-toggle="dropdown"
                             style="font-size: 0.9em; font-weight: bold;">
-                                STORE</a>
+                                MAN</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="../cate/list_by_categrpno.do?categrpno=1"
-                                    style="font-size: 0.9em;">MAN </a> <a
-                                    class="dropdown-item" href="../cate/list_by_categrpno.do?categrpno=1"
-                                    style="font-size: 0.9em;">WOMAN</a>
-                                <a class="dropdown-item" href="../cate/list_by_categrpno.do?categrpno=1"
-                                    style="font-size: 0.9em;">UNISEX</a>
+                                <a class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=1&now_page=1"
+                                    style="font-size: 0.9em;">Woody</a> <a
+                                    class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=4&now_page=1"
+                                    style="font-size: 0.9em;">Spicy</a>
+                                <a class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=7&now_page=1"
+                                    style="font-size: 0.9em;">Vanila</a>
+                                <a class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=10&now_page=1"
+                                    style="font-size: 0.9em;">Musk </a> <a
+                                    class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=13&now_page=1"
+                                    style="font-size: 0.9em;">Flower</a>
+                                <a class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=16&now_page=1"
+                                    style="font-size: 0.9em;">Fruits</a>
                                 
                             </div></li>
                         <li class="nav-item dropdown"><a
                             class="nav-link dropdown-toggle" href="#"
                             id="navbardrop" data-toggle="dropdown"
                             style="font-size: 0.9em; font-weight: bold;">
-                                REVIEW</a>
+                                WOMAN</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#"
-                                    style="font-size: 0.9em;">고객리뷰 </a>
-                                <a class="dropdown-item" href="#"
-                                    style="font-size: 0.9em;">실시간 리뷰</a>
+                                <a class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=2&now_page=1"
+                                    style="font-size: 0.9em;">Woody</a> <a
+                                    class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=5&now_page=1"
+                                    style="font-size: 0.9em;">Spicy</a>
+                                <a class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=8&now_page=1"
+                                    style="font-size: 0.9em;">Vanila</a>
+                                <a class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=11&now_page=1"
+                                    style="font-size: 0.9em;">Musk </a> <a
+                                    class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=14&now_page=1"
+                                    style="font-size: 0.9em;">Flower</a>
+                                <a class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=17&now_page=1"
+                                    style="font-size: 0.9em;">Fruits</a>
                             </div></li>
 
                         <li class="nav-item dropdown"><a
                             class="nav-link dropdown-toggle" href="#"
                             id="navbardrop" data-toggle="dropdown"
                             style="font-size: 0.9em; font-weight: bold;">
-                                BOARD</a>
+                                UNISEX</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="../notice/list_by_noticeno_search.do?noticeno=&word="
-                                    style="font-size: 0.9em;">공지사항 </a>
-                                <a class="dropdown-item" href="#"
-                                    style="font-size: 0.9em;">Q
-                                    &amp; A</a>
+                                <a class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=3&now_page=1"
+                                    style="font-size: 0.9em;">Woody</a> <a
+                                    class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=6&now_page=1"
+                                    style="font-size: 0.9em;">Spicy</a>
+                                <a class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=9&now_page=1"
+                                    style="font-size: 0.9em;">Vanila</a>
+                                <a class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=12&now_page=1"
+                                    style="font-size: 0.9em;">Musk </a> <a
+                                    class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=15&now_page=1"
+                                    style="font-size: 0.9em;">Flower</a>
+                                <a class="dropdown-item" href="/contents/list_by_cateno_search_paging.do?cateno=18&now_page=1"
+                                    style="font-size: 0.9em;">Fruits</a>
                             </div></li>
 
 
