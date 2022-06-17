@@ -89,6 +89,7 @@
               <input type='hidden' name='contentsno' value='${param.contentsno}'>
               <input type='hidden' name='cateno' value='${param.cateno}'>
               <input type='hidden' name='now_page' value='${param.now_page}'>
+              <input type='hidden' name='word' value='${param.word}'>
               
               <DIV id='panel1' style="width: 40%; text-align: center; margin: 10px auto;"></DIV>
                     

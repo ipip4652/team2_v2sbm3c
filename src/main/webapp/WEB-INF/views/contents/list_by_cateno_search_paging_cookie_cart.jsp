@@ -201,13 +201,6 @@
       </c:if>    
     </form>
   </DIV>
-  <div align="center">
-    <a href='#'>성별</a>
-    <span class='menu_divide' >│</span>
-    <a href='#'>mbti</a>
-    <span class='menu_divide' >│</span>
-    <a href='#'>etc</a>
-  </div>
   <DIV class='menu_line'></DIV>
   
   <%-- ******************** Ajax 기반 로그인 폼 시작 ******************** --%>
@@ -269,20 +262,20 @@
       <c:set var="price" value="${contentsVO.price }" />
 
       <%-- 하나의 행에 이미지를 4개씩 출력후 행 변경, index는 0부터 시작 --%>
-      <c:if test="${status.index % 4 == 0 && status.index != 0 }"> 
-        <HR class='menu_line'>
+      <c:if test="${status.index % 3 == 0 && status.index != 0 }"> 
+        <BR style='clear:both;'>
       </c:if>
       
       <!-- 하나의 이미지, 24 * 4 = 96% -->
-      <DIV style='width: 24%; 
+      <DIV style='width: 31%; 
               float: left; 
-              margin: 0.5%; padding: 0.5%; background-color: #EEEFFF; text-align: center;'>
+              margin: 0.5%; padding: 0.5%; background-color: #FFFFFF; text-align: center;'>
         <c:choose>
           <c:when test="${size1 > 0}"> <!-- 파일이 존재하면 -->
             <c:choose> 
               <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}"> <!-- 이미지 인경우 -->
                 <a href="./read.do?contentsno=${contentsno}">               
-                  <IMG src="./storage/${thumb1 }" style='width: 100%; height: 150px;'>
+                  <IMG src="./storage/${thumb1 }" style='width: 100%;'>
                 </a><br>
                 <a href="./read.do?contentsno=${contentsno}">[${pcompany}] ${pname}</a> <br>
                 <fmt:formatNumber value="${price}" pattern="#,###" />원
@@ -299,7 +292,7 @@
           </c:when>
           <c:otherwise> <%-- 파일이 없는 경우 기본 이미지 출력 --%>
             <a href="./read.do?contentsno=${contentsno}">
-              <img src='/contents/images/none1.png' style='width: 100%; height: 150px;'>
+              <img src='/contents/images/none1.png' style='width: 100%;'>
             </a><br>
             이미지를 등록해주세요.
           </c:otherwise>

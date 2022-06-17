@@ -718,16 +718,13 @@ public class ContentsCont {
      * @return
      */
     @RequestMapping(value = "/contents/delete.do", method = RequestMethod.POST)
-    public ModelAndView delete(HttpServletRequest request, ContentsVO contentsVO, 
-                                            int now_page,
+    public ModelAndView delete(HttpServletRequest request, int contentsno, int cateno, 
+                                            @RequestParam(value="now_page", defaultValue="1") int now_page,
                                             @RequestParam(value="word", defaultValue="") String word) {
-      ModelAndView mav = new ModelAndView();
-      int contentsno = contentsVO.getContentsno();
-      
-
-      
-      int cnt = 0;
- // 패스워드 일치 -> 등록된 파일 삭제 -> 신규 파일 등록
+          ModelAndView mav = new ModelAndView();
+          
+          int cnt = 0;
+     // 패스워드 일치 -> 등록된 파일 삭제 -> 신규 파일 등록
           // -------------------------------------------------------------------
           // 파일 삭제 코드 시작
           // -------------------------------------------------------------------
@@ -775,8 +772,8 @@ public class ContentsCont {
           mav.addObject("now_page", now_page);
           mav.setViewName("redirect:/contents/list_by_cateno_search_paging.do"); // redirect: param.now_page
 
-      mav.addObject("cateno", contentsVO.getCateno());
-      System.out.println("-> cateno: " + contentsVO.getCateno());
+      mav.addObject("cateno", cateno);
+      System.out.println("-> cateno: " + cateno);
       
       return mav; // forward
     }   
