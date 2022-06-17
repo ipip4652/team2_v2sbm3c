@@ -332,8 +332,8 @@
           <span style="font-size: 1.0em;">(보유 수량: <fmt:formatNumber value="${salecnt}" pattern="#,###" /> 개)</span><br>
           <span style="font-size: 1.0em;">구매 수량</span><br>
           <form>
-          <input type="text" name='ordercnt' id ='ordercnt' placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" 
-                       class="form-control" style='width: 30%;'/><br> 
+          <input type="number" name='ordercnt' id ='ordercnt' placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" 
+                       class="form-control" style='width: 50%;' min="1" max="100"/><br> 
            <button type='button' onclick="cart_ajax(${contentsno })" class="btn btn-info">바로 구매</button>
           <button type='button' onclick="cart_ajax(${contentsno })" class="btn btn-info">장바구니</button><br><br>
           

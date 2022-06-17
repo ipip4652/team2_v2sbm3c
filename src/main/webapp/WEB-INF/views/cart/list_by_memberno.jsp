@@ -74,10 +74,10 @@
   <table class="table table-striped" style='width: 100%;'>
     <colgroup>
       <col style="width: 10%;"></col>
-      <col style="width: 40%;"></col>
-      <col style="width: 20%;"></col>
-      <col style="width: 10%;"></col> <%-- 수량 --%>
-      <col style="width: 10%;"></col> <%-- 합계 --%>
+      <col style="width: 35%;"></col>
+      <col style="width: 15%;"></col>
+      <col style="width: 15%;"></col> <%-- 수량 --%>
+      <col style="width: 15%;"></col> <%-- 합계 --%>
       <col style="width: 10%;"></col>
     </colgroup>
     <%-- table 컬럼 --%>
@@ -111,7 +111,7 @@
                 <c:choose>
                   <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
                     <%-- /static/contents/storage/ --%>
-                    <a href="/contents/read.do?contentsno=${contentsno}"><IMG src="/contents/storage/${thumb1 }" style="width: 120px; height: 80px;"></a> 
+                    <a href="/contents/read.do?contentsno=${contentsno}"><IMG src="/contents/storage/${thumb1 }" style="width: 100%;"></a> 
                   </c:when>
                   <c:otherwise> <!-- 이미지가 아닌 일반 파일 -->
                     ${contentsVO.file1}
@@ -122,15 +122,15 @@
                 <a href="/contents/read.do?contentsno=${contentsno}"><strong>${pname}</strong></a> 
               </td> 
               <td style='vertical-align: middle; text-align: center;'>
-              <strong><fmt:formatNumber value="${price}" pattern="#,###" /></strong><br>
+              <strong><fmt:formatNumber value="${price}" pattern="\\ #,###" /></strong><br>
               </td>
               <td style='vertical-align: middle; text-align: center;'>
                 <input type='number' id='${cartno }_cnt' min='1' max='100' step='1' value="${cnt }" 
                   style='width: 52px;'><br>
-                <button type='button' onclick="update_cnt(${cartno})" class='btn' style='margin-top: 5px;'>변경</button>
+                <button type='button' onclick="update_cnt(${cartno})" class='btn btn-secondary' style='margin-top: 5px;'>변경</button>
               </td>
-              <td style='vertical-align: middle; text-align: center;'>
-                <fmt:formatNumber value="${tot}" pattern="#,###" />
+              <td style='vertical-align: middle; text-align: center; font-size:1.1em;'>
+                <fmt:formatNumber value="${tot}" pattern="#,### 원" />
               </td>
               <td style='vertical-align: middle; text-align: center;'>
                 <A href="javascript: delete_func(${cartno })"><IMG src="/cart/images/delete3.png"></A>
@@ -150,26 +150,19 @@
     </tbody>
   </table>
   
-  <table class="table table-striped" style='margin-top: 50px; margin-bottom: 50px; width: 100%;'>
+  <table class="table" style='margin-top: 50px; margin-bottom: 50px; width: 100%;'>
     <tbody>
       <tr>
-        <td style='width: 50%;'>
-          <div class='cart_label'>상품 금액</div>
-          <div class='cart_price'><fmt:formatNumber value="${tot_sum }" pattern="#,###" /> 원</div>
-          <%-- 
-          <div class='cart_label'>포인트</div>
-          <div class='cart_price'><fmt:formatNumber value="${point_tot }" pattern="#,###" /> 원 </div>
-           --%>
-          <div class='cart_label'>배송비</div>
-          <div class='cart_price'><fmt:formatNumber value="${baesong_tot }" pattern="#,###" /> 원</div>
-        </td>
-        <td style='width: 50%;'>
-          <div class='cart_label' style='font-size: 1.6em;'>전체 주문 금액</div>
-          <div class='cart_price'  style='font-size: 1.6em; color: #FF0000;'><fmt:formatNumber value="${total_ordering }" pattern="#,###" /> 원</div>
+        <td style='float: right;'>
+          <pre style='display:inline; font-size: 1.0em; vertical-align: sub;'>
+          상품 금액 <fmt:formatNumber value="${tot_sum }" pattern="#,###" /> 원 + 배송비 <fmt:formatNumber value="${baesong_tot }" pattern="#,###" /> 원 = 총액: </pre>
+          <pre style='display:inline; font-size: 1.4em; font:bold; float:right; color: #FF0000;'><fmt:formatNumber value="${total_ordering }" pattern="#,###" /> 원</pre>
           
-          <form name='frm' id='frm' style='margin-top: 50px;' action="/order_pay/create.do" method='get'>
+          <br style='clear:both;'>
+          <form name='frm' id='frm' style='margin-top: 20px; float: right;' action="/order_pay/create.do" method='get'>
             <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">  
-            <button type='submit' id='btn_order' class='btn btn-info' style='font-size: 1.5em;'>주문하기</button>
+            <button type='button' class='btn btn-dark' style='font-size: 1.5em;' onclick="location.href='/'">주문하기</button>
+            <button type='submit' id='btn_order' class='btn btn-dark' style='font-size: 1.5em;'>주문하기</button>      
           </form>
         <td>
       </tr>
