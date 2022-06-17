@@ -16,7 +16,7 @@
     <script type="text/javascript">
       $(function() { // 자동 실행
         $('#btn_forward').on('click', function() { location.href='/tensorflow/recommend_perfume/form1.do';});
-        $('#btn_close').on('click', function() { window.close(); });     // 윈도우 닫기
+        $('#btn_close').on('click', function() {window.open('/index.do'); window.close();});     // 윈도우 닫기
       });
     </script>
 </head>
@@ -26,7 +26,7 @@
 
     <DIV style="text-align:center; margin: 50px auto;">
         관심 향을 등록하시면 최적의 향수 추천 서비스를 이용하실수 있습니다.<br><br>
-        등록은 관심 분야의 상품을 선택하며 몇 번의 클릭만으로 바로 종료됩니다.
+        등록은 관심이 가는 사진들을 선택하며 몇 번의 클릭만으로 바로 종료됩니다.
     </DIV>
 
     <DIV style="text-align:center; margin: 50px auto;">
