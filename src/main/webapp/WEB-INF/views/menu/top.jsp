@@ -136,7 +136,11 @@
                 </nav>
 
             </div>
+            
 
+        </div>
+        <div class ="right_menu">
+                <a href="/tensorflow/recommend_perfume/start.do">관심 카테고리 추천</a>
         </div>
 
     </div>
