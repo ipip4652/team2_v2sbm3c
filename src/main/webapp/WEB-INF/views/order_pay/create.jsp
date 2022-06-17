@@ -123,10 +123,10 @@
   <table class="table table-striped" style='width: 100%;'>
     <colgroup>
       <col style="width: 10%;"></col>
-      <col style="width: 40%;"></col>
-      <col style="width: 20%;"></col>
-      <col style="width: 10%;"></col> <%-- 수량 --%>
-      <col style="width: 10%;"></col> <%-- 합계 --%>
+      <col style="width: 35%;"></col>
+      <col style="width: 15%;"></col>
+      <col style="width: 15%;"></col> <%-- 수량 --%>
+      <col style="width: 15%;"></col> <%-- 합계 --%>
       <col style="width: 10%;"></col>
     </colgroup>
    
@@ -148,7 +148,7 @@
             <c:choose>
               <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
                 <%-- /static/contents/storage/ --%>
-                <a href="/contents/read.do?contentsno=${contentsno}"><IMG src="/contents/storage/${thumb1 }" style="width: 120px; height: 80px;"></a> 
+                <a href="/contents/read.do?contentsno=${contentsno}"><IMG src="/contents/storage/${thumb1 }" style="width: 100%;"></a> 
               </c:when>
               <c:otherwise> <!-- 이미지가 아닌 일반 파일 -->
                 ${contentsVO.file1}
@@ -321,22 +321,13 @@
   <table class="table table-striped" style='margin-top: 20px; margin-bottom: 50px; width: 100%; clear: both;'>
     <tbody>
       <tr>
-        <td style='width: 50%;'>
-          <div class='cart_label'>상품 금액</div>
-          <div class='cart_price'><fmt:formatNumber value="${tot_sum }" pattern="#,###" /> 원</div>
-          
-          <%-- <div class='cart_label'>포인트</div>
-          <div class='cart_price'><fmt:formatNumber value="${point_tot }" pattern="#,###" /> 원 </div> --%>
-          
-          <div class='cart_label'>배송비</div>
-          <div class='cart_price'><fmt:formatNumber value="${baesong_tot }" pattern="#,###" /> 원</div>
+        <td style='float:right;'>
+          <pre style='display:inline; font-size: 1.0em; vertical-align: sub;'>
+          상품 금액 <fmt:formatNumber value="${tot_sum }" pattern="#,###" /> 원 + 배송비 <fmt:formatNumber value="${baesong_tot }" pattern="#,###" /> 원 = 총액: </pre>
+          <pre style='display:inline; font-size: 1.4em; font:bold; float:right; color: #FF0000;'><fmt:formatNumber value="${total_order }" pattern="#,###" /> 원</pre>          
+          <br style='clear:both;'>
+          <button type='button' id='btn_order_pay'  class='btn btn-info' style='font-size: 1.5em; float:right;'>결재하기</button>
         </td>
-        <td style='width: 50%;'>
-          <div class='cart_label' style='font-size: 2.0em;'>전체 주문 금액</div>
-          <div class='cart_price'  style='font-size: 2.0em; color: #FF0000;'><fmt:formatNumber value="${total_order }" pattern="#,###" /> 원</div>
-          
-            <button type='button' id='btn_order_pay' class='btn btn-info' style='font-size: 1.5em;'>결재하기</button>
-        <td>
       </tr>
     </tbody>
   </table>   
