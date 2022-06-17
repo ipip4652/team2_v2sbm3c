@@ -67,6 +67,11 @@
     float: left;
 }
 
+.right_menu {
+    width: 15%;
+    float: right;
+}
+
 .content {
     width: 90%;
     padding-left: 100px;
