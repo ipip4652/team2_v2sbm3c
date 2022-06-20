@@ -37,15 +37,22 @@
    //인증번호 값이 변경될 경우 인증이 재차 요구됨
    $('#certification').change(function() {
         $('#certification').attr("check_cer", "fail");
+        $('#btn_cer').show();
+        $('#cer_check_sucess').hide();
         })
     //전화번호 값이 변경될 경우 인증이 재차 요구됨
     $('#tel').change(function() {
         $('#certification').attr("check_cer", "fail");
+        $('#btn_cer').show();
+        $('#cer_check_sucess').hide();
         })        
   });
   
   function numbersend(){
-      var a = '';
+	  // 전화번호 발송
+	  // 유료라 주석처리 최종때 사용
+      // var a =  $('#tel').val(); ;
+      var a =  '';
       var phoneNumber = 'phoneNumber=' + a;
       $.ajax({
              url: './sendSMS', // spring execute
@@ -57,7 +64,10 @@
              data: phoneNumber,      // 데이터
              success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
                  rand = rdata.numStr;
+                 //테스트라 인증번호를 받을 수 없어 같이 메시지에 출력
                  Swal.fire("인증번호를 발송하였습니다.","인증번호 확인 번호 : " + rand)
+                 //최종 때 사용할 메시지 박스
+                 // Swal.fire("인증번호를 발송하였습니다.")
              },
              // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
              error: function(request, status, error) { // callback 함수
@@ -71,6 +81,8 @@
       if(certification == rand){
            Swal.fire("일치합니다.");
            $('#certification').attr("check_cer", "success");
+           $('#btn_cer').hide();
+           $('#cer_check_sucess').show();
       } else{
           Swal.fire("불일치합니다.");
           $('#certification').attr("check_cer", "fail");
@@ -301,6 +313,7 @@
     <div class="form-group">
       <label for="cer" class="col-md-2 control-label" style='font-size: 0.9em;'>인증번호*</label>    
       <button type='button' id="btn_cer" class="btn btn-info btn-md">인증확인</button>
+      <img  src='/member/images/v.png' id="cer_check_sucess" style="display: none;" > 
       <div class="col-md-10">
         <input type='text' class="form-control" name='certification' id='certification' 
                    value=''  check_cer= "fail" required="required" style='width: 30%;' placeholder="인증번호">
