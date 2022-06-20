@@ -55,7 +55,7 @@
                                     <a class="dropdown-item" href="/cate/list_all.do">카테고리 전체 목록</a>
                                     <a class="dropdown-item" href="/cate/list_all_join.do">카테고리 전체 목록 Join</a>
                                     <a class="dropdown-item" href="/member/list.do">회원 목록</a>
-                                    <a class="dropdown-item" href="/notice/list_by_noticeno_search.do?noticeno=&word=">공지사항</a>
+                                    <a class="dropdown-item" href="/notice/list_by_noticeno_search_paging.do?noticeno=&now_page&word=">공지사항</a>
                                 </div>
                             </li>
                         </c:when>

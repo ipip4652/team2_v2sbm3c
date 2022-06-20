@@ -11,6 +11,7 @@ public class Contents {
 
     /** 목록 파일명 */
     public static String LIST_FILE = "list_by_cateno_search_paging.do";
+    public static String LIST2_FILE = "list_by_noticeno_search_paging.do";
 
     // Windows, VMWare, AWS cloud 절대 경로 설정
     public static synchronized String getUploadDir() {

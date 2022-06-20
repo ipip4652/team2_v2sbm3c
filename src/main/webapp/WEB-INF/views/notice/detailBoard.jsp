@@ -24,7 +24,7 @@
     
 <script type="text/javascript">
 function boardList() {
-    let targetPlace = "./list_by_noticeno_search.do?noticeno=&word=";
+    let targetPlace = "./list_by_noticeno_search_paging.do?noticeno=&now_page=&word=";
     location.href = targetPlace;
 }
 
@@ -341,10 +341,11 @@ $(function(){
         <tr >
         <th class="btn" colspan="2">
             <input type="button" value="글목록" onclick="boardList();">
-
+            <c:if test="${sessionScope.grade < 10 }">
             <!-- 글삭제와 수정은 로그인한 사람과 해당글을 쓴 사람과 같아야 할 수 있다. -->
             <input type="button" value="글수정" onclick="boardUpdate();" >
             <input type="button" value="글삭제" onclick="boardDelete();" >
+            </c:if>
             </th>
         </tr>
     </table>    

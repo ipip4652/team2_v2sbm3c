@@ -66,7 +66,7 @@
                             href="#">ABOUT US</a></li>
                         <li class="nav-item"><a class="nav-link"
                             style="font-size: 0.9em; font-weight: bold;"
-                            href="/notice/list_by_noticeno_search.do?noticeno=&word=">Notice</a></li>
+                            href="/notice/list_by_noticeno_search_paging.do?noticeno=&now_page&word=">Notice</a></li>
                             
                         <li class="nav-item dropdown"><a
                             class="nav-link dropdown-toggle" href="#"

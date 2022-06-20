@@ -105,7 +105,7 @@ public class NoticeCont {
 //            mav.setViewName("/notice/msg"); // /WEB-INF/views/notice/msg.jsp
 
             // response.sendRedirect("/notice/list.do");
-            mav.setViewName("redirect:/notice/list.do");
+            mav.setViewName("redirect:/notice/list_by_noticeno_search_paging.do");
         } else {
             // request에 저장, request.setAttribute("code", "create_fail")
             mav.addObject("code", "create_fail");
@@ -189,7 +189,7 @@ public class NoticeCont {
         int cnt = this.noticeProc.delete(noticeno); // 삭제 처리
         mav.addObject("cnt", cnt); // request 객체에 저장
 
-        mav.setViewName("redirect:/notice/list.do"); // read_delete.jsp
+        mav.setViewName("redirect:/notice/list_by_noticeno_search_paging.do"); // read_delete.jsp
 
         return mav;
 
@@ -216,7 +216,7 @@ public class NoticeCont {
         if (cnt == 1) {
              System.out.println("수정 성공");
             // response.sendRedirect("/notice/list.do");
-            mav.setViewName("redirect:/notice/list.do");
+            mav.setViewName("redirect:/notice/list_by_noticeno_search_paging.do");
         } else {
             System.out.println("수정 실패");
             mav.addObject("code", "update_fail"); // request에 저장, request.setAttribute("code", "update_fail")
@@ -283,6 +283,67 @@ public class NoticeCont {
         return mav;
     }
     
-    
+
+    /**
+     * 목록 + 검색 + 페이징 지원
+     * http://localhost:9090/notice/list_by_noticeno_search_paging.do?noticeno=1&word=스위스&now_page=1
+     * 
+     * @param noticeno
+     * @param word
+     * @param now_page
+     * @return
+     */
+    @RequestMapping(value = "/notice/list_by_noticeno_search_paging.do", method = RequestMethod.GET)
+    public ModelAndView list_by_noticeno_search_paging(
+            @RequestParam(value = "noticeno", defaultValue = "1") int noticeno,
+            @RequestParam(value = "word", defaultValue = "") String word,
+            @RequestParam(value = "now_page", defaultValue = "1") int now_page) {
+        System.out.println("--> now_page: " + now_page);
+
+        ModelAndView mav = new ModelAndView();
+
+        // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("noticeno", noticeno); // #{noticeno}
+        map.put("word", word); // #{word}
+        map.put("now_page", now_page); // 페이지에 출력할 레코드의 범위를 산출하기위해 사용
+
+        // 검색 목록
+        List<NoticeVO> list = noticeProc.list_by_noticeno_search_paging(map);
+        mav.addObject("list", list);
+
+        // 검색된 레코드 갯수
+        int search_count = noticeProc.search_count(map);
+        mav.addObject("search_count", search_count);
+
+        NoticeVO noticeVO = noticeProc.read(noticeno);
+        mav.addObject("noticeVO", noticeVO);
+
+        /*
+         * SPAN태그를 이용한 박스 모델의 지원 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17 18
+         * 19 20 [다음]
+         * 
+         * @param noticeno 카테고리번호
+         * 
+         * @param search_count 검색(전체) 레코드수
+         * 
+         * @param now_page 현재 페이지
+         * 
+         * @param word 검색어
+         * 
+         * @return 페이징용으로 생성된 HTML/CSS tag 문자열
+         */
+        String paging = noticeProc.pagingBox(noticeno, search_count, now_page, word);
+        // System.out.println("-> paging: " + paging);
+        mav.addObject("paging", paging);
+
+        // mav.addObject("now_page", now_page);
+
+        // /notice/list_by_noticeno_table_img1_search_paging.jsp
+        mav.setViewName("/notice/list");
+
+        return mav;
+    }
+
 
 }
