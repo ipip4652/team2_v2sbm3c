@@ -7,20 +7,23 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world</title>
+<title>회원가입</title>
 
 <link href="/css/style.css" rel="Stylesheet" type="text/css">  <!-- /static -->
 
 <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <script type="text/javascript">
   $(function() { // 자동 실행
     // id가 'btn_checkID'인 태그를 찾아 'click' 이벤트 처리자(핸들러)로 checkID 함수를 등록
     // document.getElementById('btn_checkID').addEventListener('click', checkID); 동일
+    var rand="0";
     $('#btn_checkID').on('click', checkID);  
-    
+    $('#btn_cer').on('click', cer);  
+    $('#btn_number').on('click', numbersend);  
     $('#btn_DaumPostcode').on('click', DaumPostcode); // 다음 우편 번호
     $('#btn_close').on('click', setFocus); // Dialog창을 닫은후의 focus 이동
     $('#btn_close_modal').on('click', setFocus); // Dialog창을 닫은후의 focus 이동
@@ -31,9 +34,48 @@
         $('#btn_checkID').show();
         $('#id_check_sucess').hide();
         })
+   //인증번호 값이 변경될 경우 인증이 재차 요구됨
+   $('#certification').change(function() {
+        $('#certification').attr("check_cer", "fail");
+        })
+    //전화번호 값이 변경될 경우 인증이 재차 요구됨
+    $('#tel').change(function() {
+        $('#certification').attr("check_cer", "fail");
+        })        
   });
   
+  function numbersend(){
+      var a = '';
+      var phoneNumber = 'phoneNumber=' + a;
+      $.ajax({
+             url: './sendSMS', // spring execute
+             type: 'get',  // post
+             cache: false, // 응답 결과 임시 저장 취소
+             async: true,  // true: 비동기 통신
+             
+             dataType: 'json', // 응답 형식: json, html, xml...
+             data: phoneNumber,      // 데이터
+             success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
+                 rand = rdata.numStr;
+                 Swal.fire("인증번호를 발송하였습니다.","인증번호 확인 번호 : " + rand)
+             },
+             // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
+             error: function(request, status, error) { // callback 함수
+               console.log(error);
+             }
+           });
+      }
   
+  function cer(){
+      let  certification = $('#certification').val(); 
+      if(certification == rand){
+           Swal.fire("일치합니다.");
+           $('#certification').attr("check_cer", "success");
+      } else{
+          Swal.fire("불일치합니다.");
+          $('#certification').attr("check_cer", "fail");
+  }
+      }
   // jQuery ajax 요청
   function checkID() {
     // $('#btn_close').attr("data-focus", "이동할 태그 지정");
@@ -131,7 +173,17 @@
         $('#modal_panel').modal();         // 다이얼로그 출력
         return false;// submit 중지
         }
-      
+    
+    if ($('#certification').attr("check_cer") == "fail"){
+        msg = "전화번호 인증을 해주시길 바랍니다..<br>";
+        $('#modal_content').attr('class', 'alert alert-danger'); // CSS 변경
+        $('#modal_title').html('인증 확인'); // 제목 
+        $('#modal_content').html(msg);  // 내용
+        $('#btn_send').attr('data-focus', 'passwd');
+        $('#modal_panel').modal();         // 다이얼로그 출력
+        return false;// submit 중지
+        }
+    
     if ($('#passwd').val() != $('#passwd2').val() || $('#passwd').val()=="") {
       msg = '입력된 패스워드가 입력되지 않았거나 일치하지 않습니다.<br>';
       msg += "패스워드를 다시 입력해주세요.<br>"; 
@@ -239,11 +291,21 @@
 
     <div class="form-group">
       <label for="tel" class="col-md-2 control-label" style='font-size: 0.9em;'>전화번호*</label>    
+      <button type='button' id="btn_number" class="btn btn-info btn-md">인증번호 발송</button>
       <div class="col-md-10">
         <input type='text' class="form-control" name='tel' id='tel' 
-                   value='' required="required" style='width: 30%;' placeholder="전화번호"> 예) 010-0000-0000
+                   value='' required="required" style='width: 30%;' placeholder="전화번호"> -을 제외하고 입력하세요.
       </div>
     </div>   
+
+    <div class="form-group">
+      <label for="cer" class="col-md-2 control-label" style='font-size: 0.9em;'>인증번호*</label>    
+      <button type='button' id="btn_cer" class="btn btn-info btn-md">인증확인</button>
+      <div class="col-md-10">
+        <input type='text' class="form-control" name='certification' id='certification' 
+                   value=''  check_cer= "fail" required="required" style='width: 30%;' placeholder="인증번호">
+      </div>
+    </div>  
 
     <div class="form-group">
       <label for="zipcode" class="col-md-2 control-label" style='font-size: 0.9em;'>우편번호</label>    
