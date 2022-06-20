@@ -724,7 +724,7 @@ public class MemberCont {
          }
            
        } else {
-         mav.addObject("url", "login_fail_msg");
+         mav.addObject("url", "/member/login_fail_msg");
          mav.setViewName("redirect:/member/msg.do"); 
        }
            
