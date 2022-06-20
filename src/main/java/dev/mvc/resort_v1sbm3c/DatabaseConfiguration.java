@@ -22,6 +22,7 @@ import com.zaxxer.hikari.HikariDataSource;
                                               "dev.mvc.categrp",
                                               "dev.mvc.cate", 
                                               "dev.mvc.contents",
+                                              "dev.mvc.contentsReply",
                                               "dev.mvc.member",
                                               "dev.mvc.order_item",
                                               "dev.mvc.order_pay",

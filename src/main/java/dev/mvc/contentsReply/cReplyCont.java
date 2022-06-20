@@ -1,4 +1,4 @@
-package dev.mvc.noticeReply;
+package dev.mvc.contentsReply;
 
 import java.util.List;
 
@@ -15,38 +15,39 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import dev.mvc.noticeReply.ReplyVO;
-import dev.mvc.notice.NoticeProc;
-import dev.mvc.notice.NoticeVO;
+import dev.mvc.contentsReply.cReplyVO;
+import dev.mvc.cate.CateVO;
+import dev.mvc.categrp.CategrpVO;
+import dev.mvc.contents.ContentsProc;
+import dev.mvc.contents.ContentsVO;
 import dev.mvc.member.MemberProc;
 import dev.mvc.member.MemberProcInter;
 import dev.mvc.member.MemberVO;
 
 @Controller
-public class ReplyCont {
+public class cReplyCont {
   @Autowired
-  @Qualifier("dev.mvc.noticeReply.ReplyProc") // 이름 지정
-  private ReplyProcInter replyProc;
+  @Qualifier("dev.mvc.contentsReply.cReplyProc") // 이름 지정
+  private cReplyProcInter replyProc;
   
   @Autowired
   @Qualifier("dev.mvc.member.MemberProc") // 이름 지정
   private MemberProc memberProc;
   
   @Autowired
-  @Qualifier("dev.mvc.notice.NoticeProc") // 이름 지정
-  private NoticeProc noticeProc;
+  @Qualifier("dev.mvc.contents.ContentsProc") // 이름 지정
+  private ContentsProc contentsProc;
   
-  public ReplyCont(){
+  public cReplyCont(){
     System.out.println("-> ReplyCont created.");
   }
   
   @ResponseBody
-  @RequestMapping(value = "/noticeReply/create.do",
+  @RequestMapping(value = "/contentsReply/create.do",
                             method = RequestMethod.POST,
                             produces = "text/plain;charset=UTF-8")
-  public String create(ReplyVO replyVO, int noticeno) {
+  public String create(cReplyVO replyVO) {
     int cnt = replyProc.create(replyVO);
-    this.noticeProc.increaseReplycnt(noticeno); 
     
     JSONObject obj = new JSONObject();
     obj.put("cnt",cnt);
@@ -55,18 +56,18 @@ public class ReplyCont {
 
   }
   
-  @RequestMapping(value="/noticeReply/list.do", method=RequestMethod.GET)
+  @RequestMapping(value="/contentsReply/list.do", method=RequestMethod.GET)
   public ModelAndView list(HttpSession session) {
     ModelAndView mav = new ModelAndView();
     
     if (memberProc.isAdmin(session)) {
-      List<ReplyVO> list = replyProc.list();
+      List<cReplyVO> list = replyProc.list();
       
       mav.addObject("list", list);
-      mav.setViewName("/noticeReply/list"); // /webapp/noticeReply/list.jsp
+      mav.setViewName("/contentsReply/list"); // /webapp/contentsReply/list.jsp
 
     } else {
-      mav.addObject("return_url", "/notice/list.do"); // 로그인 후 이동할 주소 ★
+      mav.addObject("return_url", "/contents/read.do"); // 로그인 후 이동할 주소 ★
       
       mav.setViewName("redirect:/member/login.do"); // /WEB-INF/views/member/login_ck_form.jsp
     }
@@ -76,29 +77,29 @@ public class ReplyCont {
 
   /**
    <xmp>
-   http://localhost:9090/ojt/noticeReply/list_by_noticeno.do?noticeno=1
+   http://localhost:9090/ojt/contentsReply/list_by_contentsno.do?contentsno=1
    글이 없는 경우: {"list":[]}
    글이 있는 경우
    {"list":[
-            {"memberno":1,"rdate":"2019-12-18 16:46:43","passwd":"123","commentno":3,"content":"댓글 3","noticeno":1}
+            {"memberno":1,"rdate":"2019-12-18 16:46:43","passwd":"123","commentno":3,"content":"댓글 3","contentsno":1}
             ,
-            {"memberno":1,"rdate":"2019-12-18 16:46:39","passwd":"123","commentno":2,"content":"댓글 2","noticeno":1}
+            {"memberno":1,"rdate":"2019-12-18 16:46:39","passwd":"123","commentno":2,"content":"댓글 2","contentsno":1}
             ,
-            {"memberno":1,"rdate":"2019-12-18 16:46:35","passwd":"123","commentno":1,"content":"댓글 1","noticeno":1}
+            {"memberno":1,"rdate":"2019-12-18 16:46:35","passwd":"123","commentno":1,"content":"댓글 1","contentsno":1}
             ] 
    }
    </xmp>  
-   * @param noticeno
+   * @param contentsno
    * @return
    */
   
   
   @ResponseBody
-  @RequestMapping(value = "/noticeReply/list_by_noticeno.do",
+  @RequestMapping(value = "/contentsReply/list_by_contentsno.do",
                             method = RequestMethod.GET,
                             produces = "text/plain;charset=UTF-8")
-  public String list_by_noticeno(int noticeno) {
-    List<ReplyVO> list = replyProc.list_by_noticeno(noticeno);
+  public String list_by_contentsno(int contentsno) {
+    List<cReplyVO> list = replyProc.list_by_contentsno(contentsno);
     
     JSONObject obj = new JSONObject();
     obj.put("list", list);
@@ -115,7 +116,7 @@ public class ReplyCont {
       "commentno":1,
       "id":"user1",
       "content":"댓글 1",
-      "noticeno":1}
+      "contentsno":1}
     ,
         {"memberno":1,
        "rdate":"2019-12-18 16:46:35",
@@ -123,22 +124,22 @@ public class ReplyCont {
        "commentno":1,
        "id":"user1",
        "content":"댓글 1",
-       "noticeno":1}
+       "contentsno":1}
     ]
 }
-   * http://localhost:9090/ojt/noticeReply/list_by_noticeno_join.do?noticeno=1
-   * @param noticeno
+   * http://localhost:9090/ojt/contentsReply/list_by_contentsno_join.do?contentsno=1
+   * @param contentsno
    * @return
    */
   @ResponseBody
-  @RequestMapping(value = "/noticeReply/list_by_noticeno_join.do",
+  @RequestMapping(value = "/contentsReply/list_by_contentsno_join.do",
                               method = RequestMethod.GET,
                               produces = "text/plain;charset=UTF-8")
-  public String list_by_noticeno_join(int noticeno) {
+  public String list_by_contentsno_join(int contentsno) {
     // String msg="JSON 출력";
     // return msg;
     
-    List<ReplyMemberVO> list = replyProc.list_by_noticeno_join(noticeno);
+    List<cReplyMemberVO> list = replyProc.list_by_contentsno_join(contentsno);
     
     JSONObject obj = new JSONObject();
     obj.put("list", list);
@@ -156,13 +157,12 @@ public class ReplyCont {
    * @return
    */
   @ResponseBody
-  @RequestMapping(value = "/noticeReply/delete.do", 
+  @RequestMapping(value = "/contentsReply/delete.do", 
                               method = RequestMethod.POST,
                               produces = "text/plain;charset=UTF-8")
-  public String delete(int commentno, int noticeno) {
+  public String delete(int commentno) {
       ModelAndView mav = new ModelAndView();
       this.replyProc.delete(commentno);
-      this.noticeProc.decreaseReplycnt(noticeno); 
       /*
        * map.put("commentno", commentno); map.put("passwd", passwd);
        * 
