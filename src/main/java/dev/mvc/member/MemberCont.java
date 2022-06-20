@@ -2,6 +2,7 @@ package dev.mvc.member;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +29,7 @@ public class MemberCont {
     @Autowired
     @Qualifier("dev.mvc.member.MemberProc") // @Component("dev.mvc.member.MemberProc")
     private MemberProcInter memberProc = null;
-    
+    private CertificationService certificationService = new CertificationService();
     public MemberCont(){
         System.out.println("-> MemberCont created.");
     }
@@ -842,6 +844,27 @@ public class MemberCont {
        return json.toString(); 
      }
      
+     @ResponseBody
+     @RequestMapping(value="/member/sendSMS", method=RequestMethod.GET ,
+                            produces = "text/plain;charset=UTF-8" )
+     public String sendSMS(String phoneNumber) {
+         Random rand  = new Random();
+         String numStr = "";
+         for(int i=0; i<4; i++) {
+             String ran = Integer.toString(rand.nextInt(10));
+             numStr+=ran;
+         }
+
+         System.out.println("수신자 번호 : " + phoneNumber);
+         System.out.println("인증번호 : " + numStr);
+         certificationService.certifiedPhoneNumber(phoneNumber,numStr);
+
+         JSONObject json = new JSONObject();
+         json.put("numStr", numStr);
+         
+         
+         return json.toString(); 
+     }
      
 }
 
