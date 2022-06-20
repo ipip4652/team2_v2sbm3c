@@ -275,6 +275,12 @@ public class ContentsProc implements ContentsProcInter {
         int cnt = this.contentsDAO.count_by_cateno(cateno);
         return cnt;
     }
+
+    @Override
+    public ContentsVO search_by_word(String word) {
+       
+        return contentsDAO.search_by_word(word);
+    }
     
 
 }
