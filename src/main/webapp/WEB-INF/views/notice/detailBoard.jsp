@@ -1,12 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
- 
-      <c:set var="noticeno" value="${noticeVO.noticeno }" />
-      <c:set var="memberno" value="${noticeVO.memberno }" />
-      <c:set var="title" value="${noticeVO.title }" />
-      <c:set var="rdate" value="${noticeVO.rdate }" />
-      <c:set var="cnt" value="${noticeVO.cnt }" />
+
+ <c:set var="noticeno" value="${noticeVO.noticeno }" />
+ <c:set var="memberno" value="${noticeVO.memberno }" />
+ <c:set var="title" value="${noticeVO.title }" />
+ <c:set var="rdate" value="${noticeVO.rdate }" />
+ <c:set var="cnt" value="${noticeVO.cnt }" />
 <!DOCTYPE html> 
 <html lang="ko"> 
 <head> 
@@ -16,6 +16,17 @@
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
+
+<link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
+    
+    
+    
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -29,18 +40,30 @@ function boardList() {
 }
 
 function boardDelete() {
-    let noticeno = '${noticeVO.noticeno}';
-    let answer = confirm('게시글을 삭제하시겠습니까?');
-    
-    if(answer) {
-        location.href="delete.do?noticeno=" + noticeno;
-    }
+
+	if(('${sessionScope.memberno}'==${noticeVO.memberno })&&('${sessionScope.memberno}'!=null)){
+	    let noticeno = '${noticeVO.noticeno}';
+	    let answer = confirm('게시글을 삭제하시겠습니까?');
+	    
+	    if(answer) {
+	        location.href="delete.do?noticeno=" + noticeno;
+	    }
+	}
+	else{
+		let answer = alert('본인의 게시글만 삭제할 수 있습니다.');
+		}
 }
 
 function boardUpdate() {
-    let noticeno = '${noticeVO.noticeno}';
-    
-    location.href="read_update.do?noticeno=" + noticeno;
+	if(('${sessionScope.memberno}'==${noticeVO.memberno })&&('${sessionScope.memberno}'!=null)){
+	    let noticeno = '${noticeVO.noticeno}';
+	    
+	    location.href="read_update.do?noticeno=" + noticeno;
+		}
+
+	else{
+		let answer = alert('본인의 게시글만 수정할 수 있습니다.');
+		}
 }
 
 $(function(){
@@ -208,7 +231,7 @@ $(function(){
           msg += "<span style='font-weight: bold;'>" + row.id + "</span>";
           msg += "  " + row.rdate;
           
-          if ('${sessionScope.memberno}' == row.memberno || '${sessionScope.grade}' < 10) { // 글쓴이 일치여부 확인, 본인의 글만 삭제 가능함 ★
+          if (($('#memberno', frm_reply).val().length != 0) && ('${sessionScope.memberno}' == row.memberno || '${sessionScope.grade}' < 10)) { // 글쓴이 일치여부 확인, 본인의 글만 삭제 가능함 ★
             msg += " <A href='javascript:reply_delete("+row.commentno+")'><IMG src='/notice/images/delete.png'></A>";
           }
           msg += "  " + "<br>";
@@ -325,7 +348,7 @@ $(function(){
                                 <td>글쓴이
                                 </td>
                                 <td>
-                                ${sessionScope.id } <span style='float:right'>조회 : ${noticeVO.cnt }</span>
+                                ${memberVO.id } <span style='float:right'>조회 : ${noticeVO.cnt }</span>
                                 </td>
                             </tr>
                              <tr>
@@ -400,7 +423,7 @@ $(function(){
   <!-- ------------------------------ 댓글 영역 시작 ------------------------------ -->
 <DIV style='width: 70%; margin: 0px auto; float:left;'>
     <HR>
-    <FORM name='frm_reply' id='frm_reply'> <%-- 댓글 등록 폼 --%>
+    <FORM name='frm_reply' id='frm_reply' style='padding-left: 100px;'> <%-- 댓글 등록 폼 --%>
         <input type='hidden' name='noticeno' id='noticeno' value='${noticeno}'>
         <input type='hidden' name='memberno' id='memberno' value='${sessionScope.memberno}'>
         

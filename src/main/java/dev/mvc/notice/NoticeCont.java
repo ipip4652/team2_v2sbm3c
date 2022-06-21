@@ -132,7 +132,13 @@ public class NoticeCont {
         List<ReplyVO> replyVO = this.replyProc.list_by_noticeno(noticeno);
         
         model.addAttribute("replyVO", replyVO);
+        MemberVO memberVO = this.memberProc.read(noticeVO.getMemberno());
 
+        model.addAttribute("memberVO", memberVO);
+
+
+        
+        
         int cnt = this.noticeProc.updatecnt(noticeno); // 조회수 증가 처리
 
         mav.addObject("cnt", cnt);

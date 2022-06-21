@@ -17,14 +17,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   List<noticeVO> list = new ArrayList<noticeVO>(); 
   -->
  <select id="list_noticeno_asc" resultType="dev.mvc.notice.NoticeVO">
-    SELECT  noticeno, memberno, title, content, word, rdate
+    SELECT  noticeno, memberno, title, content, word, rdate, cnt
     FROM notice
     ORDER BY noticeno ASC
   </select>
  
   <!-- 조회, id: read, 입력: noticeno, 리턴: noticeVO -->
   <select id="read" resultType="dev.mvc.notice.NoticeVO" parameterType="int">
-    SELECT  noticeno, title, content, word, rdate
+    SELECT  noticeno, memberno, title, content, word, rdate, cnt
     FROM notice
     WHERE noticeno=#{noticeno}
   </select>
