@@ -1,5 +1,5 @@
 /* ver 2.0 */
-/* 모든 태그에 적용 */
+/* 紐⑤뱺 �깭洹몄뿉 �쟻�슜 */
 * {
     font-family: Malgun Gothic;
     font-size: 16px;
@@ -19,7 +19,7 @@
     margin: 20px auto;
   }
 
-/* 이미지 사용시 경로 지정
+/* �씠誘몄� �궗�슜�떆 寃쎈줈 吏��젙
   /css/images/top_image_1920.jpg
   Spring Boot: /static/css/images/top_image_1920.jpg
   */
@@ -30,22 +30,22 @@
 }
 
 .top_menu_label {
-    position: relative; /* 속해 있는 부모 태그 기준 설정 */
+    position: relative; /* �냽�빐 �엳�뒗 遺�紐� �깭洹� 湲곗� �꽕�젙 */
     top: 1%;
     left: 0.5%;
     color: #FFFFFF;
 }
 
 .top_menu {
-    position: relative; /* 부모 태그 기준, 화면 상단 기준*/
+    position: relative; /* 遺�紐� �깭洹� 湲곗�, �솕硫� �긽�떒 湲곗�*/
     top: 50%;
-    background-color: rgba(50, 50, 255, 0.3); /* 0.3: Alpha, 투명도 */
+    background-color: rgba(50, 50, 255, 0.3); /* 0.3: Alpha, �닾紐낅룄 */
     color: white;
     padding-left: 10px;
     height: 25px;
 }
 
-/* 화면 상단 메뉴 세로 구분선
+/* �솕硫� �긽�떒 硫붾돱 �꽭濡� 援щ텇�꽑
      <span class='top_menu_sep'>&nbsp;</span> */
 .top_menu_sep {
     background: url('/css/images/gray.jpg') center center no-repeat;
@@ -83,7 +83,7 @@
     margin: 10px auto;
 }
 
-/* 화면 내용 하단 메뉴 우측 배치 */
+/* �솕硫� �궡�슜 �븯�떒 硫붾돱 �슦痢� 諛곗튂 */
 .content_body_bottom {
     clear: both;
     padding-top: 20px;
@@ -102,7 +102,7 @@
 .bottom_menu {
     text-align: center;
     margin: 20px auto;
-    clear: both; /* 앞쪽 태그의 float 효과를 제거함. */
+    clear: both; /* �븵履� �깭洹몄쓽 float �슚怨쇰�� �젣嫄고븿. */
 }
 
 .aside_left {
@@ -110,7 +110,7 @@
     font-size: 1.3em;
 }
 
-/** 본래의 A 태그의 크기를 제거하고 부모의 가변 크기를 사용 */
+/** 蹂몃옒�쓽 A �깭洹몄쓽 �겕湲곕�� �젣嫄고븯怨� 遺�紐⑥쓽 媛�蹂� �겕湲곕�� �궗�슜 */
 .aside_left A {
     font-size: 1.0em;
 }
@@ -124,18 +124,18 @@
     font-size: 1.0em;
 }
 
-/* ASIDE 메뉴 세로 구분선 */
-.menu_divide { /* 서브 메뉴의 세로 구분선 */
+/* ASIDE 硫붾돱 �꽭濡� 援щ텇�꽑 */
+.menu_divide { /* �꽌釉� 硫붾돱�쓽 �꽭濡� 援щ텇�꽑 */
     color: #777777;
-    font-size: 0.8em; /* 부모 글자 크기에 비해서 80%로 출력 */
-    vertical-align: 10%; /* 0%는 bottom 기준 */
+    font-size: 0.8em; /* 遺�紐� 湲��옄 �겕湲곗뿉 鍮꾪빐�꽌 80%濡� 異쒕젰 */
+    vertical-align: 10%; /* 0%�뒗 bottom 湲곗� */
 }
 
 .copyright {
     margin-top: 10px;
     margin-left: 100px;
     border-top: solid 1px #999999;
-    clear: both; /* 앞쪽 태그의 float 효과를 제거함. */
+    clear: both; /* �븵履� �깭洹몄쓽 float �슚怨쇰�� �젣嫄고븿. */
     font: 10px Roboto,'Signika',Arial,verdana,sans-serif;
     
 }
@@ -151,13 +151,13 @@
     margin: 15px 10px;
 }
 
-.li_warning { /* 경고 메시지 */
+.li_warning { /* 寃쎄퀬 硫붿떆吏� */
     list-style: none;
     margin: 15px 10px;
     color: #FF6600;
 }
 
-.li_error { /* 에러 메시지 */
+.li_error { /* �뿉�윭 硫붿떆吏� */
     list-style: none;
     margin: 15px 10px;
     color: #FF0000;
@@ -211,24 +211,24 @@
     font-size: 20px;
 }
 
-.title_link:link { /* 방문전 상태 */
+.title_link:link { /* 諛⑸Ц�쟾 �긽�깭 */
     font-size: 20px;
-    text-decoration: none; /* 밑줄 삭제 */
+    text-decoration: none; /* 諛묒쨪 �궘�젣 */
 }
 
-.title_link:visited { /* 방문후 상태 */
+.title_link:visited { /* 諛⑸Ц�썑 �긽�깭 */
     font-size: 20px;
-    text-decoration: none; /* 밑줄 삭제 */
+    text-decoration: none; /* 諛묒쨪 �궘�젣 */
 }
 
-.title_link:hover { /* A 태그에 마우스가 올라간 상태 */
+.title_link:hover { /* A �깭洹몄뿉 留덉슦�뒪媛� �삱�씪媛� �긽�깭 */
     font-size: 20px;
-    text-decoration: none; /* 밑줄 출력 */
+    text-decoration: none; /* 諛묒쨪 異쒕젰 */
 }
 
-.title_link:active { /* A 태그를 클릭한 상태 */
+.title_link:active { /* A �깭洹몃�� �겢由��븳 �긽�깭 */
     font-size: 20px;
-    text-decoration: none; /* 밑줄 출력 */
+    text-decoration: none; /* 諛묒쨪 異쒕젰 */
 }
 
 .sub_menu {
@@ -242,10 +242,10 @@
     width: 100%;
 }
 
-/* 1em 기본값 : 16px, 주변 태그의 글자크기를 1em으로 인식
-      DIV 태그가 20px 일경우 자식태그가 0.5em이면 최종적으로 10px이 적용됨.
-      DIV 태그가 20px 일경우 자식태그가 1em이면 최종적으로 20px이 적용됨.
-      DIV 태그가 20px 일경우 자식태그가 1.5em이면 최종적으로 30px이 적용됨.
+/* 1em 湲곕낯媛� : 16px, 二쇰� �깭洹몄쓽 湲��옄�겕湲곕�� 1em�쑝濡� �씤�떇
+      DIV �깭洹멸� 20px �씪寃쎌슦 �옄�떇�깭洹멸� 0.5em�씠硫� 理쒖쥌�쟻�쑝濡� 10px�씠 �쟻�슜�맖.
+      DIV �깭洹멸� 20px �씪寃쎌슦 �옄�떇�깭洹멸� 1em�씠硫� 理쒖쥌�쟻�쑝濡� 20px�씠 �쟻�슜�맖.
+      DIV �깭洹멸� 20px �씪寃쎌슦 �옄�떇�깭洹멸� 1.5em�씠硫� 理쒖쥌�쟻�쑝濡� 30px�씠 �쟻�슜�맖.
   */
 .th_basic {
     font-size: 0.8em;
@@ -280,66 +280,66 @@
     text-align: left;
 }
 
-A:link { /* 방문전 상태 */
-    text-decoration: none; /* 밑줄 삭제 */
+A:link { /* 諛⑸Ц�쟾 �긽�깭 */
+    text-decoration: none; /* 諛묒쨪 �궘�젣 */
     color: #555555;
 }
 
-A:visited { /* 방문후 상태 */
-    text-decoration: none; /* 밑줄 삭제 */
+A:visited { /* 諛⑸Ц�썑 �긽�깭 */
+    text-decoration: none; /* 諛묒쨪 �궘�젣 */
     color: #555555;
 }
 
-A:hover { /* A 태그에 마우스가 올라간 상태 */
-    text-decoration: underline; /* 밑줄 출력 */
+A:hover { /* A �깭洹몄뿉 留덉슦�뒪媛� �삱�씪媛� �긽�깭 */
+    text-decoration: underline; /* 諛묒쨪 異쒕젰 */
     color: #7777FF;
 }
 
-A:active { /* A 태그를 클릭한 상태 */
-    text-decoration: underline; /* 밑줄 출력 */
+A:active { /* A �깭洹몃�� �겢由��븳 �긽�깭 */
+    text-decoration: underline; /* 諛묒쨪 異쒕젰 */
     color: #7777FF;
 }
 
-.menu_link:link { /* 방문전 상태 */
-    text-decoration: none; /* 밑줄 삭제 */
+.menu_link:link { /* 諛⑸Ц�쟾 �긽�깭 */
+    text-decoration: none; /* 諛묒쨪 �궘�젣 */
     color: white;
 }
 
-.menu_link:visited { /* 방문후 상태 */
-    text-decoration: none; /* 밑줄 삭제 */
+.menu_link:visited { /* 諛⑸Ц�썑 �긽�깭 */
+    text-decoration: none; /* 諛묒쨪 �궘�젣 */
     color: white;
 }
 
-.menu_link:hover { /* A 태그에 마우스가 올라간 상태 */
-    text-decoration: underline; /* 밑줄 출력 */
+.menu_link:hover { /* A �깭洹몄뿉 留덉슦�뒪媛� �삱�씪媛� �긽�깭 */
+    text-decoration: underline; /* 諛묒쨪 異쒕젰 */
     color: white;
 }
 
-.menu_link:active { /* A 태그를 클릭한 상태 */
-    text-decoration: underline; /* 밑줄 출력 */
+.menu_link:active { /* A �깭洹몃�� �겢由��븳 �긽�깭 */
+    text-decoration: underline; /* 諛묒쨪 異쒕젰 */
     color: white;
 }
 
-.recom_link:link { /* 방문전 상태 */
-    text-decoration: none; /* 밑줄 삭제 */
+.recom_link:link { /* 諛⑸Ц�쟾 �긽�깭 */
+    text-decoration: none; /* 諛묒쨪 �궘�젣 */
     color: #555555;
     font-size: 0.8em;
 }
 
-.recom_link:visited { /* 방문후 상태 */
-    text-decoration: none; /* 밑줄 삭제 */
+.recom_link:visited { /* 諛⑸Ц�썑 �긽�깭 */
+    text-decoration: none; /* 諛묒쨪 �궘�젣 */
     color: #555555;
     font-size: 0.8em;
 }
 
-.recom_link:hover { /* A 태그에 마우스가 올라간 상태 */
-    text-decoration: none; /* 밑줄 출력 */
+.recom_link:hover { /* A �깭洹몄뿉 留덉슦�뒪媛� �삱�씪媛� �긽�깭 */
+    text-decoration: none; /* 諛묒쨪 異쒕젰 */
     color: #7777FF;
     font-size: 0.8em;
 }
 
-.recom_link:active { /* A 태그를 클릭한 상태 */
-    text-decoration: none; /* 밑줄 출력 */
+.recom_link:active { /* A �깭洹몃�� �겢由��븳 �긽�깭 */
+    text-decoration: none; /* 諛묒쨪 異쒕젰 */
     color: #7777FF;
     font-size: 0.8em;
 }
@@ -363,7 +363,7 @@ A:active { /* A 태그를 클릭한 상태 */
     font-size: 0.9em;
 }
 
-.li_left_menu_1 { /* 화면 좌측 대분류 */
+.li_left_menu_1 { /* �솕硫� 醫뚯륫 ��遺꾨쪟 */
     list-style: none;
     margin-top: 25px;
     background: url(/css/images/li_left_menu_1.png) left center no-repeat;
@@ -372,7 +372,7 @@ A:active { /* A 태그를 클릭한 상태 */
     line-height: 15px;
 }
 
-.li_left_menu_2 { /* 화면 좌측 중분류 */
+.li_left_menu_2 { /* �솕硫� 醫뚯륫 以묐텇瑜� */
     list-style: none;
     margin: 15px 10px;
     background: url(/css/images/li_left_menu_2.png) left center no-repeat;
@@ -386,12 +386,12 @@ A:active { /* A 태그를 클릭한 상태 */
     background-color: #99cc00;
     color: #FFFFFF;
     font-weight: normal;
-    display: inline-block; /* DIV 태그처럼 한줄의 영역을 블럭 영역으로 확장 표시 */
+    display: inline-block; /* DIV �깭洹몄쿂�읆 �븳以꾩쓽 �쁺�뿭�쓣 釉붾윮 �쁺�뿭�쑝濡� �솗�옣 �몴�떆 */
     text-align: right;
     padding-right: 10px;
 }
 
-/* 기타 메시지 */
+/* 湲고� 硫붿떆吏� */
 .message {
     width: 70%;
     border: none;
@@ -401,21 +401,21 @@ A:active { /* A 태그를 클릭한 상태 */
     padding: 30px;
 }
 
-/* 알림 메시지 */
+/* �븣由� 硫붿떆吏� */
 .span_info {
     color: #ffffff;
     background-color: rgba(0, 200, 0, 0.6);
     padding: 2px;
 }
 
-/* 주의 메시지 */
+/* 二쇱쓽 硫붿떆吏� */
 .span_alert {
     color: #ffffff;
     background-color: rgba(0, 0, 200, 0.6);
     padding: 2px;
 }
 
-/* 경고 메시지 */
+/* 寃쎄퀬 硫붿떆吏� */
 .span_warning {
     color: #FFFFFF;
     background-color: rgba(255, 0, 0, 0.6);
@@ -431,7 +431,7 @@ A:active { /* A 태그를 클릭한 상태 */
     width: 80%;
 }
 
-/* 처리 성공 메시지 */
+/* 泥섎━ �꽦怨� 硫붿떆吏� */
 .span_success {
     background: url('/css/images/url5.png') left center no-repeat;
     background-size: 10px;
@@ -439,7 +439,7 @@ A:active { /* A 태그를 클릭한 상태 */
     padding-left: 20px;
 }
 
-/* 처리 실패 메시지 */
+/* 泥섎━ �떎�뙣 硫붿떆吏� */
 .span_fail {
     background: url('/css/images/url8.png') left center no-repeat;
     background-size: 10px;
@@ -537,8 +537,8 @@ A:active { /* A 태그를 클릭한 상태 */
 
 
 .thumb{
-    weight: 400px;
-    height: 400px;
+    weight: 300px;
+    height: 300px;
     
 }
 

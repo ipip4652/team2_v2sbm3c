@@ -38,7 +38,7 @@
     
     
 <% 
-String filenames[] = {"//theparfum.co.kr/web/product/medium/202109/0e344e9ba5d1989510c7b17d2b770721.png", "//theparfum.co.kr/web/product/medium/202010/ac4e481bbd087b49187a678397f6889a.jpg", "http://theparfum.co.kr/web/product/medium/202010/e7b5f940f9068e482123dcefe6fd99c9.jpg","http://theparfum.co.kr/web/product/medium/20200518/ab7ffcbfdf58c7f3b08a043483828985.jpg","http://theparfum.co.kr/web/product/medium/20200518/f68bc44b406436020a957f8b79490d37.jpg","http://theparfum.co.kr/web/product/medium/20200518/86ad159603a5b986eddef2c0a3023838.jpg","//theparfum.co.kr/web/product/medium/202109/0e344e9ba5d1989510c7b17d2b770721.png","//theparfum.co.kr/web/product/medium/202109/0e344e9ba5d1989510c7b17d2b770721.png","//theparfum.co.kr/web/product/medium/202109/0e344e9ba5d1989510c7b17d2b770721.png"};
+String filenames[] = {"images/fruit10.jpg","images/musk4.jpg", "images/musk7.jpg", "images/flower8.jpg", "images/spicy2.jpg", "images/spicy4.jpg", "images/spicy5.jpg"};
 String filelinks[]={"http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=13&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=15&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word="};
 request.setAttribute("list1",filenames);
 request.setAttribute("list2",filelinks);
