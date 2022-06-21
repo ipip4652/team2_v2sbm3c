@@ -76,11 +76,16 @@
             <span class="span_success">컨텐츠 삭제에 성공했습니다.</span>
           </LI>                                                                      
         </c:when>        
-        <c:when test="${code == 'delete_fail'}"> <%-- Java if --%>
+        <c:when test="${param.code == 'delete_fail'}"> <%-- Java if --%>
           <LI class='li_none'>
             <span class="span_fail">컨텐츠 삭제에 실패했습니다.</span>
           </LI>                                                                      
         </c:when> 
+        <c:when test="${param.code == 'ordered_success'}"> <%-- Java if --%>
+          <LI class='li_none'>
+            <span class="span_success">상품이 장바구니에 추가되었습니다.</span>
+          </LI>                                                                      
+        </c:when>
         <c:otherwise>
           <LI class='li_none_left'>
             <span class="span_fail">알 수 없는 에러로 작업에 실패했습니다.</span>

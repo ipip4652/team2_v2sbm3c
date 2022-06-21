@@ -97,6 +97,12 @@ public interface ContentsProcInter {
      */
     public int count_by_cateno(int cateno);
     
+    /**
+     * 키워드로 검색 (챗봇)
+     * @param word
+     * @return
+     */
+    public ContentsVO search_by_word(String word);
 }
 
 

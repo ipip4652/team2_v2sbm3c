@@ -1,9 +1,17 @@
 
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
-
+<script type="text/javascript">
+    function chatting(){
+        var url = 'http://localhost:8000/chatbot/chatting/';
+        var win = window.open(url, '챗봇', 'width=700px, height=630px');
+    
+        var x = (screen.width - 700) / 2;
+        var y = (screen.height - 630) / 2;
+    
+        win.moveTo(x, y); // 화면 중앙으로 이동\
+      }
+</script>
 <DIV class='container_main'>
     <!-- 헤더 -->
     <div class="header">
@@ -42,7 +50,8 @@
                     	<c:choose>
                            	<c:when test="${sessionScope.id != null}">
                                	<a href="/member/read.do?memberno=${sessionScope.memberno}" class="login_a">my page</a> / <a href="/cart/list_by_memberno.do?memberno=${sessionScope.memberno}" class="login_a">basket</a></li>
-                           	</c:when>
+                           	    / <a href="javascript: chatting();">CHATBOT</a>
+                            </c:when>
                        	</c:choose>
                     
                 </ul>
@@ -57,7 +66,7 @@
                             href="#">ABOUT US</a></li>
                         <li class="nav-item"><a class="nav-link"
                             style="font-size: 0.9em; font-weight: bold;"
-                            href="/notice/list_by_noticeno_search.do?noticeno=&word=">Notice</a></li>
+                            href="/notice/list_by_noticeno_search_paging.do?noticeno=&now_page&word=">Notice</a></li>
                             
                         <li class="nav-item dropdown"><a
                             class="nav-link dropdown-toggle" href="#"

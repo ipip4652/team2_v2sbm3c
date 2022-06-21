@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.cart.CartProcInter;
+import dev.mvc.cart.CartVO;
 import dev.mvc.cate.CateProcInter;
 import dev.mvc.cate.CateVO;
 import dev.mvc.categrp.CategrpProcInter;
@@ -36,6 +39,10 @@ public class ContentsCont {
     @Autowired
     @Qualifier("dev.mvc.contents.ContentsProc")
     private ContentsProcInter contentsProc;
+    
+    @Autowired
+    @Qualifier("dev.mvc.cart.CartProc") // @Component("dev.mvc.cate.CateProc")
+    private CartProcInter cartProc;
 
     public ContentsCont() {
         System.out.println("-> ContentsCont created.");
@@ -779,6 +786,28 @@ public class ContentsCont {
     }   
     
       
-    
+    @RequestMapping(value = "/contents/chatbot_order.do", method = RequestMethod.GET)
+    public ModelAndView chatbot_order(HttpSession session,HttpServletRequest request, String perfume) {
+        ModelAndView mav = new ModelAndView();
 
+        ContentsVO contentsVO = contentsProc.search_by_word(perfume);
+        
+        int cateno = contentsVO.getCateno();
+        
+        CartVO cartVO = new CartVO();
+        cartVO.setContentsno(contentsVO.getContentsno());
+        
+        int memberno = (Integer)session.getAttribute("memberno");
+        cartVO.setMemberno(memberno);
+        
+        cartVO.setCnt(1); // 최초 구매 수량 1개로 지정
+        
+        int cnt = this.cartProc.create(cartVO); // 등록 처리
+        
+        mav.addObject("code","ordered_success");
+        mav.addObject("cateno", cateno);
+        mav.setViewName("redirect:/contents/msg.do");
+        
+        return mav;
+    }
 }

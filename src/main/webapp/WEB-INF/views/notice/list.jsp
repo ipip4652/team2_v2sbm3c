@@ -107,6 +107,10 @@
         </c:forEach>   
     </tbody>
   </TABLE>
+  
+    <!-- 페이지 목록 출력 부분 시작 -->
+  <DIV class='bottom_menu'>${paging }</DIV> <%-- 페이지 리스트 --%>
+  <!-- 페이지 목록 출력 부분 종료 -->
 </DIV>
 
  

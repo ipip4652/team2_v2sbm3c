@@ -151,4 +151,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE cateno=#{cateno}
   </select>
   
+  <select id="search_by_word" resultType="dev.mvc.contents.ContentsVO" parameterType="String">
+    SELECT contentsno, memberno, cnt, rdate
+    FROM contents
+    WHERE word=#{word}
+  </select>
 </mapper> 
