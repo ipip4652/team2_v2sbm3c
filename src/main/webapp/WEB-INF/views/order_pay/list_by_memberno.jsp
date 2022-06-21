@@ -19,7 +19,35 @@
     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script
     src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
- 
+
+<style>
+    #starform fieldset{
+        display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+        border: 0; /* 필드셋 테두리 제거 */
+    }
+    #starform input[type=radio]{
+        display: none; /* 라디오박스 감춤 */
+    }
+    #starform label{
+        font-size: 0.8em; /* 이모지 크기 */
+        color: transparent; /* 기존 이모지 컬러 제거 */
+        text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+    }
+    #starform label:hover{
+    text-shadow: 0 0 0 #a00; /* 마우스 호버 */
+    }
+    #starform label:hover ~ label{
+        text-shadow: 0 0 0 #a00; /* 마우스 호버 뒤에오는 이모지들 */
+    }
+    #starform fieldset{
+        display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+        direction: rtl; /* 이모지 순서 반전 */
+        border: 0; /* 필드셋 테두리 제거 */
+    }
+    #starform input[type=radio]:checked ~ label{
+        text-shadow: 0 0 0 #a00; /* 마우스 클릭 체크 */
+    }   
+</style>
  
 <script type="text/javascript">
   $(function(){
@@ -46,25 +74,27 @@
    
     <table class="table table-striped" style='width: 100%;'>
     <colgroup>
-      <col style='width: 5%;'/>
-      <col style='width: 5%;'/>
+      <%-- <col style='width: 5%;'/>
+      <col style='width: 5%;'/> --%>
       <col style='width: 7%;'/>
       <col style='width: 15%;'/>
-      <col style='width: 30%;'/>
+      <col style='width: 25%;'/>
       <col style='width: 10%;'/>
       <col style='width: 10%;'/>
       <col style='width: 13%;'/>
+      <col style='width: 15%;'/>
       <col style='width: 5%;'/>
     </colgroup>
     <TR>
-      <TH class='th_bs'>주문<br>번호</TH>
-      <TH class='th_bs'>회원<br>번호</TH>
+      <!-- <TH class='th_bs'>주문<br>번호</TH>
+      <TH class='th_bs'>회원<br>번호</TH> -->
       <TH class='th_bs'>수취인<br>성명</TH>
       <TH class='th_bs'>수취인<br>전화번호</TH>
       <TH class='th_bs'>수취인<br>주소</TH>
       <TH class='th_bs'>결재 타입</TH>
       <TH class='th_bs'>결재 금액</TH>
       <TH class='th_bs'>주문일</TH>
+      <TH class='th_bs'>별점</TH>
       <TH class='th_bs'>조회</TH>
     </TR>
    
@@ -80,8 +110,8 @@
          
        
     <TR>
-      <TD class=td_basic>${order_payno}</TD>
-      <TD class=td_basic><A href="/member/read.do?memberno=${memberno}">${memberno}</A></TD>
+      <%-- <TD class=td_basic>${order_payno}</TD>
+      <TD class=td_basic><A href="/member/read.do?memberno=${memberno}">${memberno}</A></TD> --%>
       <TD class='td_basic'>${rname}</TD>
       <TD class='td_left'>${rtel}</TD>
       <TD class='td_basic'>${address}</TD>
@@ -96,6 +126,17 @@
       </TD>
       <TD class='td_basic'><fmt:formatNumber value="${amount }" pattern="#,###" /></TD>
       <TD class='td_basic'>${rdate.substring(1,16) }</TD>
+      <TD class='td_basic'>
+        <form name="starform" id="starform" method="post" action="./save">
+            <fieldset>
+                <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
+                <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
+                <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
+                <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
+                <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
+            </fieldset>
+        </form>
+      </TD>
       <TD class='td_basic'>
         <A href="/order_item/list_by_memberno.do?order_payno=${order_payno}"><img src="/order_pay/images/bu6.png" title="주문 내역 상세 조회"></A>
       </TD>

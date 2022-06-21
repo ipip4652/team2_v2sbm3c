@@ -183,6 +183,7 @@ public class Order_payCont {
 
             List<Order_payVO> list = this.order_payProc.list_by_memberno(memberno);
             mav.addObject("list", list); // request.setAttribute("list", list);
+            mav.addObject("sr",0); // STAR RATE
 
             mav.setViewName("/order_pay/list_by_memberno"); // /views/order_pay/list_by_memberno.jsp
 
