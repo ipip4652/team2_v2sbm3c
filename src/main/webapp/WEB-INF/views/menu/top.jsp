@@ -47,13 +47,11 @@
                             </li>
 
                     <li class="login_li">
-                    	<c:choose>
-                           	<c:when test="${sessionScope.id != null}">
-                               	<a href="/member/read.do?memberno=${sessionScope.memberno}" class="login_a">my page</a> / <a href="/cart/list_by_memberno.do?memberno=${sessionScope.memberno}" class="login_a">basket</a></li>
-                           	    / <a href="javascript: chatting();">CHATBOT</a>
-                            </c:when>
-                       	</c:choose>
-                    
+                       	<c:if test="${sessionScope.id != null}">
+                           	<a href="/member/read.do?memberno=${sessionScope.memberno}" class="login_a">my page</a> / <a href="/cart/list_by_memberno.do?memberno=${sessionScope.memberno}" class="login_a">basket</a>
+                       	    / <a href="javascript: chatting();">CHATBOT</a> / <a href="/order_pay/list_by_memberno.do">주문내역</a>
+                        </c:if>
+                    </li>
                 </ul>
             </div>
 
