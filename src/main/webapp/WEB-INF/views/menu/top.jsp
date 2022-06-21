@@ -35,23 +35,28 @@
                                	<a href="/member/login.do" class="login_a">login</a>
                            	</c:when>
                            	<c:otherwise>
-	                           	<a href="/member/logout.do" class="login_a">${sessionScope.id } logout</a>                               	
+	                           	<a href="/member/logout.do" class="login_a">logout</a>                               	
                            	</c:otherwise>
                        	</c:choose>
                         <c:choose>
                            	<c:when test="${sessionScope.id == null}">
                                	<a href="/member/create.do" class="login_a">/ join</a>
                            	</c:when>
+                           	<c:otherwise>
+	                           	<a href="/member/read.do?memberno=${sessionScope.memberno}" class="login_a">my page</a>                            	
+                           	</c:otherwise>
                        	</c:choose>    
                        	
                             </li>
 
                     <li class="login_li">
-                       	<c:if test="${sessionScope.id != null}">
-                           	<a href="/member/read.do?memberno=${sessionScope.memberno}" class="login_a">my page</a> / <a href="/cart/list_by_memberno.do?memberno=${sessionScope.memberno}" class="login_a">basket</a>
-                       	    / <a href="javascript: chatting();">CHATBOT</a> / <a href="/order_pay/list_by_memberno.do">주문내역</a>
-                        </c:if>
-                    </li>
+                    	<c:choose>
+                           	<c:when test="${sessionScope.id != null}">
+                               	<a href="/order_pay/list_by_memberno.do" class="login_a">order list</a>/ <a href="/cart/list_by_memberno.do?memberno=${sessionScope.memberno}" class="login_a">basket</a></li>
+                           	    
+                            </c:when>
+                       	</c:choose>
+                    
                 </ul>
             </div>
 
@@ -61,7 +66,7 @@
                     <ul class="navbar-nav">
                         <li class="nav-item"><a class="nav-link"
                             style="font-size: 0.9em; font-weight: bold;"
-                            href="#">ABOUT US</a></li>
+                            href="javascript: chatting();">CHATBOT</a></li>
                         <li class="nav-item"><a class="nav-link"
                             style="font-size: 0.9em; font-weight: bold;"
                             href="/notice/list_by_noticeno_search_paging.do?noticeno=&now_page&word=">Notice</a></li>
