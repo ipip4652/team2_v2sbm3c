@@ -1,5 +1,6 @@
 package dev.mvc.order_pay;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface Order_payProcInter {
@@ -16,4 +17,11 @@ public interface Order_payProcInter {
    * @return
    */
   public List<Order_payVO> list_by_memberno(int memberno);
+  
+  /**
+   * 평점 업데이트
+   * @param map
+   * @return
+   */
+  public void update_rating(HashMap<Object, Object> map);
 }

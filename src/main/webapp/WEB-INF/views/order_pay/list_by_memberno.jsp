@@ -51,7 +51,23 @@
  
 <script type="text/javascript">
   $(function(){
- 
+      <c:forEach items="${list}" var="item">
+
+         $('input[name="'+${item.order_payno}+'_rating"][type="radio"]').change(function(){ // set
+              console.log(${item.order_payno}+', ' +this.value);
+              let params = 'order_payno=' + ${item.order_payno};
+              params += '&rating=' + this.value;
+              $.ajax({
+                  url: '/order_pay/update_rating.do', // spring execute
+                  type: 'get',  // post
+                  async: true,  // true: 비동기 통신
+                  data: params      // 데이터
+              }); // 반환이 불필요함. 별점 업데이트만 수행
+         });
+
+         $('input[name="'+${item.order_payno}+'_rating"][type="radio"][value='+${item.rating}+']').prop('checked',true);
+      </c:forEach>
+
   });
 </script>
 </head> 
@@ -107,7 +123,7 @@
       <c:set var="paytype" value ="${order_payVO.paytype}" />
       <c:set var="amount" value ="${order_payVO.amount}" />
       <c:set var="rdate" value ="${order_payVO.rdate}" />
-         
+      
        
     <TR>
       <%-- <TD class=td_basic>${order_payno}</TD>
@@ -129,11 +145,11 @@
       <TD class='td_basic'>
         <form name="starform" id="starform" method="post" action="./save">
             <fieldset>
-                <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
-                <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
-                <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
-                <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
-                <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
+                <input type="radio" name="${order_payno }_rating" value="5" id="${order_payno }_rate1"><label for="${order_payno }_rate1">⭐</label>
+                <input type="radio" name="${order_payno }_rating" value="4" id="${order_payno }_rate2"><label for="${order_payno }_rate2">⭐</label>
+                <input type="radio" name="${order_payno }_rating" value="3" id="${order_payno }_rate3"><label for="${order_payno }_rate3">⭐</label>
+                <input type="radio" name="${order_payno }_rating" value="2" id="${order_payno }_rate4"><label for="${order_payno }_rate4">⭐</label>
+                <input type="radio" name="${order_payno }_rating" value="1" id="${order_payno }_rate5"><label for="${order_payno }_rate5">⭐</label>
             </fieldset>
         </form>
       </TD>

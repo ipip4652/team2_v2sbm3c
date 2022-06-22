@@ -16,6 +16,9 @@ CREATE TABLE order_pay(
   FOREIGN KEY (memberno) REFERENCES member (memberno)
 );
 
+alter table order_pay add rating number;
+COMMENT ON COLUMN order_pay.rating is '평점';
+
 COMMENT ON TABLE order_pay is '주문_결제';
 COMMENT ON COLUMN order_pay.order_payno is '주문번호';
 COMMENT ON COLUMN order_pay.memberno is '회원번호';

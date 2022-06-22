@@ -1,5 +1,6 @@
 package dev.mvc.order_pay;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.cart.CartProcInter;
@@ -196,4 +198,16 @@ public class Order_payCont {
         return mav;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/order_pay/update_rating.do", method = RequestMethod.GET)
+    public String update_rating(int order_payno, int rating) {
+        
+        HashMap<Object, Object> map = new HashMap<>();
+        map.put("order_payno", order_payno);
+        map.put("rating", rating);
+    
+        order_payProc.update_rating(map);
+        
+        return "{'ok':1}";
+    }
 }

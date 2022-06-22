@@ -23,17 +23,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </selectKey>
     
     INSERT INTO order_pay(order_payno, memberno, rname, rtel, rzipcode,
-                                     raddress1, raddress2, paytype, amount, rdate)
+                                     raddress1, raddress2, paytype, amount, rdate, rating)
     VALUES (#{order_payno}, #{memberno}, #{rname}, #{rtel}, #{rzipcode},
-                                     #{raddress1}, #{raddress2}, #{paytype}, #{amount}, sysdate)
+                                     #{raddress1}, #{raddress2}, #{paytype}, #{amount}, sysdate, 1)
   </insert> 
   
   <!-- 회원별 주문 결재 목록 -->
   <select id="list_by_memberno" resultType="dev.mvc.order_pay.Order_payVO" parameterType="int">
-    SELECT order_payno, memberno, rname, rtel, rzipcode, raddress1, raddress2, paytype, amount, rdate
+    SELECT order_payno, memberno, rname, rtel, rzipcode, raddress1, raddress2, paytype, amount, rdate, rating
     FROM order_pay
     WHERE memberno=#{memberno}
     ORDER BY order_payno DESC
   </select>
+  
+  <update id="update_rating" parameterType="HashMap">
+    UPDATE order_pay
+    SET rating=#{rating}
+    WHERE order_payno=#{order_payno}
+  </update>
 
 </mapper>

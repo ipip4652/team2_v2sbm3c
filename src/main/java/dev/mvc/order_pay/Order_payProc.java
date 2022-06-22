@@ -1,5 +1,6 @@
 package dev.mvc.order_pay;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,10 @@ public class Order_payProc implements Order_payProcInter {
     public List<Order_payVO> list_by_memberno(int memberno) {
         List<Order_payVO> list = this.order_payDAO.list_by_memberno(memberno);
         return list;
+    }
+
+    @Override
+    public void update_rating(HashMap<Object, Object> map) {
+        order_payDAO.update_rating(map);
     }
 }
