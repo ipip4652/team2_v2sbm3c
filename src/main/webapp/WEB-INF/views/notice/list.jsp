@@ -53,13 +53,13 @@
 
   <%-- *********************************** 검색 시작 *********************************** --%>
   <DIV style="text-align: right;">  
-    <form name='frm' id='frm' method='get' action='./list_by_noticeno_search.do'>
+    <form name='frm' id='frm' method='get' action='./list_by_noticeno_search_paging.do'>
       <input type='hidden' name='noticeno' value='${noticeVO.noticeno }'>
       <input type='text' name='word' id='word' value='${param.word }' style='width: 20%;'>
       <button type='submit'>검색</button>
       <c:if test="${param.word.length() > 0 }">
         <button type='button' 
-                     onclick="location.href='./list_by_noticeno_search.do?noticeno=${noticeVO.noticeno}&word='">검색 취소</button>  
+                     onclick="location.href='./list_by_noticeno_search_paging.do?noticeno=${noticeVO.noticeno}&word='">검색 취소</button>  
       </c:if> 
       &nbsp;   
     </form>
