@@ -64,6 +64,7 @@
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">추천시스템</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="/tensorflow/recommend_perfume/start.do">관심 카테고리 추천</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/recommend_personal_perfume/req/${sessionScope.memberno }/">추천 향수 시스템</a>
                         </div>
                     </li>                    
                 </ul>
