@@ -38,7 +38,7 @@
     
     
 <% 
-String filenames[] = {"images/fruit10.jpg","images/musk4.jpg", "images/musk7.jpg", "images/flower8.jpg", "images/spicy2.jpg", "images/spicy4.jpg", "images/spicy5.jpg"};
+String filenames[] = {"images/woody7.jpg", "images/spicy5.jpg","images/musk4.jpg", "images/musk7.jpg", "images/flower8.jpg", "images/spicy2.jpg", "images/woody11.jpg"};
 String filelinks[]={"http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=13&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=15&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word="};
 request.setAttribute("list1",filenames);
 request.setAttribute("list2",filelinks);

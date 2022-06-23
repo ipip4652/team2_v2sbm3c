@@ -43,7 +43,7 @@
                                	<a href="/member/create.do" class="login_a">/ join</a>
                            	</c:when>
                            	<c:otherwise>
-	                           	<a href="/member/read.do?memberno=${sessionScope.memberno}" class="login_a">my page</a>                            	
+	                           	<a href="/member/read.do?memberno=${sessionScope.memberno}" class="login_a">/ my page</a>                            	
                            	</c:otherwise>
                        	</c:choose>    
                        	
@@ -52,7 +52,7 @@
                     <li class="login_li">
                     	<c:choose>
                            	<c:when test="${sessionScope.id != null}">
-                               	<a href="/order_pay/list_by_memberno.do" class="login_a">order list</a>/ <a href="/cart/list_by_memberno.do?memberno=${sessionScope.memberno}" class="login_a">basket</a></li>
+                               	<a href="/order_item/list_by_memberno.do?memberno=${sessionScope.memberno}" class="login_a">order list</a> / <a href="/cart/list_by_memberno.do?memberno=${sessionScope.memberno}" class="login_a">basket</a></li>
                            	    
                             </c:when>
                        	</c:choose>

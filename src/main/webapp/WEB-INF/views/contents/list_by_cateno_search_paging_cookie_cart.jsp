@@ -257,7 +257,7 @@
       <c:set var="pcontent" value="${contentsVO.pcontent }" />
       <c:set var="file1" value="${contentsVO.file1 }" />
       <c:set var="size1" value="${contentsVO.size1 }" />
-      <c:set var="thumb1" value="${contentsVO.thumb1 }" />
+      <c:set var="file1saved" value="${contentsVO.file1saved }" />
       
       <c:set var="price" value="${contentsVO.price }" />
 
@@ -273,9 +273,9 @@
         <c:choose>
           <c:when test="${size1 > 0}"> <!-- 파일이 존재하면 -->
             <c:choose> 
-              <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}"> <!-- 이미지 인경우 -->
+              <c:when test="${file1saved.endsWith('jpg') || file1saved.endsWith('png') || file1saved.endsWith('gif')}"> <!-- 이미지 인경우 -->
                 <a href="./read.do?contentsno=${contentsno}">               
-                  <IMG src="./storage/${thumb1 }" style='width: 100%;'>
+                  <IMG src="./storage/${file1saved }" style='width: 70%;'>
                 </a><br>
                 <a href="./read.do?contentsno=${contentsno}">[${pcompany}] ${pname}</a> <br>
                 <fmt:formatNumber value="${price}" pattern="#,###" />원
