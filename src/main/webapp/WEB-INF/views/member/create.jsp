@@ -51,8 +51,8 @@
   function numbersend(){
 	  // 전화번호 발송
 	  // 유료라 주석처리 최종때 사용
-      // var a =  $('#tel').val(); ;
-      var a =  '';
+       var a =  $('#tel').val(); ;
+      // var a =  '';
       var phoneNumber = 'phoneNumber=' + a;
       $.ajax({
              url: './sendSMS', // spring execute
@@ -65,9 +65,9 @@
              success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
                  rand = rdata.numStr;
                  //테스트라 인증번호를 받을 수 없어 같이 메시지에 출력
-                 Swal.fire("인증번호를 발송하였습니다.","인증번호 확인 번호 : " + rand)
+                 //Swal.fire("인증번호를 발송하였습니다.","인증번호 확인 번호 : " + rand)
                  //최종 때 사용할 메시지 박스
-                 // Swal.fire("인증번호를 발송하였습니다.")
+                 Swal.fire("인증번호를 발송하였습니다.")
              },
              // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
              error: function(request, status, error) { // callback 함수
