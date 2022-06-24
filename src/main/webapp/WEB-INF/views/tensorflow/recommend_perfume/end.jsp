@@ -102,17 +102,17 @@
             <table style='width:60%; margin-left:20%; margin-right:20%;'>
                 <tr>
                     <td style='box-shadow: 5px 5px 5px #000; '>
-                    <a href="../contents/list_by_cateno_search_paging.do?cateno=16&now_page=1" title="해당 페이지로 이동">
+                    <a href="/contents/list_by_cateno_search_paging.do?cateno=16&now_page=1" title="해당 페이지로 이동">
                         <img id='img1' src="/recommend_perfume/images/man.png" style='height: 150px'></a>
                     </td>
                     <td style='width:30px'>  </td>
                     <td style='box-shadow: 5px 5px 5px #000; '>
-                    <a href="../contents/list_by_cateno_search_paging.do?cateno=17&now_page=1" title="해당 페이지로 이동">
+                    <a href="/contents/list_by_cateno_search_paging.do?cateno=17&now_page=1" title="해당 페이지로 이동">
                         <img id='img2' src="/recommend_perfume/images/woman.png" style='height: 150px'></a>
                     </td>
                     <td style='width:30px'>  </td>
                     <td style='box-shadow: 5px 5px 5px #000; '>
-                    <a href="../contents/list_by_cateno_search_paging.do?cateno=18&now_page=1" title="해당 페이지로 이동">
+                    <a href="/contents/list_by_cateno_search_paging.do?cateno=18&now_page=1" title="해당 페이지로 이동">
                         <img id='img3' src="/recommend_perfume/images/couple.png" style='height: 150px'></a>
                     </td>
                 </tr>
@@ -125,17 +125,17 @@
             <table style='width:60%; margin-left:20%; margin-right:20%;'>
                 <tr>
                     <td style='box-shadow: 5px 5px 5px #000; '>
-                    <a href="../contents/list_by_cateno_search_paging.do?cateno=13&now_page=1" title="해당 페이지로 이동">
+                    <a href="/contents/list_by_cateno_search_paging.do?cateno=13&now_page=1" title="해당 페이지로 이동">
                         <img id='img1' src="/recommend_perfume/images/man.png" style='height: 150px'></a>
                     </td>
                     <td style='width:30px'>  </td>
                     <td style='box-shadow: 5px 5px 5px #000; '>
-                    <a href="../contents/list_by_cateno_search_paging.do?cateno=14&now_page=1" title="해당 페이지로 이동">
+                    <a href="/contents/list_by_cateno_search_paging.do?cateno=14&now_page=1" title="해당 페이지로 이동">
                         <img id='img2' src="/recommend_perfume/images/woman.png" style='height: 150px'></a>
                     </td>
                     <td style='width:30px'>  </td>
                     <td style='box-shadow: 5px 5px 5px #000; '>
-                    <a href="../contents/list_by_cateno_search_paging.do?cateno=15&now_page=1" title="해당 페이지로 이동">
+                    <a href="/contents/list_by_cateno_search_paging.do?cateno=15&now_page=1" title="해당 페이지로 이동">
                         <img id='img3' src="/recommend_perfume/images/couple.png" style='height: 150px'></a>
                     </td>
                 </tr>
@@ -148,17 +148,17 @@
             <table style='width:60%; margin-left:20%; margin-right:20%;'>
                 <tr>
                     <td style='box-shadow: 5px 5px 5px #000; '>
-                    <a href="../contents/list_by_cateno_search_paging.do?cateno=10&now_page=1" title="해당 페이지로 이동">
+                    <a href="/contents/list_by_cateno_search_paging.do?cateno=10&now_page=1" title="해당 페이지로 이동">
                         <img id='img1' src="/recommend_perfume/images/man.png" style='height: 150px'></a>
                     </td>
                     <td style='width:30px'>  </td>
                     <td style='box-shadow: 5px 5px 5px #000; '>
-                    <a href="../contents/list_by_cateno_search_paging.do?cateno=11&now_page=1" title="해당 페이지로 이동">
+                    <a href="/contents/list_by_cateno_search_paging.do?cateno=11&now_page=1" title="해당 페이지로 이동">
                         <img id='img2' src="/recommend_perfume/images/woman.png" style='height: 150px'></a>
                     </td>
                     <td style='width:30px'>  </td>
                     <td style='box-shadow: 5px 5px 5px #000; '>
-                    <a href="../contents/list_by_cateno_search_paging.do?cateno=12&now_page=1" title="해당 페이지로 이동">
+                    <a href="/contents/list_by_cateno_search_paging.do?cateno=12&now_page=1" title="해당 페이지로 이동">
                         <img id='img3' src="/recommend_perfume/images/couple.png" style='height: 150px'></a>
                     </td>
                 </tr>
@@ -194,17 +194,17 @@
             <table style='width:60%; margin-left:20%; margin-right:20%;'>
                 <tr>
                     <td style='box-shadow: 5px 5px 5px #000; '>
-                    <a href="../contents/list_by_cateno_search_paging.do?cateno=4&now_page=1" title="해당 페이지로 이동">
+                    <a href="/contents/list_by_cateno_search_paging.do?cateno=4&now_page=1" title="해당 페이지로 이동">
                         <img id='img1' src="/recommend_perfume/images/man.png" style='height: 150px'></a>
                     </td>
                     <td style='width:30px'>  </td>
                     <td style='box-shadow: 5px 5px 5px #000; '>
-                    <a href="../contents/list_by_cateno_search_paging.do?cateno=5&now_page=1" title="해당 페이지로 이동">
+                    <a href="/contents/list_by_cateno_search_paging.do?cateno=5&now_page=1" title="해당 페이지로 이동">
                         <img id='img2' src="/recommend_perfume/images/woman.png" style='height: 150px'></a>
                     </td>
                     <td style='width:30px'>  </td>
                     <td style='box-shadow: 5px 5px 5px #000; '>
-                    <a href="../contents/list_by_cateno_search_paging.do?cateno=6&now_page=1" title="해당 페이지로 이동">
+                    <a href="/contents/list_by_cateno_search_paging.do?cateno=6&now_page=1" title="해당 페이지로 이동">
                         <img id='img3' src="/recommend_perfume/images/couple.png" style='height: 150px'></a>
                     </td>
                 </tr>
@@ -217,17 +217,17 @@
             <<table style='width:60%; margin-left:20%; margin-right:20%;'>
                 <tr>
                     <td style='box-shadow: 5px 5px 5px #000; '>
-                    <a href="../contents/list_by_cateno_search_paging.do?cateno=1&now_page=1" title="해당 페이지로 이동">
+                    <a href="/contents/list_by_cateno_search_paging.do?cateno=1&now_page=1" title="해당 페이지로 이동">
                         <img id='img1' src="/recommend_perfume/images/man.png" style='height: 150px'></a>
                     </td>
                     <td style='width:30px'>  </td>
                     <td style='box-shadow: 5px 5px 5px #000; '>
-                    <a href="../contents/list_by_cateno_search_paging.do?cateno=2&now_page=1" title="해당 페이지로 이동">
+                    <a href="/contents/list_by_cateno_search_paging.do?cateno=2&now_page=1" title="해당 페이지로 이동">
                         <img id='img2' src="/recommend_perfume/images/woman.png" style='height: 150px'></a>
                     </td>
                     <td style='width:30px'>  </td>
                     <td style='box-shadow: 5px 5px 5px #000; '>
-                    <a href="../contents/list_by_cateno_search_paging.do?cateno=3&now_page=1" title="해당 페이지로 이동">
+                    <a href="/contents/list_by_cateno_search_paging.do?cateno=3&now_page=1" title="해당 페이지로 이동">
                         <img id='img3' src="/recommend_perfume/images/couple.png" style='height: 150px'></a>
                     </td>
                 </tr>
