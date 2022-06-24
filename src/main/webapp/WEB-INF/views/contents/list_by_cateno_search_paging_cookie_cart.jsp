@@ -183,8 +183,14 @@
  --%>
 <DIV class='content_body'>
   <ASIDE class="aside_right">
+  
+	<c:choose>
+		<c:when test="${sessionScope.grade < 10}">
     <A href="./create.do?cateno=${cateVO.cateno }">등록</A>
     <span class='menu_divide' >│</span>
+		</c:when>
+	</c:choose>
+    
     <A href="javascript:location.reload();">새로고침</A>
     <span class='menu_divide' >│</span>
     <A href="./list_by_cateno_grid.do?cateno=${cateVO.cateno }">갤러리형</A>
@@ -253,6 +259,7 @@
     <c:forEach var="contentsVO" items="${list }" varStatus="status">
       <c:set var="contentsno" value="${contentsVO.contentsno }" />
       <c:set var="pcompany" value="${contentsVO.pcompany }" />
+      <c:set var="pword" value="${contentsVO.word }" />
       <c:set var="pname" value="${contentsVO.pname }" />
       <c:set var="pcontent" value="${contentsVO.pcontent }" />
       <c:set var="file1" value="${contentsVO.file1 }" />
@@ -277,7 +284,7 @@
                 <a href="./read.do?contentsno=${contentsno}">               
                   <IMG src="./storage/${file1saved }" style='width: 70%;'>
                 </a><br>
-                <a href="./read.do?contentsno=${contentsno}">[${pcompany}] ${pname}</a> <br>
+                <a href="./read.do?contentsno=${contentsno}">[${pword}] ${pname}</a> <br>
                 <fmt:formatNumber value="${price}" pattern="#,###" />원
               </c:when>
               <c:otherwise> <!-- 이미지가 아닌 일반 파일 -->

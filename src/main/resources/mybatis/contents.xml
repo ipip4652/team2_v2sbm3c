@@ -86,13 +86,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <!-- 카테고리별 검색 목록 + 페이징 + 메인 이미지 -->   
   <select id="list_by_cateno_search_paging" 
              resultType="dev.mvc.contents.ContentsVO" parameterType="HashMap">
-   SELECT contentsno, memberno, cateno, pcompany, pname, pcontent, cnt, rdate,
+   SELECT contentsno, memberno, cateno, pcompany, pname, pcontent, cnt, rdate, word,
               file1, file1saved, thumb1, size1, price, r
    FROM (
-              SELECT contentsno, memberno, cateno, pcompany, pname, pcontent, cnt, rdate,
+              SELECT contentsno, memberno, cateno, pcompany, pname, pcontent, cnt, rdate, word,
                          file1, file1saved, thumb1, size1, price, rownum as r
               FROM (
-                        SELECT contentsno, memberno, cateno, pcompany, pname, pcontent, cnt, rdate,
+                        SELECT contentsno, memberno, cateno, pcompany, pname, pcontent, cnt, rdate, word,
                                    file1, file1saved, thumb1, size1, price
                         FROM contents
                         <choose>
