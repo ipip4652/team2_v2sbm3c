@@ -64,9 +64,11 @@
                 <nav class="navbar">
                     <!-- Links -->
                     <ul class="navbar-nav">
+                    <c:if test="${sessionScope.id != null}">
                         <li class="nav-item"><a class="nav-link"
                             style="font-size: 0.9em; font-weight: bold;"
                             href="javascript: chatting();">CHATBOT</a></li>
+                    </c:if>
                         <li class="nav-item"><a class="nav-link"
                             style="font-size: 0.9em; font-weight: bold;"
                             href="/notice/list_by_noticeno_search_paging.do?noticeno=&now_page&word=">Notice</a></li>
