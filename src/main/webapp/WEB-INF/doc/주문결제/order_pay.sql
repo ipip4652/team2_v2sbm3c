@@ -9,7 +9,7 @@ CREATE TABLE order_pay(
 		rtel                          		VARCHAR2(14)		 NOT NULL,
 		rzipcode                      		VARCHAR2(5)		 NOT NULL,
 		raddress1                     		VARCHAR2(80)		 NOT NULL,
-		raddress12                    		VARCHAR2(50)		 NOT NULL,
+		raddress2                    		VARCHAR2(50)		 NOT NULL,
 		paytype                       		NUMBER(1)		 NOT NULL,
 		amount                        		NUMBER(10)		 NOT NULL,
 		rdate                         		DATE		 NOT NULL,
