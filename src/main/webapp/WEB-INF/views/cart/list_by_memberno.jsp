@@ -50,7 +50,15 @@
 </head> 
  
 <body>
-<jsp:include page="../menu/top.jsp" />
+
+<c:choose>
+	<c:when test="${sessionScope.grade < 10}">
+		<jsp:include page="../menu/top_ckup.jsp" flush='false' />
+	</c:when>
+	<c:otherwise>
+		<jsp:include page="../menu/top.jsp" flush='false' />                               	
+	</c:otherwise>
+</c:choose>
 <%-- GET -> POST: 상품 삭제, 수량 변경용 폼 --%>
 <form name='frm_post' id='frm_post' action='' method='post'>
   <input type='hidden' name='cartno' id='cartno'>

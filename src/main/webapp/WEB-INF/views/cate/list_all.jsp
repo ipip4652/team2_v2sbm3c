@@ -23,7 +23,15 @@
 </head> 
  
 <body>
-<jsp:include page="../menu/top.jsp" />
+
+<c:choose>
+	<c:when test="${sessionScope.grade < 10}">
+		<jsp:include page="../menu/top_ckup.jsp" flush='false' />
+	</c:when>
+	<c:otherwise>
+		<jsp:include page="../menu/top.jsp" flush='false' />                               	
+	</c:otherwise>
+</c:choose>
  
 <DIV class='title_line'>카테고리 그룹 > 전체 카테고리</DIV>
 

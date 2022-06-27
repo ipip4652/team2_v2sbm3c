@@ -15,11 +15,11 @@ CREATE TABLE c_comment(
 );
 
 COMMENT ON TABLE c_comment is '컨텐츠 댓글';
-COMMENT ON COLUMN c_commnet.commentno is '컨텐츠 댓글번호';
-COMMENT ON COLUMN c_commnet.memberno is '회원번호';
-COMMENT ON COLUMN c_commnet.contentsno is '컨텐츠 글번호';
-COMMENT ON COLUMN c_commnet.content is '댓글내용';
-COMMENT ON COLUMN c_commnet.rdate is '작성일';
+COMMENT ON COLUMN c_comment.commentno is '컨텐츠 댓글번호';
+COMMENT ON COLUMN c_comment.memberno is '회원번호';
+COMMENT ON COLUMN c_comment.contentsno is '컨텐츠 글번호';
+COMMENT ON COLUMN c_comment.content is '댓글내용';
+COMMENT ON COLUMN c_comment.rdate is '작성일';
 
 
 CREATE SEQUENCE c_comment_seq     --noticeno 시퀀스

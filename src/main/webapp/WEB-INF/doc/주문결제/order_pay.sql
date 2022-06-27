@@ -9,7 +9,7 @@ CREATE TABLE order_pay(
 		rtel                          		VARCHAR2(14)		 NOT NULL,
 		rzipcode                      		VARCHAR2(5)		 NOT NULL,
 		raddress1                     		VARCHAR2(80)		 NOT NULL,
-		raddress12                    		VARCHAR2(50)		 NOT NULL,
+		raddress2                    		VARCHAR2(50)		 NOT NULL,
 		paytype                       		NUMBER(1)		 NOT NULL,
 		amount                        		NUMBER(10)		 NOT NULL,
 		rdate                         		DATE		 NOT NULL,
@@ -26,7 +26,7 @@ COMMENT ON COLUMN order_pay.rname is '수취인성명';
 COMMENT ON COLUMN order_pay.rtel is '수취인 전화번호';
 COMMENT ON COLUMN order_pay.rzipcode is '수취인 우편번호';
 COMMENT ON COLUMN order_pay.raddress1 is '수취인 주소1';
-COMMENT ON COLUMN order_pay.raddress12 is '수취인 주소2';
+COMMENT ON COLUMN order_pay.raddress2 is '수취인 주소2';
 COMMENT ON COLUMN order_pay.paytype is '결제 종류';
 COMMENT ON COLUMN order_pay.amount is '결제금액';
 COMMENT ON COLUMN order_pay.rdate is '주문날짜';

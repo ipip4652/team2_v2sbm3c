@@ -3,6 +3,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="dev.mvc.categrp.CategrpVO" %>
  
+ 
 <!DOCTYPE html> 
 <html lang="ko"> 
 <head> 
@@ -19,6 +20,13 @@
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css"></head>
 
+<script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+
+
+    
 <script type="text/javascript">
     $(function() {
         $('#btn_create_cancel').on('click', cancel);    
@@ -141,7 +149,15 @@
 </head> 
  
 <body>
-<jsp:include page="../menu/top.jsp" />
+
+<c:choose>
+	<c:when test="${sessionScope.grade < 10}">
+		<jsp:include page="../menu/top_ckup.jsp" flush='false' />
+	</c:when>
+	<c:otherwise>
+		<jsp:include page="../menu/top.jsp" flush='false' />                               	
+	</c:otherwise>
+</c:choose>
  
 <DIV class='title_line'>카테고리 그룹</DIV>
 
@@ -232,10 +248,8 @@
         <TD class="td_bs">${categrpVO.rdate.substring(0, 10) }</TD> 
         
         <TD class="td_bs">
-          <A href="../cate/create.do?categrpno=${categrpno }" title="${name } 등록"><i class="fa-solid fa-pen-to-square"></i></A>
           <A href="javascript: read_update_ajax(${categrpno })" title="수정"><i class="fa-regular fa-pen-to-square"></i></A>
           <A href="javascript: read_delete_ajax(${categrpno })" title="삭제"><i class="fa-solid fa-eraser"></i></A>       
-          ${categrpno }
         </TD>   
       </TR>   
     </c:forEach> 

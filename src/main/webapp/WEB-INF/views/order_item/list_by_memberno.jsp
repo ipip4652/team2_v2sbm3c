@@ -29,7 +29,15 @@
 </head> 
  
 <body>
-<jsp:include page="../menu/top.jsp" flush='false' />
+
+<c:choose>
+	<c:when test="${sessionScope.grade < 10}">
+		<jsp:include page="../menu/top_ckup.jsp" flush='false' />
+	</c:when>
+	<c:otherwise>
+		<jsp:include page="../menu/top.jsp" flush='false' />                               	
+	</c:otherwise>
+</c:choose>
  
   <DIV class='title_line'>
     ${sessionScope.id }님 주문 결재 상세 내역
