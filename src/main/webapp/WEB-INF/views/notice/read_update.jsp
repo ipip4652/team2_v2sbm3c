@@ -13,8 +13,17 @@
         <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
         <title>공지사항 게시판 수정</title>
         
+<link href="/css/style.css" rel="Stylesheet" type="text/css"> <%-- /static --%>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-       
+
+<script type="text/JavaScript"
+          src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+ 
+      
     <script type="text/javascript">
  	        function boardDelete() {
 	            let noticeno = '${noticeVO.noticeno}';
@@ -38,7 +47,19 @@
      </script>
     </head>
     <body>
-      <jsp:include page="../menu/top.jsp" />
+
+<c:choose>
+	<c:when test="${sessionScope.grade < 10}">
+		<jsp:include page="../menu/top_ckup.jsp" flush='false' />
+	</c:when>
+	<c:otherwise>
+		<jsp:include page="../menu/top.jsp" flush='false' />                               	
+	</c:otherwise>
+</c:choose>
+      
+      
+      
+      
         <div class="container">
             <hr/>
 
