@@ -41,7 +41,7 @@ public class Tool {
         boolean sw = false;
         if (file != null) {
             file = file.toLowerCase();
-            if (file.endsWith(".jpg") || file.endsWith(".jpeg") || file.endsWith(".png") || file.endsWith("gif")) {
+            if (file.endsWith("jpg") || file.endsWith(".jpeg") || file.endsWith(".png") || file.endsWith("gif")) {
                 sw = true;
             }
         }
