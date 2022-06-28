@@ -606,7 +606,7 @@ public class ContentsCont {
      */
     @RequestMapping(value = "/contents/update_file.do", method = RequestMethod.POST)
     public ModelAndView update_file(HttpServletRequest request, ContentsVO contentsVO, 
-                                                      int now_page, String word) {
+            @RequestParam(value="now_page", defaultValue="1") int now_page, String word) {
       ModelAndView mav = new ModelAndView();
       
       // System.out.println("-> now_page: " + now_page);

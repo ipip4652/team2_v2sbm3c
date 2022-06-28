@@ -38,7 +38,7 @@
     
     
 <% 
-String filenames[] = {"images/woody7.jpg", "images/spicy5.jpg","images/musk4.jpg", "images/musk7.jpg", "images/flower8.jpg", "images/spicy2.jpg", "images/woody11.jpg"};
+String filenames[] = {"images/woody7.jpg", "images/spicy5.jpg", "images/musk7.jpg","images/musk4.jpg", "images/spicy2.jpg", "images/woody11.jpg", "images/flower8.jpg"};
 String filelinks[]={"http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=13&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=15&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word=","http://localhost:9091/contents/read.do?contentsno=27&now_page=1&word="};
 request.setAttribute("list1",filenames);
 request.setAttribute("list2",filelinks);
@@ -51,11 +51,11 @@ request.setAttribute("list2",filelinks);
         <c:forEach var="filename" items="${list1}" varStatus="status">           
             <%-- 하나의 행에 이미지를 3개씩 출력후 행 변경, index는 0부터 시작 --%>
             <c:if test="${status.index % 3 == 0 && status.index != 0 }">
-                <br>
+        <BR style='clear:both;'>
             </c:if>
             <!-- 하나의 이미지, 33 * 3 = 99% -->
             <DIV style='width: 30%; float: left; margin: 0.5%; padding: 0.5%; background-color: #FFFFFF; text-align: center;'> 
-                <a href="${list2[status.index]}"> <img src="${filename}"  alt="" class="thumb"> </a>
+                <a href="${list2[status.index]}"> <img src="${filename}"  alt=""  style='width: 80%;'> </a>
             </DIV>
         </c:forEach>
         <!-- 갤러리 Layout 종료 -->

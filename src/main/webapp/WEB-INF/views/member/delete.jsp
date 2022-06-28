@@ -1,11 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  
 <!DOCTYPE html> 
 <html lang="ko"> 
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world</title>
+<title>The PARFUM</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
@@ -15,7 +16,15 @@
  
 </head> 
 <body>
-<jsp:include page="../menu/top.jsp" flush='false' />
+
+<c:choose>
+	<c:when test="${sessionScope.grade < 10}">
+		<jsp:include page="../menu/top_ckup.jsp" flush='false' />
+	</c:when>
+	<c:otherwise>
+		<jsp:include page="../menu/top.jsp" flush='false' />                               	
+	</c:otherwise>
+</c:choose>
  
   <DIV class='title_line'>
     회원 삭제(관리자 전용)
