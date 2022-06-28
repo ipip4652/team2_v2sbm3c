@@ -165,6 +165,24 @@
                                     신다윗(리브리브)
                                 </a>
                             </div></li>
+                      
+                        
+                    <c:if test="${sessionScope.id != null}">
+                        <li class="nav-item dropdown"><a
+                            class="nav-link dropdown-toggle" href="#"
+                            id="navbardrop" data-toggle="dropdown"
+                            style="font-size: 0.9em; font-weight: bold;">
+                                추천 시스템</a>
+                            <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="/tensorflow/recommend_perfume/start.do">관심 카테고리 추천</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/recommend_personal_perfume/req/${sessionScope.memberno }/">추천 향수 시스템</a>
+                            </div></li>
+                    
+                    
+                    </c:if>
+                            
+                            
 
 
 
@@ -175,9 +193,6 @@
             </div>
             
 
-        </div>
-        <div class ="right_menu">
-                <a href="/tensorflow/recommend_perfume/start.do">관심 카테고리 추천</a>
         </div>
 
     </div>
